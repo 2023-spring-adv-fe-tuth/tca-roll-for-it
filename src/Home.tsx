@@ -4,10 +4,21 @@ export const Home = () => {
             className="flex flex-col"
         >
             <h2
-                className="text-3xl text-left font-bold"
+                className="text-3xl text-left font-bold my-0"
             >
-                Home
+                Roll for It
             </h2>
+            <h3
+                className="text-left text-lg my-0"
+            >
+                Companion App
+            </h3>
+            <br />
+            <ul className="steps">
+                <li className="step step-primary">Play</li>
+                <li className="step step-primary">Tap the App</li>
+                <li className="step step-primary">Enjoy fun facts</li>
+            </ul>
             <br />
             <button 
                 className="btn btn-lg btn-primary capitalize"
