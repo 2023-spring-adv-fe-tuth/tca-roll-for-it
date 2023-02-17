@@ -17,7 +17,7 @@ export const Home = () => {
             <ul className="steps">
                 <li className="step step-primary">Play</li>
                 <li className="step step-primary">Tap the App</li>
-                <li className="step step-primary">Enjoy fun facts</li>
+                <li className="step step-primary">Enjoy Fun Facts</li>
             </ul>
             <br />
             <button 
