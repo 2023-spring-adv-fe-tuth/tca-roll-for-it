@@ -37,7 +37,7 @@ const router = createHashRouter([
 function App() {
   return (
     <div 
-      className="App p-6"
+      className="App"
     >
       <RouterProvider router={router} />
     </div>
