@@ -11,6 +11,8 @@ import {
   , RouterProvider
 } from "react-router-dom";
 
+const cat = () => console.log("Meow");
+
 const router = createHashRouter([
   {
     path: "/",
@@ -26,13 +28,14 @@ const router = createHashRouter([
   }
   , {
     path: "/setup"
-    , element: <Setup />
+    , element: <Setup foo={`${1 + 1}`} cat={cat} />
   }
   , {
     path: "/play"
     , element: <Play />
   }
 ]);
+
 
 function App() {
   return (

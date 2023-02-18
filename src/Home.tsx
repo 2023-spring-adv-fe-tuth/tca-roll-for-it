@@ -1,4 +1,8 @@
+import { useNavigate } from "react-router-dom";
+
 export const Home = () => {
+    const nav = useNavigate();
+
     return (
         <div
             className=""
@@ -28,6 +32,7 @@ export const Home = () => {
                 <br />
                 <button 
                     className="btn btn-lg btn-primary capitalize"
+                    onClick={() => nav("/setup")}
                 >
                     Play Roll for It
                 </button>
