@@ -16,7 +16,9 @@ export const Setup: FC<{
     cat();
     
     return (
-        <>
+        <div
+            className="flex flex-col p-1"
+        >
             <h2>
                 Setup
             </h2>
@@ -29,6 +31,6 @@ export const Setup: FC<{
             >
                 Start Playing
             </button>    
-        </>
+        </div>
     );
 };

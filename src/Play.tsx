@@ -4,7 +4,9 @@ export const Play = () => {
     const nav = useNavigate();
 
     return (
-        <>
+        <div
+            className="flex flex-col p-1"
+        >
             <h2>
                 Play
             </h2>
@@ -14,6 +16,6 @@ export const Play = () => {
             >
                 Done
             </button>    
-        </>
+        </div>
 );
 };
