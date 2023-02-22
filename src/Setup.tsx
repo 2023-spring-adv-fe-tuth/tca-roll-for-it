@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const Setup: FC<{
     foo: string
@@ -7,6 +8,8 @@ export const Setup: FC<{
     foo
     , cat
 }) => {
+
+    const nav = useNavigate();
 
     cat();
     cat();
@@ -20,6 +23,12 @@ export const Setup: FC<{
             <p>
                 {foo}
             </p>
+            <button 
+                className="btn btn-lg btn-primary capitalize"
+                onClick={() => nav("/play")}
+            >
+                Start Playing
+            </button>    
         </>
     );
 };
