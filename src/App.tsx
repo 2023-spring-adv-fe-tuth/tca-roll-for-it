@@ -3,12 +3,23 @@ import logo from './logo.svg';
 import './App.css';
 
 import {
-  Outlet
+  Outlet, useLocation
 } from "react-router-dom";
 
 const cat = () => console.log("Meow");
 
 function App() {
+
+  const location = useLocation();
+  console.log("location", location);
+
+  const title = location.pathname == "/play"
+    ? "Play" 
+    : location.pathname == "/setup"
+      ? "Setup"
+      : "Roll for It"
+  ;
+
   return (
     <div
       className="App"
@@ -20,8 +31,10 @@ function App() {
           </button>
         </div>
         <div className="flex flex-col items-start mx-3">
-          <h1 className="text-2xl font-bold">Roll for It</h1>
-          <h2 className="text-sm uppercase font-semi-bold -mt-1">Companion App</h2>
+          <h1 className="text-3xl font-bold">{title}</h1>
+          {/* {
+            location.pathname == "/" && <h2 className="text-sm uppercase font-semi-bold -mt-1">Companion App</h2>
+          } */}
         </div>
       </div>
       <Outlet />

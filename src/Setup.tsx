@@ -19,18 +19,18 @@ export const Setup: FC<{
         <div
             className="flex flex-col p-1"
         >
-            <h2>
-                Setup
-            </h2>
-            <p>
-                {foo}
-            </p>
             <button 
                 className="btn btn-lg btn-primary capitalize"
                 onClick={() => nav("/play")}
             >
                 Start Playing
             </button>    
+            <p>
+                Some stuff goes here : - )
+            </p>
+            <p>
+                {foo}
+            </p>
         </div>
     );
 };

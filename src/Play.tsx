@@ -7,10 +7,7 @@ export const Play = () => {
         <div
             className="flex flex-col p-1"
         >
-            <h2>
-                Play
-            </h2>
-                <button 
+            <button 
                 className="btn btn-lg btn-primary capitalize"
                 onClick={() => nav(-2)}
             >
