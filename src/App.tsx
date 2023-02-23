@@ -17,7 +17,7 @@ function App() {
     ? "Play" 
     : location.pathname == "/setup"
       ? "Setup"
-      : "Roll for It Companion App"
+      : "Roll for It"
   ;
 
   return (
@@ -31,7 +31,10 @@ function App() {
           </button>
         </div>
         <div className="flex flex-col items-start">
-          <h1 className="text-sm font-light">{title}</h1>
+          <h1 className="text-sm">
+            {title}
+            {location.pathname == "/" && <span className="text-primary"> Companion App</span>}
+          </h1>
           {/* {
             location.pathname == "/" && <h2 className="text-sm uppercase font-semi-bold -mt-1">Companion App</h2>
           } */}
