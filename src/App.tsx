@@ -3,22 +3,18 @@ import logo from './logo.svg';
 import './App.css';
 
 import {
-  Outlet, useLocation
+  HashRouter
+  , Routes
+  , Route
 } from "react-router-dom";
+
+import { Home } from './Home';
+import { Setup } from './Setup';
+import { Play } from './Play';
 
 const cat = () => console.log("Meow");
 
 function App() {
-
-  const location = useLocation();
-  console.log("location", location);
-
-  const title = location.pathname == "/play"
-    ? "Play" 
-    : location.pathname == "/setup"
-      ? "Setup"
-      : "Roll for It"
-  ;
 
   return (
     <div
@@ -31,18 +27,29 @@ function App() {
           </button>
         </div>
         <div className="flex flex-col items-start">
-          <h1 className="text-sm">
-            {title}
-            {location.pathname == "/" && <span className="text-primary"> Companion App</span>}
+          <h1 className="text-xl font-bold">
+            Roll for It
           </h1>
-          {/* {
-            location.pathname == "/" && <h2 className="text-sm uppercase font-semi-bold -mt-1">Companion App</h2>
-          } */}
         </div>
       </div>
-      <Outlet />
+      <HashRouter>
+          <Routes>
+            <Route
+              path='/'
+              element={<Home />}
+            />
+            <Route
+              path='/setup'
+              element={<Setup foo={`${1 + 1}`} cat={cat} />}
+            />
+            <Route
+              path='/play'
+              element={<Play />}
+            />
+          </Routes>
+        </HashRouter>      
     </div>
   );
 }
 
-export default App;
+      export default App;
