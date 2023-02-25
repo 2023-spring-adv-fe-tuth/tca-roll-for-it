@@ -64,7 +64,7 @@ export const Setup: FC<SetupProps> = ({
                                     <input 
                                         type="text" 
                                         placeholder="New Player Name" 
-                                        className="input input-bordered grow" 
+                                        className="input input-bordered grow w-0" 
                                         value={newPlayerName}
                                         onChange={(e) => setNewPlayerName(e.target.value)}
                                     />
