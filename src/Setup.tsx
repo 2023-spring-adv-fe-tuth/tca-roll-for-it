@@ -56,7 +56,7 @@ export const Setup: FC<SetupProps> = ({
                 <div
                     className="flex"
                 >
-                    <div className="card w-96 bg-base-100 shadow-xl grow">
+                    <div className="card w-0 bg-base-100 shadow-xl grow overflow-x-hidden">
                         <div className="card-body">
                             <h2 className="card-title">Choose or add players...</h2>
                             <div className="form-control">
