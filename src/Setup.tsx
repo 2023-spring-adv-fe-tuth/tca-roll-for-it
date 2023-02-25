@@ -44,7 +44,24 @@ export const Setup: FC<SetupProps> = ({
                 Available Players
             </h3>
             <ul>
-                {chosenPlayers.map(x => <li>( {x.checked ? 'x' : ' '} ) {x.name}</li>)}
+                {chosenPlayers.map(x => (
+                    <div className="form-control">
+                        <label className="label cursor-pointer">
+                            <span className="label-text text-xl">{x.name}</span> 
+                            <input 
+                                type="checkbox" 
+                                checked={x.checked} 
+                                className="checkbox checkbox-primary" 
+                                onChange={() => setChosenPlayers([
+                                    ...chosenPlayers.map(y => ({
+                                        ...y
+                                        , checked: x.name == y.name ? !y.checked : y.checked 
+                                    }))
+                                ])}
+                            />
+                        </label>
+                    </div>
+                ))}
             </ul>
             <button 
                 className="btn btn-lg btn-primary capitalize"
