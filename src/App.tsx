@@ -16,6 +16,92 @@ import { useState } from 'react';
 
 const cat = () => console.log("Meow");
 
+interface GameResult {
+  winner: string;
+  players: string[];
+};
+
+const hardCodedGameResults: GameResult[] = [
+  {
+      winner: "Tom"
+      , players: ["Tom", "Taylor"]
+      // , won: false
+
+  }
+  , {
+      winner: "Taylor"
+      , players: ["Jack", "Taylor"]
+  }
+  , {
+      winner: "Taylor"
+      , players: ["Tom", "Taylor", "Jack"]
+  }
+  , {
+      winner: "X"
+      , players: ["X", "Joe"]
+  }
+  , {
+      winner: "X"
+      , players: ["X", "Joe"]
+  }
+  , {
+      winner: "Joe"
+      , players: ["X", "Joe"]
+  }
+  , {
+      winner: "Jack"
+      , players: ["X", "Joe", "Jack"]
+  }
+];
+
+const getPreviousPlayers = (grs: GameResult[]) => {
+    
+  // const allPreviousPlayers = grs.map(x => x.players);
+  const allPreviousPlayers = grs.flatMap(x => x.players);
+  
+  return [
+      ...new Set(allPreviousPlayers)
+  ].sort();
+};
+
+const calculateLeaderboard = (results: GameResult[]) => {
+
+  const gameResultsGroupedByPlayer = getPreviousPlayers(results).reduce(
+      (acc, x) => acc.set(
+          x
+          , results.filter(y => y.players.includes(x))
+      )
+      , new Map<string, GameResult[]>() 
+  );
+
+  // return gameResultsGroupedByPlayer;
+
+  // return [...gameResultsGroupedByPlayer]; // Array of tuples of [string, GameResult[]]
+
+  return [...gameResultsGroupedByPlayer]
+      // First object with names game counts and wins...
+      .map(x => ({
+          name: x[0]
+          , totalGames: x[1].length
+          , wins: x[1].filter(y => y.winner === x[0]).length
+      }))
+      /// Now use wins and total games to get avg and losses
+      .map(x => ({
+          name: x.name
+          , wins: x.wins 
+          , losses: x.totalGames - x.wins
+          , avg: x.wins / x.totalGames
+      }))
+      .sort(
+          (a, b) => (a.avg * 1000 + a.wins + a.losses) > (b.avg * 1000 + b.wins + b.losses) ? -1 : 1
+      )
+      .map(x => ({
+          ...x
+          , avg: x.avg.toFixed(3)
+      }))
+  ;
+};
+
 function App() {
 
   const [darkMode, setDarkMode] = useState(false);
@@ -53,7 +139,13 @@ function App() {
             />
             <Route
               path='/setup'
-              element={<Setup foo={`${1 + 1}`} cat={cat} />}
+              element={
+                <Setup
+                  availablePlayers={getPreviousPlayers(hardCodedGameResults)} 
+                  foo={`${1 + 1}`} 
+                  cat={cat} 
+                />
+              }
             />
             <Route
               path='/play'
