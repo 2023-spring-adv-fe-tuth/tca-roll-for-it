@@ -26,6 +26,29 @@ export const Setup: FC<SetupProps> = ({
 
     const [newPlayerName, setNewPlayerName] = useState("");
 
+    const addPlayerWithValidation = () => {
+        // Check if newPlayerName is blank or already exists.
+        if (
+            newPlayerName.length == 0
+            || chosenPlayers.some(x => 0 == x.name.localeCompare(newPlayerName))
+        )
+            return;
+
+        // If not, add it defaulted to checked.
+        setChosenPlayers(
+            [
+                ...chosenPlayers 
+                , {
+                    name: newPlayerName
+                    , checked: true
+                }
+            ].sort((a, b) => a.name.localeCompare(b.name))
+        );
+
+        // Clear out the text box.
+        setNewPlayerName("");
+    };
+
     return (
         <div
             className="flex flex-col p-1"
@@ -47,13 +70,7 @@ export const Setup: FC<SetupProps> = ({
                                     />
                                     <button 
                                         className="btn btn-square btn-primary"
-                                        onClick={() => setChosenPlayers([
-                                            ...chosenPlayers 
-                                            , {
-                                                name: newPlayerName
-                                                , checked: true
-                                            }
-                                        ])}
+                                        onClick={() => addPlayerWithValidation()}
                                     >
                                         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16">
                                             <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
