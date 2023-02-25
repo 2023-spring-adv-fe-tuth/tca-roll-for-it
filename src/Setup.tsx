@@ -28,26 +28,27 @@ export const Setup: FC<SetupProps> = ({
         <div
             className="flex flex-col p-1"
         >
+            <h3
+                className="text-2xl text-left"
+            >
+                Choose players...
+            </h3>
             <button 
                 className="btn btn-link capitalize"
                 onClick={() => setChosenPlayers([
                     ...chosenPlayers 
                     , {
-                        name: "Dummy"
+                        name: "Dummy Player with a really really long name, really long, yeah"
                         , checked: true
                     }
                 ])}
             >
                 Add Dummy Player
             </button>
-            <h3>
-                Available Players
-            </h3>
             <ul>
                 {chosenPlayers.map(x => (
-                    <div className="form-control">
-                        <label className="label cursor-pointer">
-                            <span className="label-text text-xl">{x.name}</span> 
+                    <div className="form-control1 mt-5">
+                        <label className="label1 flex ml-10">
                             <input 
                                 type="checkbox" 
                                 checked={x.checked} 
@@ -59,12 +60,13 @@ export const Setup: FC<SetupProps> = ({
                                     }))
                                 ])}
                             />
+                            <span className="label-text text-xl ml-3 capitalize">{x.name}</span> 
                         </label>
                     </div>
                 ))}
             </ul>
             <button 
-                className="btn btn-lg btn-primary capitalize"
+                className="btn btn-lg btn-primary capitalize mt-5"
                 onClick={() => nav("/play")}
             >
                 Start Playing
