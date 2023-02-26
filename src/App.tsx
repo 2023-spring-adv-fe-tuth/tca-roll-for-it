@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { AddGameResultFunc, GameResult } from './front-end-model';
+import { AddGameResultFunc, GameResult, GetPreviousPlayers } from './front-end-model';
 
 import {
   HashRouter
@@ -50,7 +50,7 @@ const hardCodedGameResults: GameResult[] = [
   }
 ];
 
-const getPreviousPlayers = (grs: GameResult[]) => {
+const getPreviousPlayers: GetPreviousPlayers = (grs: GameResult[]) => {
     
   // const allPreviousPlayers = grs.map(x => x.players);
   const allPreviousPlayers = grs.flatMap(x => x.players);

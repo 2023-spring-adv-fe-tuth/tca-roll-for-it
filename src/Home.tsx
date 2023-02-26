@@ -1,14 +1,8 @@
 import { useNavigate } from "react-router-dom";
+import { LeaderboardPlayer } from "./front-end-model";
 
 interface HomeProps {
     leaderBoardData: LeaderboardPlayer[] 
-}
-
-export interface LeaderboardPlayer {
-    name: string;
-    wins: number;
-    losses: number;
-    avg: string;
 }
 
 export const Home: React.FC<HomeProps> = ({leaderBoardData}) => {
