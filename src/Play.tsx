@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
+import { AddGameResultFunc } from "./front-end-model";
 
 interface PlayProps {
-    addGameResult: (r: any) => void
+    addGameResult: AddGameResultFunc;
 }
 
 export const Play: React.FC<PlayProps> = ({addGameResult}) => {

@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { AddGameResultFunc, GameResult } from './front-end-model';
 
 import {
   HashRouter
@@ -15,12 +16,6 @@ import { Play } from './Play';
 import { useState } from 'react';
 
 const cat = () => console.log("Meow");
-
-interface GameResult {
-  winner: string;
-  players: string[];
-};
-
 
 const hardCodedGameResults: GameResult[] = [
   {
@@ -109,7 +104,7 @@ function App() {
 
   const [gameResults, setGameResults] = useState(hardCodedGameResults);
 
-  const addGameResult = (result: GameResult) => setGameResults(
+  const addGameResult: AddGameResultFunc = (result: GameResult) => setGameResults(
     [
       ...gameResults
       , result
