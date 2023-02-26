@@ -21,6 +21,7 @@ interface GameResult {
   players: string[];
 };
 
+
 const hardCodedGameResults: GameResult[] = [
   {
       winner: "Tom"
@@ -135,7 +136,11 @@ function App() {
           <Routes>
             <Route
               path='/'
-              element={<Home />}
+              element={
+                <Home 
+                  leaderBoardData={calculateLeaderboard(hardCodedGameResults)}
+                />
+              }
             />
             <Route
               path='/setup'

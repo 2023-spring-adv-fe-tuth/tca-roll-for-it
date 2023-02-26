@@ -1,6 +1,17 @@
 import { useNavigate } from "react-router-dom";
 
-export const Home = () => {
+interface HomeProps {
+    leaderBoardData: LeaderboardPlayer[] 
+}
+
+export interface LeaderboardPlayer {
+    name: string;
+    wins: number;
+    losses: number;
+    avg: string;
+}
+
+export const Home: React.FC<HomeProps> = ({leaderBoardData}) => {
     const nav = useNavigate();
 
     return (
@@ -27,42 +38,30 @@ export const Home = () => {
                 <div
                     className="flex"
                 >
-                    <div className="card w-96 bg-base-100 shadow-xl bg-base-200 grow">
+                    <div className="card w-0 bg-base-100 shadow-xl bg-base-200 grow">
                         <div className="card-body">
                             <h2 className="card-title">Leaderboard</h2>
-                        
-                            {/* <table className="table table-zebra w-full">
+
+                            <table className="table w-0">
                                 <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>Name</th>
-                                    <th>Job</th>
-                                    <th>Favorite Color</th>
-                                </tr>
+                                    <tr>
+                                        <th>W</th>
+                                        <th>L</th>
+                                        <th>AVG</th>
+                                        <th></th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <th>1</th>
-                                    <td>Cy Ganderton</td>
-                                    <td>Quality Control Specialist</td>
-                                    <td>Blue</td>
-                                </tr>
-                                <tr>
-                                    <th>2</th>
-                                    <td>Hart Hagerty</td>
-                                    <td>Desktop Support Technician</td>
-                                    <td>Purple</td>
-                                </tr>
-                                <tr>
-                                    <th>3</th>
-                                    <td>Brice Swyre</td>
-                                    <td>Tax Accountant</td>
-                                    <td>Red</td>
-                                </tr>
+                                    {leaderBoardData.map(x => (
+                                        <tr>
+                                            <td>{x.wins}</td>
+                                            <td>{x.losses}</td>
+                                            <td>{x.avg}</td>
+                                            <td>{x.name}</td>
+                                        </tr>
+                                    ))}
                                 </tbody>
-                            </table> */}
-                            
-
+                            </table>
                         </div>
                     </div>
                 </div>
