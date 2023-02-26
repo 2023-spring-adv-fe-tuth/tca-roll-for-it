@@ -3,7 +3,7 @@ export interface GameResult {
     players: string[];
 };
 
-export type GetPreviousPlayers = (r: GameResult[]) => string[];
+export type GetPreviousPlayersFunc = (r: GameResult[]) => string[];
 
 export interface LeaderboardPlayer {
     name: string;
