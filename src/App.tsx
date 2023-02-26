@@ -107,6 +107,15 @@ function App() {
 
   const [darkMode, setDarkMode] = useState(false);
 
+  const [gameResults, setGameResults] = useState(hardCodedGameResults);
+
+  const addGameResult = (result: GameResult) => setGameResults(
+    [
+      ...gameResults
+      , result
+    ]
+  );
+
   return (
     <div
       className="App"
@@ -138,7 +147,7 @@ function App() {
               path='/'
               element={
                 <Home 
-                  leaderBoardData={calculateLeaderboard(hardCodedGameResults)}
+                  leaderBoardData={calculateLeaderboard(gameResults)}
                 />
               }
             />
@@ -146,7 +155,7 @@ function App() {
               path='/setup'
               element={
                 <Setup
-                  availablePlayers={getPreviousPlayers(hardCodedGameResults)} 
+                  availablePlayers={getPreviousPlayers(gameResults)} 
                   foo={`${1 + 1}`} 
                   cat={cat} 
                 />
@@ -154,7 +163,11 @@ function App() {
             />
             <Route
               path='/play'
-              element={<Play />}
+              element={
+                <Play 
+                  addGameResult={addGameResult}
+                />
+              }
             />
           </Routes>
         </HashRouter>      

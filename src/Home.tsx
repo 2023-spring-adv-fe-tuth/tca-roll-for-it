@@ -39,10 +39,9 @@ export const Home: React.FC<HomeProps> = ({leaderBoardData}) => {
                     className="flex"
                 >
                     <div className="card w-0 bg-base-100 shadow-xl bg-base-200 grow">
-                        <div className="card-body">
+                        <div className="card-body overflow-x-hidden">
                             <h2 className="card-title">Leaderboard</h2>
-
-                            <table className="table w-0">
+                            <table className="table w-full">
                                 <thead>
                                     <tr>
                                         <th>W</th>

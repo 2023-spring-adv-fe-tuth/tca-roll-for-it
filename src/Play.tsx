@@ -1,7 +1,19 @@
 import { useNavigate } from "react-router-dom";
 
-export const Play = () => {
+interface PlayProps {
+    addGameResult: (r: any) => void
+}
+
+export const Play: React.FC<PlayProps> = ({addGameResult}) => {
     const nav = useNavigate();
+
+    const done = () => {
+        addGameResult({
+            winner: "Larry"
+            , players: ["Larry", "Curly", "Moe"]
+        });
+        nav(-2);
+    };
 
     return (
         <div
@@ -9,7 +21,7 @@ export const Play = () => {
         >
             <button 
                 className="btn btn-lg btn-primary capitalize"
-                onClick={() => nav(-2)}
+                onClick={done}
             >
                 Done
             </button>    
