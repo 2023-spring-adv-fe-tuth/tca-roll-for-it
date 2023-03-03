@@ -1,14 +1,17 @@
 import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { SetupInfo } from "./front-end-model";
 
 interface SetupProps {
     availablePlayers: string[];
+    setSetupInfo: (info: SetupInfo) => void;
     foo?: any;
     cat?: any;
 }
 
 export const Setup: FC<SetupProps> = ({
     availablePlayers
+    , setSetupInfo
     , foo
     , cat
 }) => {
@@ -51,13 +54,23 @@ export const Setup: FC<SetupProps> = ({
         setNewPlayerName("");
     };
 
+    const startGame = () => {
+
+        setSetupInfo({
+            players: chosenPlayers
+                .filter(x => x.checked)
+                .map(x => x.name)
+        });
+        nav("/play");
+    };
+
     return (
         <div
             className="flex flex-col p-1"
         >
             <button
                 className={`btn btn-lg btn-primary capitalize mt-3 ${playerChecked ? '' : 'btn-disabled'}`}
-                onClick={() => nav("/play")}
+                onClick={startGame}
             >
                 {playerChecked ? 'Start Playing' : 'Choose players below...'}
             </button>
@@ -101,7 +114,11 @@ export const Setup: FC<SetupProps> = ({
                                                 }))
                                             ])}
                                         />
-                                        <span className="label-text text-xl ml-3 capitalize">{x.name}</span>
+                                        <span 
+                                            className="label-text text-xl ml-3 capitalize"
+                                        >
+                                            {x.name}
+                                        </span>
                                     </label>
                                 </div>
                             ))}

@@ -1,17 +1,25 @@
 import { useNavigate } from "react-router-dom";
-import { GameResult } from "./front-end-model";
+import { GameResult, SetupInfo } from "./front-end-model";
 
 interface PlayProps {
+    setupInfo: SetupInfo;
     addGameResult: (r: GameResult) => void;
 }
 
-export const Play: React.FC<PlayProps> = ({addGameResult}) => {
+export const Play: React.FC<PlayProps> = ({
+    setupInfo
+    , addGameResult}
+) => {
+
     const nav = useNavigate();
 
-    const done = () => {
+    const done = (winner: string) => {
         addGameResult({
-            winner: "Larry"
-            , players: [{ name: "Larry", order: 0}, { name: "Curly", order: 0}, { name: "Moe", order: 0}]
+            winner: winner
+            , players: setupInfo.players.map(x => ({
+                name: x
+                , order: 0
+            }))
         });
         nav(-2);
     };
@@ -20,12 +28,14 @@ export const Play: React.FC<PlayProps> = ({addGameResult}) => {
         <div
             className="flex flex-col p-1"
         >
-            <button 
-                className="btn btn-lg btn-primary capitalize"
-                onClick={done}
-            >
-                Done
-            </button>    
+            {setupInfo.players.map(x => (
+                <button 
+                    className="btn btn-lg btn-primary capitalize mt-3"
+                    onClick={() => done(x)}
+                >
+                    {x} Won
+                </button>    
+            ))}
         </div>
-);
+    );
 };

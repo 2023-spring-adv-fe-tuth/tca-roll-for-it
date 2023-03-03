@@ -1,7 +1,12 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { GameResult, GetPreviousPlayersFunc } from './front-end-model';
+import { 
+  GameResult
+  , getPreviousPlayers
+  , calculateLeaderboard
+  , SetupInfo
+} from './front-end-model';
 
 import {
   HashRouter
@@ -50,60 +55,15 @@ const hardCodedGameResults: GameResult[] = [
   }
 ];
 
-const getPreviousPlayers: GetPreviousPlayersFunc = (grs: GameResult[]) => {
-  
-  const allPreviousPlayers = grs.flatMap(x => x.players.map(y => y.name));
-  
-  return [
-      ...new Set(allPreviousPlayers)
-  ].sort();
-};
-
-const calculateLeaderboard = (results: GameResult[]) => {
-
-  const gameResultsGroupedByPlayer = getPreviousPlayers(results).reduce(
-      (acc, x) => acc.set(
-          x
-          , results.filter(y => y.players.map(z => z.name).some(a => a == x))
-      )
-      , new Map<string, GameResult[]>() 
-  );
-
-  return [...gameResultsGroupedByPlayer]
-
-      // First object with names game counts and wins...
-      .map(x => ({
-          name: x[0]
-          , totalGames: x[1].length
-          , wins: x[1].filter(y => y.winner === x[0]).length
-      }))
-      
-      // Now use wins and total games to get avg and losses
-      .map(x => ({
-          name: x.name
-          , wins: x.wins 
-          , losses: x.totalGames - x.wins
-          , avg: x.wins / x.totalGames
-      }))
-      
-      // Break average ties with total games...
-      .sort(
-          (a, b) => (a.avg * 1000 + a.wins + a.losses) > (b.avg * 1000 + b.wins + b.losses) ? -1 : 1
-      )
-
-      // Finally, convert average to a 3 digit string...
-      .map(x => ({
-          ...x
-          , avg: x.avg.toFixed(3)
-      }))
-  ;
-};
-
 function App() {
 
   const [darkMode, setDarkMode] = useState(false);
 
   const [gameResults, setGameResults] = useState(hardCodedGameResults);
+
+  const [setupInfo, setSetupInfo] = useState<SetupInfo>({
+    players: []
+  });
 
   const addGameResult = (result: GameResult) => setGameResults(
     [
@@ -152,6 +112,7 @@ function App() {
               element={
                 <Setup
                   availablePlayers={getPreviousPlayers(gameResults)} 
+                  setSetupInfo={setSetupInfo}
                   foo={`${1 + 1}`} 
                   cat={cat} 
                 />
@@ -161,6 +122,7 @@ function App() {
               path='/play'
               element={
                 <Play 
+                  setupInfo={setupInfo}
                   addGameResult={addGameResult}
                 />
               }
