@@ -57,7 +57,8 @@ export const Setup: FC<SetupProps> = ({
     const startGame = () => {
 
         setSetupInfo({
-            players: chosenPlayers
+            start: new Date().toUTCString()
+            , players: chosenPlayers
                 .filter(x => x.checked)
                 .map(x => x.name)
         });

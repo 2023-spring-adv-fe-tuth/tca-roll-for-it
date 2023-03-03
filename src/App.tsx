@@ -62,7 +62,8 @@ function App() {
   const [gameResults, setGameResults] = useState(hardCodedGameResults);
 
   const [setupInfo, setSetupInfo] = useState<SetupInfo>({
-    players: []
+    start: ""
+    , players: []
   });
 
   const addGameResult = (result: GameResult) => setGameResults(

@@ -7,6 +7,7 @@ export interface GameResult {
 };
 
 export interface SetupInfo {
+    start: string;
     players: string[];
 }
 export interface GamePlayer {

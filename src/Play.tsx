@@ -11,6 +11,8 @@ export const Play: React.FC<PlayProps> = ({
     , addGameResult}
 ) => {
 
+    console.log(setupInfo.start);
+
     const nav = useNavigate();
 
     const done = (winner: string) => {
