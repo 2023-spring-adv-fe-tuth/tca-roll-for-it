@@ -9,7 +9,7 @@ export interface GameResult {
 export interface GamePlayer {
     name: string;
     order: number;
-    diceColor: string;
+    turns?: any[];
 }
 
 export interface LeaderboardPlayer {

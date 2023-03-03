@@ -11,7 +11,7 @@ export const Play: React.FC<PlayProps> = ({addGameResult}) => {
     const done = () => {
         addGameResult({
             winner: "Larry"
-            , players: [{ name: "Larry", order: 0, diceColor: "red"}, { name: "Curly", order: 0, diceColor: "red"}, { name: "Moe", order: 0, diceColor: "red"}]
+            , players: [{ name: "Larry", order: 0}, { name: "Curly", order: 0}, { name: "Moe", order: 0}]
         });
         nav(-2);
     };

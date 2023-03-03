@@ -20,33 +20,33 @@ const cat = () => console.log("Meow");
 const hardCodedGameResults: GameResult[] = [
   {
       winner: "Tom"
-      , players: [{ name: "Tom", order: 0, diceColor: "red"}, { name: "Taylor", order: 0, diceColor: "red"}]
+      , players: [{ name: "Tom", order: 0}, { name: "Taylor", order: 0}]
       // , won: false
 
   }
   , {
       winner: "Taylor"
-      , players: [{ name: "Jack", order: 0, diceColor: "red"}, { name: "Taylor", order: 0, diceColor: "red"}]
+      , players: [{ name: "Jack", order: 0}, { name: "Taylor", order: 0}]
   }
   , {
       winner: "Taylor"
-      , players: [{ name: "Tom", order: 0, diceColor: "red"}, { name: "Taylor", order: 0, diceColor: "red"}, { name: "Jack", order: 0, diceColor: "red"}]
+      , players: [{ name: "Tom", order: 0}, { name: "Taylor", order: 0}, { name: "Jack", order: 0}]
   }
   , {
       winner: "X"
-      , players: [{ name: "X", order: 0, diceColor: "red"}, { name: "Joe", order: 0, diceColor: "red"}]
+      , players: [{ name: "X", order: 0}, { name: "Joe", order: 0}]
   }
   , {
       winner: "X"
-      , players: [{ name: "X", order: 0, diceColor: "red"}, { name: "Joe", order: 0, diceColor: "red"}]
+      , players: [{ name: "X", order: 0}, { name: "Joe", order: 0}]
   }
   , {
       winner: "Joe"
-      , players: [{ name: "X", order: 0, diceColor: "red"}, { name: "Joe", order: 0, diceColor: "red"}]
+      , players: [{ name: "X", order: 0}, { name: "Joe", order: 0}]
   }
   , {
       winner: "Jack"
-      , players: [{ name: "X", order: 0, diceColor: "red"}, { name: "Joe", order: 0, diceColor: "red"}, { name: "Jack", order: 0, diceColor: "red"}]
+      , players: [{ name: "X", order: 0}, { name: "Joe", order: 0}, { name: "Jack", order: 0}]
   }
 ];
 
