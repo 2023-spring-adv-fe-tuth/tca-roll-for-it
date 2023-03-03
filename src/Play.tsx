@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import { AddGameResultFunc } from "./front-end-model";
+import { GameResult } from "./front-end-model";
 
 interface PlayProps {
-    addGameResult: AddGameResultFunc;
+    addGameResult: (r: GameResult) => void;
 }
 
 export const Play: React.FC<PlayProps> = ({addGameResult}) => {
@@ -11,7 +11,7 @@ export const Play: React.FC<PlayProps> = ({addGameResult}) => {
     const done = () => {
         addGameResult({
             winner: "Larry"
-            , players: ["Larry", "Curly", "Moe"]
+            , players: [{ name: "Larry", order: 0, diceColor: "red"}, { name: "Curly", order: 0, diceColor: "red"}, { name: "Moe", order: 0, diceColor: "red"}]
         });
         nav(-2);
     };

@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { AddGameResultFunc, GameResult, GetPreviousPlayersFunc } from './front-end-model';
+import { GameResult, GetPreviousPlayersFunc } from './front-end-model';
 
 import {
   HashRouter
@@ -20,40 +20,39 @@ const cat = () => console.log("Meow");
 const hardCodedGameResults: GameResult[] = [
   {
       winner: "Tom"
-      , players: ["Tom", "Taylor"]
+      , players: [{ name: "Tom", order: 0, diceColor: "red"}, { name: "Taylor", order: 0, diceColor: "red"}]
       // , won: false
 
   }
   , {
       winner: "Taylor"
-      , players: ["Jack", "Taylor"]
+      , players: [{ name: "Jack", order: 0, diceColor: "red"}, { name: "Taylor", order: 0, diceColor: "red"}]
   }
   , {
       winner: "Taylor"
-      , players: ["Tom", "Taylor", "Jack"]
+      , players: [{ name: "Tom", order: 0, diceColor: "red"}, { name: "Taylor", order: 0, diceColor: "red"}, { name: "Jack", order: 0, diceColor: "red"}]
   }
   , {
       winner: "X"
-      , players: ["X", "Joe"]
+      , players: [{ name: "X", order: 0, diceColor: "red"}, { name: "Joe", order: 0, diceColor: "red"}]
   }
   , {
       winner: "X"
-      , players: ["X", "Joe"]
+      , players: [{ name: "X", order: 0, diceColor: "red"}, { name: "Joe", order: 0, diceColor: "red"}]
   }
   , {
       winner: "Joe"
-      , players: ["X", "Joe"]
+      , players: [{ name: "X", order: 0, diceColor: "red"}, { name: "Joe", order: 0, diceColor: "red"}]
   }
   , {
       winner: "Jack"
-      , players: ["X", "Joe", "Jack"]
+      , players: [{ name: "X", order: 0, diceColor: "red"}, { name: "Joe", order: 0, diceColor: "red"}, { name: "Jack", order: 0, diceColor: "red"}]
   }
 ];
 
 const getPreviousPlayers: GetPreviousPlayersFunc = (grs: GameResult[]) => {
-    
-  // const allPreviousPlayers = grs.map(x => x.players);
-  const allPreviousPlayers = grs.flatMap(x => x.players);
+  
+  const allPreviousPlayers = grs.flatMap(x => x.players.map(y => y.name));
   
   return [
       ...new Set(allPreviousPlayers)
@@ -65,32 +64,34 @@ const calculateLeaderboard = (results: GameResult[]) => {
   const gameResultsGroupedByPlayer = getPreviousPlayers(results).reduce(
       (acc, x) => acc.set(
           x
-          , results.filter(y => y.players.includes(x))
+          , results.filter(y => y.players.map(z => z.name).some(a => a == x))
       )
       , new Map<string, GameResult[]>() 
   );
 
-  // return gameResultsGroupedByPlayer;
-
-  // return [...gameResultsGroupedByPlayer]; // Array of tuples of [string, GameResult[]]
-
   return [...gameResultsGroupedByPlayer]
+
       // First object with names game counts and wins...
       .map(x => ({
           name: x[0]
           , totalGames: x[1].length
           , wins: x[1].filter(y => y.winner === x[0]).length
       }))
-      /// Now use wins and total games to get avg and losses
+      
+      // Now use wins and total games to get avg and losses
       .map(x => ({
           name: x.name
           , wins: x.wins 
           , losses: x.totalGames - x.wins
           , avg: x.wins / x.totalGames
       }))
+      
+      // Break average ties with total games...
       .sort(
           (a, b) => (a.avg * 1000 + a.wins + a.losses) > (b.avg * 1000 + b.wins + b.losses) ? -1 : 1
       )
+
+      // Finally, convert average to a 3 digit string...
       .map(x => ({
           ...x
           , avg: x.avg.toFixed(3)
@@ -104,7 +105,7 @@ function App() {
 
   const [gameResults, setGameResults] = useState(hardCodedGameResults);
 
-  const addGameResult: AddGameResultFunc = (result: GameResult) => setGameResults(
+  const addGameResult = (result: GameResult) => setGameResults(
     [
       ...gameResults
       , result

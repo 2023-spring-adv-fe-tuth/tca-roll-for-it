@@ -1,9 +1,16 @@
+//
+// Interfaces...
+//
 export interface GameResult {
     winner: string;
-    players: string[];
+    players: GamePlayer[];
 };
 
-export type GetPreviousPlayersFunc = (r: GameResult[]) => string[];
+export interface GamePlayer {
+    name: string;
+    order: number;
+    diceColor: string;
+}
 
 export interface LeaderboardPlayer {
     name: string;
@@ -12,7 +19,9 @@ export interface LeaderboardPlayer {
     avg: string;
 }
 
+//
+// Func types...
+//
+export type GetPreviousPlayersFunc = (r: GameResult[]) => string[];
 export type CalculateLeaderboardFunc = (r: GameResult[]) => LeaderboardPlayer[];
-
-export type AddGameResultFunc = (r: GameResult) => void;
   
