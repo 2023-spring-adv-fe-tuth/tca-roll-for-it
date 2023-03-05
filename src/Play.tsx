@@ -112,7 +112,8 @@ export const Play: React.FC<PlayProps> = ({
                                 className="text-xl text-left font-bold"
                             >
                                 <span 
-                                    className="badge badge-lg w-16 mr-5 bg-primary">
+                                    className={`badge badge-lg w-16 mr-5 ${activePlayer == x ? 'bg-primary' : ''}`}
+                                >
                                         0
                                 </span>
                                 {x.name}
