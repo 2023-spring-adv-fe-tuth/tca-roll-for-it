@@ -20,18 +20,25 @@ export const Play: React.FC<PlayProps> = ({
 ) => {
 
     console.log(setupInfo.start);
+    
     const [currentPlayers, setCurrentPlayers] = useState<GamePlayer[]>([]);
     
+    const [activePlayer, setActivePlayer] = useState<GamePlayer | undefined>(undefined);
+
     const showDrawerReason =
         
-        // If need to pick player order. 
-        setupInfo.players.length != currentPlayers.length
-            ? ShowDrawerReason.ChoosePlayerOrder
-            : ShowDrawerReason.None
-        
-            // Or pick returned/bumped dice when scoring a card.
+        // Don't show if active player.
+        activePlayer 
+            ? ShowDrawerReason.None
+            : 
+                // If need to pick player order. 
+                setupInfo.players.length != currentPlayers.length
+                    ? ShowDrawerReason.ChoosePlayerOrder
+                    : ShowDrawerReason.None
+                
+                    // Or pick returned/bumped dice when scoring a card.
 
-                // Or confirm end of game.
+                        // Or confirm end of game.
     ;
 
     const nav = useNavigate();
@@ -61,13 +68,26 @@ export const Play: React.FC<PlayProps> = ({
                     className="flex flex-col p-1"
                 >
                     {currentPlayers.map(x => (
-                        <button
-                            key={x.name}
-                            className="btn btn-lg btn-primary capitalize mt-3"
-                            onClick={() => done(x.name)}
-                        >
-                            {x.name} Won
-                        </button>
+                        <div>
+
+                            <h2
+                                className="text-xl text-left font-bold"
+                            >
+                                <span 
+                                    className="badge badge-lg w-16 mr-5 bg-primary">
+                                        0
+                                </span>
+                                {x.name}
+                            </h2>
+
+                            <button
+                                key={x.name}
+                                className="btn btn-lg btn-primary capitalize mt-3"
+                                onClick={() => done(x.name)}
+                            >
+                                {x.name} Won
+                            </button>
+                        </div>
                     ))}
                 </div>
             </div>
