@@ -1,5 +1,6 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { GameResult, SetupInfo } from "./front-end-model";
+import { GamePlayer, GameResult, SetupInfo } from "./front-end-model";
 
 interface PlayProps {
     setupInfo: SetupInfo;
@@ -8,10 +9,12 @@ interface PlayProps {
 
 export const Play: React.FC<PlayProps> = ({
     setupInfo
-    , addGameResult}
+    , addGameResult }
 ) => {
 
     console.log(setupInfo.start);
+    const [currentPlayers, setCurrentPlayers] = useState<GamePlayer[]>([]);
+    const allPlayersOrderChosen = setupInfo.players.length == currentPlayers.length;
 
     const nav = useNavigate();
 
@@ -27,34 +30,54 @@ export const Play: React.FC<PlayProps> = ({
     };
 
     return (
-
-
         <div className="drawer drawer-end">
-            <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
+            <input 
+                id="choose-order-drawer" 
+                type="checkbox" 
+                className="drawer-toggle" 
+                checked={!allPlayersOrderChosen} 
+                readOnly
+            />
             <div className="drawer-content">
-
                 <div
                     className="flex flex-col p-1"
                 >
-                    {setupInfo.players.map(x => (
-                        <button 
+                    {currentPlayers.map(x => (
+                        <button
+                            key={x.name}
                             className="btn btn-lg btn-primary capitalize mt-3"
-                            onClick={() => done(x)}
+                            onClick={() => done(x.name)}
                         >
-                            {x} Won
-                        </button>    
+                            {x.name} Won
+                        </button>
                     ))}
                 </div>
-
-
-                <label htmlFor="my-drawer-4" className="drawer-button btn btn-primary">Open drawer</label>
-
-            </div> 
+            </div>
             <div className="drawer-side">
-                <label htmlFor="my-drawer-4" className="drawer-overlay"></label>
+                <label htmlFor="cnoose-order-drawer" className="drawer-overlay"></label>
                 <ul className="menu p-4 w-80 bg-base-100 text-base-content">
-                <li><a>Sidebar Item 1</a></li>
-                <li><a>Sidebar Item 2</a></li>
+                    <p>Choose Player {currentPlayers.length + 1}</p>
+                    {
+                        setupInfo.players
+                            .filter(x => !currentPlayers.some(y => y.name == x))
+                            .map(x => (
+                                <button
+                                    className="btn btn-lg btn-primary capitalize mt-3"
+                                    key={x}
+                                    onClick={() => setCurrentPlayers([
+                                            ...currentPlayers
+                                            , {
+                                                name: x
+                                                , order: currentPlayers.length + 1
+                                                , turns: []
+                                            }
+                                        ])
+                                    }
+                                >
+                                    {x}                                    
+                                </button>
+                            ))
+                    }
                 </ul>
             </div>
         </div>
