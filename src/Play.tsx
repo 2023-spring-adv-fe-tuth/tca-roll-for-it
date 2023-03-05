@@ -7,6 +7,13 @@ interface PlayProps {
     addGameResult: (r: GameResult) => void;
 }
 
+enum ShowDrawerReason {
+    None
+    , ChoosePlayerOrder
+    , ScoringCard 
+    , EndOfGame
+};
+
 export const Play: React.FC<PlayProps> = ({
     setupInfo
     , addGameResult }
@@ -14,7 +21,18 @@ export const Play: React.FC<PlayProps> = ({
 
     console.log(setupInfo.start);
     const [currentPlayers, setCurrentPlayers] = useState<GamePlayer[]>([]);
-    const allPlayersOrderChosen = setupInfo.players.length == currentPlayers.length;
+    
+    const showDrawerReason =
+        
+        // If need to pick player order. 
+        setupInfo.players.length != currentPlayers.length
+            ? ShowDrawerReason.ChoosePlayerOrder
+            : ShowDrawerReason.None
+        
+            // Or pick returned/bumped dice when scoring a card.
+
+                // Or confirm end of game.
+    ;
 
     const nav = useNavigate();
 
@@ -35,7 +53,7 @@ export const Play: React.FC<PlayProps> = ({
                 id="choose-order-drawer" 
                 type="checkbox" 
                 className="drawer-toggle" 
-                checked={!allPlayersOrderChosen} 
+                checked={showDrawerReason != ShowDrawerReason.None} 
                 readOnly
             />
             <div className="drawer-content">
