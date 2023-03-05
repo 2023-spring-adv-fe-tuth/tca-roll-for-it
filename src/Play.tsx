@@ -76,7 +76,17 @@ export const Play: React.FC<PlayProps> = ({
 
     const endTurn = () => {
         setActivePlayer(
-            undefined
+
+            // Choose next player if order not chosen for all players
+            setupInfo.players.length != currentPlayers.length
+             ? undefined
+
+             // Otherwise, next player if not last player
+             : activePlayer!.order < currentPlayers.length
+                ? currentPlayers[activePlayer!.order]
+
+                // Or if nothing else, the first player
+                : currentPlayers[0]
         );
     };
 
@@ -94,7 +104,9 @@ export const Play: React.FC<PlayProps> = ({
                     className="flex flex-col p-1"
                 >
                     {currentPlayers.map(x => (
-                        <div>
+                        <div
+                            className="mt-5"
+                        >
 
                             <h2
                                 className="text-xl text-left font-bold"
@@ -108,13 +120,24 @@ export const Play: React.FC<PlayProps> = ({
 
                             {
                                 activePlayer == x &&
-                                <button
-                                    key={x.name}
-                                    className="btn btn-sm btn-primary capitalize mt-3"
-                                    onClick={endTurn}
+                                <div
+                                    className="flex flex-row mt-3 ml-5"
                                 >
-                                    End Turn
-                                </button>
+                                    <button
+                                        key={x.name}
+                                        className="btn btn-sm btn-primary btn-outline capitalize"
+                                        onClick={endTurn}
+                                    >
+                                        End Turn
+                                    </button>                                    
+                                    <button
+                                        key={x.name}
+                                        className="ml-3 btn btn-sm btn-primary btn-outline capitalize"
+                                        onClick={() => done(x.name)}
+                                    >
+                                        Won
+                                    </button>                                    
+                                </div>
                             }
                         </div>
                     ))}
