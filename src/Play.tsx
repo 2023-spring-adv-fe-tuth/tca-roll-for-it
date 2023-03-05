@@ -56,7 +56,11 @@ export const Play: React.FC<PlayProps> = ({
             <div className="drawer-side">
                 <label htmlFor="cnoose-order-drawer" className="drawer-overlay"></label>
                 <ul className="menu p-4 w-80 bg-base-100 text-base-content">
-                    <p>Choose Player {currentPlayers.length + 1}</p>
+                    <p
+                        className="text-xl text-left font-bold"
+                    >
+                        Choose Player {currentPlayers.length + 1}
+                    </p>
                     {
                         setupInfo.players
                             .filter(x => !currentPlayers.some(y => y.name == x))
