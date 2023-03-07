@@ -5,7 +5,10 @@ import {
   GameResult
   , getPreviousPlayers
   , calculateLeaderboard
-  , SetupInfo
+  , SetupInfo,
+  getShortestGame,
+  getLongestGame,
+  getAvgGameLengths
 } from './front-end-model';
 
 import {
@@ -26,32 +29,45 @@ const hardCodedGameResults: GameResult[] = [
   {
       winner: "Tom"
       , players: [{ name: "Tom", order: 0}, { name: "Taylor", order: 0}]
-      // , won: false
+      , start: "2023-03-07T09:18:00.000"
+      , end: "2023-03-07T09:19:58.000"
 
   }
   , {
       winner: "Taylor"
       , players: [{ name: "Jack", order: 0}, { name: "Taylor", order: 0}]
+      , start: "2023-03-07T09:20:00.000"
+      , end: "2023-03-07T09:40:00.000"
   }
   , {
       winner: "Taylor"
       , players: [{ name: "Tom", order: 0}, { name: "Taylor", order: 0}, { name: "Jack", order: 0}]
+      , start: "2023-03-07T09:45:00.000"
+      , end: "2023-03-07T09:51:00.000"
   }
   , {
       winner: "X"
       , players: [{ name: "X", order: 0}, { name: "Joe", order: 0}]
+      , start: "2023-03-07T10:00:00.000"
+      , end: "2023-03-07T10:05:00.000"
   }
   , {
       winner: "X"
       , players: [{ name: "X", order: 0}, { name: "Joe", order: 0}]
+      , start: "2023-03-07T10:20:00.000"
+      , end: "2023-03-07T10:50:00.000"
   }
   , {
       winner: "Joe"
       , players: [{ name: "X", order: 0}, { name: "Joe", order: 0}]
+      , start: "2023-03-07T10:55:00.000"
+      , end: "2023-03-07T10:57:00.000"
   }
   , {
       winner: "Jack"
       , players: [{ name: "X", order: 0}, { name: "Joe", order: 0}, { name: "Jack", order: 0}]
+      , start: "2023-03-07T11:00:00.000"
+      , end: "2023-03-07T11:25:00.000"
   }
 ];
 
@@ -105,6 +121,9 @@ function App() {
               element={
                 <Home 
                   leaderBoardData={calculateLeaderboard(gameResults)}
+                  shortestGame={getShortestGame(gameResults)}
+                  longestGame={getLongestGame(gameResults)}
+                  avgGameLengths={getAvgGameLengths(gameResults)}
                 />
               }
             />

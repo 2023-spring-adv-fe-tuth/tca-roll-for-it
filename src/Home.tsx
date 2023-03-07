@@ -1,11 +1,22 @@
 import { useNavigate } from "react-router-dom";
 import { LeaderboardPlayer } from "./front-end-model";
+import { durationFormatter } from 'human-readable'
 
 interface HomeProps {
-    leaderBoardData: LeaderboardPlayer[] 
+    leaderBoardData: LeaderboardPlayer[];
+    shortestGame: number;
+    longestGame: number;
+    avgGameLengths: { playerCount: number, avgTime: number}[];
 }
 
-export const Home: React.FC<HomeProps> = ({leaderBoardData}) => {
+const format = durationFormatter();
+
+export const Home: React.FC<HomeProps> = ({
+    leaderBoardData
+    , shortestGame
+    , longestGame
+    , avgGameLengths
+}) => {
     const nav = useNavigate();
 
     return (
@@ -65,6 +76,42 @@ export const Home: React.FC<HomeProps> = ({leaderBoardData}) => {
                     <div className="card w-96 bg-base-100 shadow-xl grow">
                         <div className="card-body p-3">
                             <h2 className="card-title">Game Time Facts</h2>
+                            <p
+                                className="text-lg text-left mt-3"
+                            >
+                                <span
+                                    className="font-bold mr-3"
+                                >
+                                    {`${format(shortestGame)}`}
+                                </span> 
+                                shortest game ever
+                            </p>
+                            <p
+                                className="text-lg text-left"
+                            >
+                                <span
+                                    className="font-bold mr-3"
+                                >
+                                    {`${format(longestGame)}`}
+                                </span> 
+                                longest game ever
+                            </p>
+                            <table className="table w-full mt-3">
+                                <thead>
+                                    <tr>
+                                        <th># PLAYERS</th>
+                                        <th>AVG GAME LENGTH</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {avgGameLengths.map(x => (
+                                        <tr>
+                                            <td>{x.playerCount}</td>
+                                            <td>{`${format(x.avgTime)}`}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
@@ -77,8 +124,7 @@ export const Home: React.FC<HomeProps> = ({leaderBoardData}) => {
                             <h2 className="card-title">Winning Sequences</h2>
                         </div>
                     </div>
-                </div>
-  
+                </div>  
             </div>
       </div>
     );

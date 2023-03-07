@@ -2,18 +2,31 @@
 // Interfaces...
 //
 export interface GameResult {
+    
+    start: string;
+    end: string;
+
     winner: string;
     players: GamePlayer[];
 };
 
-export interface SetupInfo {
-    start: string;
-    players: string[];
-}
 export interface GamePlayer {
     name: string;
     order: number;
-    turns?: any[];
+
+    turns?: GamePlayerTurn[];
+}
+
+export interface GamePlayerTurn {
+    start: string;
+    end: string;
+    cardsScored: CardScored[];
+}
+
+export interface CardScored {
+    timestamp: string;
+    points: 2 | 5 | 10 | 15; // : number
+    returnedDiceTo: string[];
 }
 
 export interface LeaderboardPlayer {
@@ -23,11 +36,19 @@ export interface LeaderboardPlayer {
     avg: string;
 }
 
+export interface SetupInfo {
+    start: string;
+    players: string[];
+}
+
 //
 // Func types...
 //
 export type GetPreviousPlayersFunc = (r: GameResult[]) => string[];
 export type CalculateLeaderboardFunc = (r: GameResult[]) => LeaderboardPlayer[];
+export type GetLongestGame = (results: GameResult[]) => number;
+export type GetShortestGame = (results: GameResult[]) => number;
+export type GetAverageGameLengthsByPlayerCount = (results: GameResult[]) => { playerCount: number, avgTime: number }[];
   
 //
 // Func impls...
@@ -79,4 +100,26 @@ export const calculateLeaderboard = (results: GameResult[]) => {
             , avg: x.avg.toFixed(3)
         }))
     ;
+};
+
+export const getLongestGame: GetLongestGame = (results) => Math.max(...results.map(x => new Date(x.end).getTime() - new Date(x.start).getTime()));
+export const getShortestGame: GetShortestGame = (results) => Math.min(...results.map(x => new Date(x.end).getTime() - new Date(x.start).getTime()));
+
+export const getAvgGameLengths: GetAverageGameLengthsByPlayerCount = (results) => {
+
+    const gameDurationsGroupedByNumberOfPlayers = results.reduce(
+        (acc, x) => acc.set(
+            x.players.length
+            , [
+                ...acc.get(x.players.length) ?? []
+                , new Date(x.end).getTime() - new Date(x.start).getTime()
+            ]
+        )
+        , new Map<number, number[]>()
+    );
+
+    return [...gameDurationsGroupedByNumberOfPlayers].map(x => ({
+        playerCount: x[0]
+        , avgTime: x[1].reduce((acc, x) => acc + x, 0) / x[1].length
+    }));
 };

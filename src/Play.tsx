@@ -54,6 +54,8 @@ export const Play: React.FC<PlayProps> = ({
                 name: x
                 , order: 0
             }))
+            , start: setupInfo.start
+            , end: new Date().toISOString()
         });
         nav(-2);
     };
