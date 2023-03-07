@@ -49,10 +49,25 @@ export const Home: React.FC<HomeProps> = ({
                             <table className="table w-full">
                                 <thead>
                                     <tr>
-                                        <th>W</th>
-                                        <th>L</th>
-                                        <th>AVG</th>
-                                        <th></th>
+                                        <th
+                                            className="bg-base-300"
+                                        >
+                                            W
+                                        </th>
+                                        <th
+                                            className="bg-base-300"
+                                        >
+                                            L
+                                        </th>
+                                        <th
+                                            className="bg-base-300"
+                                        >
+                                            AVG
+                                        </th>
+                                        <th
+                                            className="bg-base-300"
+                                        >
+                                        </th>
                                     </tr>
                                 </thead>
                                 <tbody>
