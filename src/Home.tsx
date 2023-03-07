@@ -81,7 +81,7 @@ export const Home: React.FC<HomeProps> = ({
                     className="flex"
                 >
                     <div className="card w-96 bg-base-100 shadow-xl grow">
-                        <div className="card-body p-3">
+                        <div className="card-body p-3 overflow-x-hidden">
                             <h2 className="card-title">Game Time Facts</h2>
                             <p
                                 className="text-lg text-left mt-1 ml-5"
@@ -127,7 +127,7 @@ export const Home: React.FC<HomeProps> = ({
                     className="flex"
                 >
                     <div className="card w-96 bg-base-100 shadow-xl grow">
-                        <div className="card-body p-3">
+                        <div className="card-body p-3 overflow-x-hidden">
                             <h2 className="card-title">Winning Sequences</h2>
                         </div>
                     </div>
