@@ -118,8 +118,13 @@ export const getAvgGameLengths: GetAverageGameLengthsByPlayerCount = (results) =
         , new Map<number, number[]>()
     );
 
-    return [...gameDurationsGroupedByNumberOfPlayers].map(x => ({
-        playerCount: x[0]
-        , avgTime: x[1].reduce((acc, x) => acc + x, 0) / x[1].length
-    }));
+    return [...gameDurationsGroupedByNumberOfPlayers]
+        .map(x => ({
+            playerCount: x[0]
+            , avgTime: x[1].reduce((acc, x) => acc + x, 0) / x[1].length
+        }))
+        .sort(
+            (a, b) => a.playerCount >= b.playerCount ? 1 : -1
+        )
+    ;
 };
