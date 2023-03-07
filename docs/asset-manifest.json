@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/tca-roll-for-it/static/css/main.825623b9.css",
-    "main.js": "/tca-roll-for-it/static/js/main.1acfa655.js",
+    "main.css": "/tca-roll-for-it/static/css/main.e7b40888.css",
+    "main.js": "/tca-roll-for-it/static/js/main.73320b49.js",
     "static/js/787.b02ed5da.chunk.js": "/tca-roll-for-it/static/js/787.b02ed5da.chunk.js",
     "index.html": "/tca-roll-for-it/index.html",
-    "main.825623b9.css.map": "/tca-roll-for-it/static/css/main.825623b9.css.map",
-    "main.1acfa655.js.map": "/tca-roll-for-it/static/js/main.1acfa655.js.map",
+    "main.e7b40888.css.map": "/tca-roll-for-it/static/css/main.e7b40888.css.map",
+    "main.73320b49.js.map": "/tca-roll-for-it/static/js/main.73320b49.js.map",
     "787.b02ed5da.chunk.js.map": "/tca-roll-for-it/static/js/787.b02ed5da.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.825623b9.css",
-    "static/js/main.1acfa655.js"
+    "static/css/main.e7b40888.css",
+    "static/js/main.73320b49.js"
   ]
 }
