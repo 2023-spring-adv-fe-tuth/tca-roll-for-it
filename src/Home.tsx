@@ -43,30 +43,22 @@ export const Home: React.FC<HomeProps> = ({
                 <div
                     className="flex"
                 >
-                    <div className="card w-0 bg-base-100 shadow-xl bg-base-200 grow">
+                    <div className="card w-0 bg-base-100 shadow-xl grow">
                         <div className="card-body p-3 overflow-x-hidden">
                             <h2 className="card-title">Leaderboard</h2>
                             <table className="table w-full">
                                 <thead>
                                     <tr>
-                                        <th
-                                            className="bg-base-300"
-                                        >
+                                        <th>
                                             W
                                         </th>
-                                        <th
-                                            className="bg-base-300"
-                                        >
+                                        <th>
                                             L
                                         </th>
-                                        <th
-                                            className="bg-base-300"
-                                        >
+                                        <th>
                                             AVG
                                         </th>
-                                        <th
-                                            className="bg-base-300"
-                                        >
+                                        <th>
                                         </th>
                                     </tr>
                                 </thead>
@@ -134,7 +126,7 @@ export const Home: React.FC<HomeProps> = ({
                 <div
                     className="flex"
                 >
-                    <div className="card w-96 bg-base-100 shadow-xl bg-base-200 grow">
+                    <div className="card w-96 bg-base-100 shadow-xl grow">
                         <div className="card-body p-3">
                             <h2 className="card-title">Winning Sequences</h2>
                         </div>
