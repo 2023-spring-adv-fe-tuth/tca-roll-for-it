@@ -84,20 +84,20 @@ export const Home: React.FC<HomeProps> = ({
                         <div className="card-body p-3">
                             <h2 className="card-title">Game Time Facts</h2>
                             <p
-                                className="text-lg text-left mt-3"
+                                className="text-lg text-left mt-1 ml-5"
                             >
                                 <span
-                                    className="font-bold mr-3"
+                                    className="font-bold mr-1"
                                 >
                                     {`${format(shortestGame)}`}
                                 </span> 
                                 shortest game ever
                             </p>
                             <p
-                                className="text-lg text-left"
+                                className="text-lg text-left ml-5"
                             >
                                 <span
-                                    className="font-bold mr-3"
+                                    className="font-bold mr-1"
                                 >
                                     {`${format(longestGame)}`}
                                 </span> 
