@@ -107,14 +107,14 @@ export const Play: React.FC<PlayProps> = ({
                 >
                     {currentPlayers.map(x => (
                         <div
-                            className="mt-5"
+                            className="mb-10"
                         >
 
                             <h2
-                                className="text-xl text-left font-bold"
+                                className="text-3xl text-left font-bold"
                             >
                                 <span 
-                                    className={`badge badge-lg w-16 mr-5 ${activePlayer == x ? 'bg-primary' : ''}`}
+                                    className={`text-xl badge badge-lg w-16 mr-5 ${activePlayer == x ? 'bg-primary' : ''}`}
                                 >
                                         0
                                 </span>
@@ -124,22 +124,50 @@ export const Play: React.FC<PlayProps> = ({
                             {
                                 activePlayer == x &&
                                 <div
-                                    className="flex flex-row mt-3 ml-5"
+                                    className="flex flex-col ml-5 mt-5"
                                 >
-                                    <button
-                                        key={x.name}
-                                        className="btn btn-sm btn-primary btn-outline capitalize"
-                                        onClick={endTurn}
+                                    <div
+                                        className="flex flex-row"
                                     >
-                                        End Turn
-                                    </button>                                    
-                                    <button
-                                        key={x.name}
-                                        className="ml-3 btn btn-sm btn-primary btn-outline capitalize"
-                                        onClick={() => done(x.name)}
+                                        <button
+                                            className="btn btn-primary btn-outline btn-lg"
+                                        >
+                                            +2
+                                        </button>
+                                        <button
+                                            className="btn btn-primary btn-outline btn-lg ml-3"
+                                        >
+                                            +5
+                                        </button>
+                                        <button
+                                            className="btn btn-primary btn-outline btn-lg ml-3"
+                                        >
+                                            +10
+                                        </button>
+                                        <button
+                                            className="btn btn-primary btn-outline btn-lg ml-3"
+                                        >
+                                            +15
+                                        </button>
+                                    </div>
+                                    <div
+                                        className="flex flex-row mt-3"
                                     >
-                                        Won
-                                    </button>                                    
+                                        <button
+                                            key={x.name}
+                                            className="btn btn-lg btn-primary capitalize"
+                                            onClick={endTurn}
+                                        >
+                                            End Turn
+                                        </button>                                    
+                                        <button
+                                            key={x.name}
+                                            className="ml-3 btn btn-lg btn-primary btn-outline capitalize"
+                                            onClick={() => done(x.name)}
+                                        >
+                                            Won
+                                        </button>                                    
+                                    </div>                                    
                                 </div>
                             }
                         </div>
