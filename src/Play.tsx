@@ -178,34 +178,34 @@ export const Play: React.FC<PlayProps> = ({
                         </div>
                     ))}
                     <div
-                        className="text-md text-left ml-5 font-light"
+                        className="text-md text-left ml-5 font-light mr-3"
                     >
-                        Keep playing until somebody wins with <span className="font-semibold">30 points</span>... 
-                    </div>
-                    <div
-                        className="text-md text-left ml-5 font-light"
-                    >
-                        You can
-                        <a
-                            className="btn btn-link capitalize text-lg -ml-3 -mr-3"
-                        >
-                            Undo
-                        </a>
-                        scored cards through previous turns...
-                    </div>    
-                    <div
-                        className="text-md text-left ml-5 -mt-3 font-light"
-                    >
-                        Or 
-                        <a
-                            className="btn btn-link capitalize text-lg -ml-3 -mr-3"
-                            onClick={() => nav(-2)}
-                        >
-                            Quit
-                        </a>
-                        and not record data for this game...
-                    </div>
+                        <p>
+                            Keep playing until somebody wins with <span className="font-semibold">30 points</span>... 
+                        </p>
+    
+                        <p>
+                            You can
+                            <a
+                                className="btn btn-link capitalize text-lg -ml-3 -mr-3 -mb-3"
+                            >
+                                Undo
+                            </a>
+                            scored cards through previous turns...
 
+                        </p>
+    
+                        <p>
+                            Or 
+                            <a
+                                className="btn btn-link capitalize text-lg -ml-3 -mr-3 -mb-3"
+                                onClick={() => nav(-2)}
+                            >
+                                Quit
+                            </a>
+                            and not record data for this game...
+                        </p>
+                    </div>
                 </div>
             </div>
             <div className="drawer-side">
