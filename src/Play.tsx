@@ -127,7 +127,7 @@ export const Play: React.FC<PlayProps> = ({
                                     className="flex flex-col ml-5 mt-5"
                                 >
                                     <div
-                                        className="font-semibold text-primary text-sm text-left mb-3 ml-16 -mt-5"
+                                        className="font-semibold1 text-primary text-sm text-left mb-3 ml-16 -mt-5"
                                     >
                                         5 + 5
                                     </div>
@@ -137,22 +137,22 @@ export const Play: React.FC<PlayProps> = ({
                                         <button
                                             className="btn btn-primary btn-outline btn-md"
                                         >
-                                            +2
+                                            + 2
                                         </button>
                                         <button
                                             className="btn btn-primary btn-outline btn-md ml-3"
                                         >
-                                            +5
+                                            + 5
                                         </button>
                                         <button
                                             className="btn btn-primary btn-outline btn-md ml-3"
                                         >
-                                            +10
+                                            + 10
                                         </button>
                                         <button
                                             className="btn btn-primary btn-outline btn-md ml-3"
                                         >
-                                            +15
+                                            + 15
                                         </button>
                                     </div>
                                     <div
