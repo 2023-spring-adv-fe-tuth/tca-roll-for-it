@@ -111,12 +111,12 @@ export const Play: React.FC<PlayProps> = ({
                         >
 
                             <h2
-                                className="text-3xl text-left font-bold"
+                                className="text-2xl text-left"
                             >
                                 <span 
-                                    className={`text-xl badge badge-lg w-16 mr-5 ${activePlayer == x ? 'bg-primary' : ''}`}
+                                    className={`text-xl font-bold badge badge-lg w-16 mr-5 ${activePlayer == x ? 'bg-primary' : ''}`}
                                 >
-                                        0
+                                        10
                                 </span>
                                 {x.name}
                             </h2>
@@ -124,28 +124,28 @@ export const Play: React.FC<PlayProps> = ({
                             {
                                 activePlayer == x &&
                                 <div
-                                    className="flex flex-col ml-5 mt-5"
+                                    className="flex flex-col ml-20 mt-5"
                                 >
                                     <div
                                         className="flex flex-row"
                                     >
                                         <button
-                                            className="btn btn-primary btn-outline btn-lg"
+                                            className="btn btn-primary btn-outline btn-md"
                                         >
                                             +2
                                         </button>
                                         <button
-                                            className="btn btn-primary btn-outline btn-lg ml-3"
+                                            className="btn btn-primary btn-outline btn-md ml-3"
                                         >
                                             +5
                                         </button>
                                         <button
-                                            className="btn btn-primary btn-outline btn-lg ml-3"
+                                            className="btn btn-primary btn-outline btn-md ml-3"
                                         >
                                             +10
                                         </button>
                                         <button
-                                            className="btn btn-primary btn-outline btn-lg ml-3"
+                                            className="btn btn-primary btn-outline btn-md ml-3"
                                         >
                                             +15
                                         </button>
@@ -155,14 +155,14 @@ export const Play: React.FC<PlayProps> = ({
                                     >
                                         <button
                                             key={x.name}
-                                            className="btn btn-lg btn-primary capitalize"
+                                            className="btn btn-md btn-primary capitalize"
                                             onClick={endTurn}
                                         >
                                             End Turn
                                         </button>                                    
                                         <button
                                             key={x.name}
-                                            className="ml-3 btn btn-lg btn-primary btn-outline capitalize"
+                                            className="ml-3 btn btn-md btn-link"
                                             onClick={() => done(x.name)}
                                         >
                                             Won
