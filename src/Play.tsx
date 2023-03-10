@@ -7,6 +7,8 @@ interface PlayProps {
     addGameResult: (r: GameResult) => void;
 }
 
+type Points = 2 | 5 | 10 | 15;
+
 enum ShowDrawerReason {
     None
     , ChoosePlayerOrder
@@ -24,7 +26,7 @@ export const Play: React.FC<PlayProps> = ({
     const [currentPlayers, setCurrentPlayers] = useState<GamePlayer[]>([]);
     
     const [activePlayer, setActivePlayer] = useState<GamePlayer | undefined>(undefined);
-    const [scoreCard, setScoreCard] = useState<2 | 5 | 10 | 15 | undefined>(undefined);
+    const [scoreCard, setScoreCard] = useState<Points | undefined>(undefined);
     const [gameOver, setGameOver] = useState<boolean>(false);
 
     const showDrawerReason =
@@ -92,6 +94,10 @@ export const Play: React.FC<PlayProps> = ({
         );
     };
 
+    const startScoreCard = (points: Points) => {
+        setScoreCard(points);
+    };
+
     return (
         <div className="drawer drawer-end">
             <input 
@@ -136,21 +142,25 @@ export const Play: React.FC<PlayProps> = ({
                                     >
                                         <button
                                             className="btn btn-primary btn-outline btn-md"
+                                            onClick={() => startScoreCard(2)}
                                         >
                                             + 2
                                         </button>
                                         <button
                                             className="btn btn-primary btn-outline btn-md ml-3"
+                                            onClick={() => startScoreCard(5)}
                                         >
                                             + 5
                                         </button>
                                         <button
                                             className="btn btn-primary btn-outline btn-md ml-3"
+                                            onClick={() => startScoreCard(10)}
                                         >
                                             + 10
                                         </button>
                                         <button
                                             className="btn btn-primary btn-outline btn-md ml-3"
+                                            onClick={() => startScoreCard(15)}
                                         >
                                             + 15
                                         </button>
@@ -234,6 +244,51 @@ export const Play: React.FC<PlayProps> = ({
                                         </button>
                                     ))
                             }                
+                        </div>
+                    }
+                    { 
+                        showDrawerReason == ShowDrawerReason.ScoreCard &&
+                        <div
+                            className="flex flex-col"
+                        >
+                            <p
+                                className="text-xl text-left font-bold"
+                            >
+                                Returned dice to...
+                            </p>
+                            {
+                                setupInfo.players
+                                    .filter(x => x != activePlayer?.name)
+                                    .map(x => (
+                                        <div className="form-control1 mt-5">
+                                            <label className="label1 flex">
+                                                <input
+                                                    type="checkbox"
+                                                    // checked={x.checked}
+                                                    className="checkbox checkbox-primary"
+                                                    // onChange={() => setChosenPlayers([
+                                                    //     ...chosenPlayers.map(y => ({
+                                                    //         ...y
+                                                    //         , checked: x.name == y.name ? !y.checked : y.checked
+                                                    //     }))
+                                                    // ])}
+                                                />
+                                                <span 
+                                                    className="label-text text-xl ml-3 capitalize"
+                                                >
+                                                    {x}
+                                                </span>
+                                            </label>
+                                        </div>
+                                    ))
+                            }      
+                            <button
+                                className="btn btn-lg btn-primary capitalize mt-10"
+                                // key={x}
+                                onClick={() => setScoreCard(undefined)}
+                            >
+                                Score                                    
+                            </button>                                   
                         </div>
                     }
                 </ul>
