@@ -46,7 +46,7 @@ export const Home: React.FC<HomeProps> = ({
                     <div className="card w-0 bg-base-100 shadow-xl grow">
                         <div className="card-body p-3 overflow-x-hidden">
                             <h2 className="card-title">Leaderboard</h2>
-                            <table className="table w-full">
+                            <table className="table w-full mt-3">
                                 <thead>
                                     <tr>
                                         <th>
