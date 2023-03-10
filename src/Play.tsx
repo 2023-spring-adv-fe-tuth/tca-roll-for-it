@@ -127,6 +127,11 @@ export const Play: React.FC<PlayProps> = ({
                                     className="flex flex-col ml-5 mt-5"
                                 >
                                     <div
+                                        className="font-semibold text-primary text-sm text-left mb-3 ml-16 -mt-5"
+                                    >
+                                        5 + 5
+                                    </div>
+                                    <div
                                         className="flex flex-row"
                                     >
                                         <button
@@ -173,14 +178,14 @@ export const Play: React.FC<PlayProps> = ({
                         </div>
                     ))}
                     <div
-                        className="text-md text-left ml-5"
+                        className="text-md text-left ml-5 font-light"
                     >
-                        Keep playing until somebody wins... 
+                        Keep playing until somebody wins with <span className="font-semibold">30 points</span>... 
                     </div>
                     <div
-                        className="text-md text-left ml-5 mt-3"
+                        className="text-md text-left ml-5 font-light"
                     >
-                        You can also
+                        You can
                         <a
                             className="btn btn-link capitalize text-lg -ml-3 -mr-3"
                         >
@@ -189,11 +194,12 @@ export const Play: React.FC<PlayProps> = ({
                         scored cards through previous turns...
                     </div>    
                     <div
-                        className="text-md text-left ml-5 mt-3"
+                        className="text-md text-left ml-5 -mt-3 font-light"
                     >
                         Or 
                         <a
                             className="btn btn-link capitalize text-lg -ml-3 -mr-3"
+                            onClick={() => nav(-2)}
                         >
                             Quit
                         </a>
