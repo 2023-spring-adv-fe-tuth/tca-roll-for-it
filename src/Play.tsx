@@ -27,7 +27,7 @@ export const Play: React.FC<PlayProps> = ({
     const [scoreCard, setScoreCard] = useState<Points | undefined>(undefined);
     const [gameOver, setGameOver] = useState<boolean>(false);
 
-    const [currentTurn, setCurrentTurn] = useState<GamePlayerTurn | undefined>(undefined);
+    const [currentTurn, setCurrentTurn] = useState<GamePlayerTurn>();
     const [turns, setTurns] = useState<GamePlayerTurn[]>([]);
 
     const showDrawerReason =
@@ -104,6 +104,18 @@ export const Play: React.FC<PlayProps> = ({
                 : currentPlayers[0]
         ;
 
+        setTurns(
+            [
+                ...turns
+                , {
+                    name: currentTurn?.name ?? ""
+                    , start: currentTurn?.start ?? ""
+                    , cardsScored: currentTurn?.cardsScored ?? []
+                    , end: new Date().toISOString()
+                }
+            ]
+        );
+
         setCurrentTurn(
             nextPlayer 
             ? {
@@ -168,14 +180,27 @@ export const Play: React.FC<PlayProps> = ({
                                     className={`text-xl font-bold badge badge-lg w-16 mr-5 ${activePlayer == x ? 'bg-primary' : ''}`}
                                 >
                                         {
-                                            currentTurn?.name == x.name
-                                                ? currentTurn?.cardsScored
-                                                    .reduce(
-                                                        (acc, x) => acc + x.points
-                                                        , 0
-                                                    )
-                                                    ?? 0 
+                                            turns
+                                                .filter(y => y.name == x.name)
+                                                .flatMap(y => y.cardsScored)
+                                                .reduce(
+                                                    (acc, y) => acc + y.points
+                                                    , 0
+                                                )
+                                            
+                                            +
+
+                                            (currentTurn 
+                                                ? currentTurn.name == x.name
+                                                    ? currentTurn.cardsScored
+                                                        .reduce(
+                                                            (acc, x) => acc + x.points
+                                                            , 0
+                                                        )
+                                                        ?? 0 
+                                                    : 0
                                                 : 0
+                                            )
                                         }
                                 </span>
                                 {x.name}
