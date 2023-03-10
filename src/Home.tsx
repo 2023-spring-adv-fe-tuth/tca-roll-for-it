@@ -64,7 +64,9 @@ export const Home: React.FC<HomeProps> = ({
                                 </thead>
                                 <tbody>
                                     {leaderBoardData.map(x => (
-                                        <tr>
+                                        <tr
+                                            key={x.name}
+                                        >
                                             <td>{x.wins}</td>
                                             <td>{x.losses}</td>
                                             <td>{x.avg}</td>
