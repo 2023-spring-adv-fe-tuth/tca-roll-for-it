@@ -8,24 +8,27 @@ export interface GameResult {
 
     winner: string;
     players: GamePlayer[];
+
+    turns?: GamePlayerTurn[];
 };
 
 export interface GamePlayer {
     name: string;
     order: number;
-
-    turns?: GamePlayerTurn[];
 }
 
 export interface GamePlayerTurn {
+    name: string;
     start: string;
     end: string;
     cardsScored: CardScored[];
 }
 
+export type Points = 0 | 2 | 5 | 10 | 15;
+
 export interface CardScored {
     timestamp: string;
-    points: 2 | 5 | 10 | 15; // : number
+    points: Points; // : number
     returnedDiceTo: string[];
 }
 

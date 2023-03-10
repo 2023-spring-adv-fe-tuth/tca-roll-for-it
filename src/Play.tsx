@@ -1,13 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { GamePlayer, GameResult, SetupInfo } from "./front-end-model";
+import { GamePlayer, GameResult, SetupInfo, Points, GamePlayerTurn } from "./front-end-model";
 
 interface PlayProps {
     setupInfo: SetupInfo;
     addGameResult: (r: GameResult) => void;
 }
-
-type Points = 2 | 5 | 10 | 15;
 
 enum ShowDrawerReason {
     None
@@ -28,6 +26,9 @@ export const Play: React.FC<PlayProps> = ({
     const [activePlayer, setActivePlayer] = useState<GamePlayer | undefined>(undefined);
     const [scoreCard, setScoreCard] = useState<Points | undefined>(undefined);
     const [gameOver, setGameOver] = useState<boolean>(false);
+
+    const [currentTurn, setCurrentTurn] = useState<GamePlayerTurn | undefined>(undefined);
+    const [turns, setTurns] = useState<GamePlayerTurn[]>([]);
 
     const showDrawerReason =
     
@@ -67,7 +68,6 @@ export const Play: React.FC<PlayProps> = ({
         const newPlayer = {
             name: x
             , order: currentPlayers.length + 1
-            , turns: []
         };
 
         setCurrentPlayers([
@@ -76,26 +76,71 @@ export const Play: React.FC<PlayProps> = ({
         ]);
         
         setActivePlayer(newPlayer);
+
+        setCurrentTurn(
+            newPlayer 
+            ? {
+                name: newPlayer.name
+                , start: new Date().toISOString()
+                , end: ""
+                , cardsScored: []
+            }
+            : undefined
+        );        
     };
 
     const endTurn = () => {
-        setActivePlayer(
 
+        const nextPlayer =             
             // Choose next player if order not chosen for all players
             setupInfo.players.length != currentPlayers.length
-             ? undefined
+            ? undefined
 
-             // Otherwise, next player if not last player
-             : activePlayer!.order < currentPlayers.length
+            // Otherwise, next player if not last player
+            : activePlayer!.order < currentPlayers.length
                 ? currentPlayers[activePlayer!.order]
 
                 // Or if nothing else, the first player
                 : currentPlayers[0]
+        ;
+
+        setCurrentTurn(
+            nextPlayer 
+            ? {
+                name: nextPlayer.name
+                , start: new Date().toISOString()
+                , end: ""
+                , cardsScored: []
+            }
+            : undefined
         );
+
+        setActivePlayer(nextPlayer);
     };
 
     const startScoreCard = (points: Points) => {
         setScoreCard(points);
+    };
+
+    const cardScored = () => {
+
+        setCurrentTurn(
+            currentTurn
+            ? {
+                ...currentTurn
+                , cardsScored: [
+                    ...currentTurn.cardsScored
+                    , {
+                        timestamp: new Date().toISOString()
+                        , points: scoreCard ?? 0
+                        , returnedDiceTo: []
+                    }
+                ]
+            }
+            : undefined
+        );
+
+        setScoreCard(undefined);
     };
 
     return (
@@ -122,7 +167,16 @@ export const Play: React.FC<PlayProps> = ({
                                 <span 
                                     className={`text-xl font-bold badge badge-lg w-16 mr-5 ${activePlayer == x ? 'bg-primary' : ''}`}
                                 >
-                                        10
+                                        {
+                                            currentTurn?.name == x.name
+                                                ? currentTurn?.cardsScored
+                                                    .reduce(
+                                                        (acc, x) => acc + x.points
+                                                        , 0
+                                                    )
+                                                    ?? 0 
+                                                : 0
+                                        }
                                 </span>
                                 {x.name}
                             </h2>
@@ -285,7 +339,7 @@ export const Play: React.FC<PlayProps> = ({
                             <button
                                 className="btn btn-lg btn-primary capitalize mt-10"
                                 // key={x}
-                                onClick={() => setScoreCard(undefined)}
+                                onClick={cardScored}
                             >
                                 Score                                    
                             </button>                                   
