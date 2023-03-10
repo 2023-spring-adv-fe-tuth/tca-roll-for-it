@@ -172,6 +172,34 @@ export const Play: React.FC<PlayProps> = ({
                             }
                         </div>
                     ))}
+                    <div
+                        className="text-xl text-left ml-3"
+                    >
+                        Keep playing until somebody wins... 
+                    </div>
+                    <div
+                        className="text-xl text-left ml-3 mt-3"
+                    >
+                        You can also
+                        <a
+                            className="btn btn-link capitalize text-xl -ml-3 -mr-3"
+                        >
+                            Undo
+                        </a>
+                        scored cards through previous turns...
+                    </div>    
+                    <div
+                        className="text-xl text-left ml-3 mt-3"
+                    >
+                        Or 
+                        <a
+                            className="btn btn-link capitalize text-xl -ml-3 -mr-3"
+                        >
+                            Quit
+                        </a>
+                        and not record data for this game...
+                    </div>
+
                 </div>
             </div>
             <div className="drawer-side">
