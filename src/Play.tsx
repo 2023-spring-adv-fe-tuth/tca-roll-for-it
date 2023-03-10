@@ -162,7 +162,7 @@ export const Play: React.FC<PlayProps> = ({
                                         </button>                                    
                                         <button
                                             key={x.name}
-                                            className="ml-3 btn btn-md btn-link"
+                                            className="ml-3 btn btn-md btn-link capitalize"
                                             onClick={() => done(x.name)}
                                         >
                                             Won
@@ -193,7 +193,7 @@ export const Play: React.FC<PlayProps> = ({
                     >
                         Or 
                         <a
-                            className="btn btn-link capitalize text-md -ml-3 -mr-3"
+                            className="btn btn-link capitalize text-lg -ml-3 -mr-3"
                         >
                             Quit
                         </a>
