@@ -124,7 +124,7 @@ export const Play: React.FC<PlayProps> = ({
                             {
                                 activePlayer == x &&
                                 <div
-                                    className="flex flex-col ml-10 mt-5"
+                                    className="flex flex-col ml-5 mt-5"
                                 >
                                     <div
                                         className="flex flex-row"
@@ -173,12 +173,12 @@ export const Play: React.FC<PlayProps> = ({
                         </div>
                     ))}
                     <div
-                        className="text-lg text-left ml-3"
+                        className="text-md text-left ml-5"
                     >
                         Keep playing until somebody wins... 
                     </div>
                     <div
-                        className="text-lg text-left ml-3 mt-3"
+                        className="text-md text-left ml-5 mt-3"
                     >
                         You can also
                         <a
@@ -189,11 +189,11 @@ export const Play: React.FC<PlayProps> = ({
                         scored cards through previous turns...
                     </div>    
                     <div
-                        className="text-lg text-left ml-3 mt-3"
+                        className="text-md text-left ml-5 mt-3"
                     >
                         Or 
                         <a
-                            className="btn btn-link capitalize text-lg -ml-3 -mr-3"
+                            className="btn btn-link capitalize text-md -ml-3 -mr-3"
                         >
                             Quit
                         </a>
