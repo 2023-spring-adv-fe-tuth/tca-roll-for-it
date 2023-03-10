@@ -114,7 +114,9 @@ export const Home: React.FC<HomeProps> = ({
                                 </thead>
                                 <tbody>
                                     {avgGameLengths.map(x => (
-                                        <tr>
+                                        <tr
+                                            key={x.playerCount}
+                                        >
                                             <td>{x.playerCount}</td>
                                             <td>{`${format(x.avgTime)}`}</td>
                                         </tr>
