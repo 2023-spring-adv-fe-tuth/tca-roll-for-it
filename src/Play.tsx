@@ -222,7 +222,7 @@ export const Play: React.FC<PlayProps> = ({
                 >
                     {currentPlayers.map(x => (
                         <div
-                            className="mt-5 ml-5"
+                            className="mt-5 ml-3"
                         >
 
                             <h2
