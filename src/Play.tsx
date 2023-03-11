@@ -30,6 +30,8 @@ export const Play: React.FC<PlayProps> = ({
     const [currentTurn, setCurrentTurn] = useState<GamePlayerTurn>();
     const [turns, setTurns] = useState<GamePlayerTurn[]>([]);
 
+    const [showLess, setShowLess] = useState(false);
+
     const showDrawerReason =
     
         // If no active player and not all players order chosen
@@ -170,7 +172,7 @@ export const Play: React.FC<PlayProps> = ({
                 >
                     {currentPlayers.map(x => (
                         <div
-                            className="mb-10"
+                            className="mt-5"
                         >
 
                             <h2
@@ -267,33 +269,67 @@ export const Play: React.FC<PlayProps> = ({
                         </div>
                     ))}
                     <div
-                        className="text-md text-left ml-5 font-light mr-3"
+                        className="text-md text-left ml-5 font-light mr-3 mt-3"
                     >
-                        <p>
-                            Keep playing until somebody wins with <span className="font-semibold">30 points</span>... 
-                        </p>
-    
-                        <p>
-                            You can
-                            <a
-                                className="btn btn-link capitalize text-lg -ml-3 -mr-3 -mb-3"
+                        <div 
+                            className="divider text-xs"
+                            onClick={() => setShowLess(!showLess)}
+                        >
+                            Show {showLess ? 'More': 'Less'}
+                        </div>
+                        {
+                            showLess &&
+                            <div
+                                className="-mt-3"
                             >
-                                Undo
-                            </a>
-                            scored cards through previous turns...
+                                <a
+                                    className="btn btn-link capitalize text-lg"
+                                >
+                                    Undo
+                                </a>
+                                <span
+                                    className="text-base-300"
+                                >
+                                    |
+                                </span>
+                                <a
+                                    className="btn btn-link capitalize text-lg"
+                                    onClick={() => nav(-2)}
+                                >
+                                    Quit
+                                </a>                                                                                                
+                            </div>
+                        }
+                        {
+                            !showLess &&
+                            <div>
+                                <p>
+                                    Keep playing until somebody wins with <span className="font-semibold">30 points</span>... 
+                                </p>
+            
+                                <p>
+                                    You can
+                                    <a
+                                        className="btn btn-link capitalize text-lg -ml-3 -mr-3 -mb-3"
+                                    >
+                                        Undo
+                                    </a>
+                                    scored cards through previous turns...
 
-                        </p>
-    
-                        <p>
-                            Or 
-                            <a
-                                className="btn btn-link capitalize text-lg -ml-3 -mr-3 -mb-3"
-                                onClick={() => nav(-2)}
-                            >
-                                Quit
-                            </a>
-                            and not record data for this game...
-                        </p>
+                                </p>
+            
+                                <p>
+                                    Or 
+                                    <a
+                                        className="btn btn-link capitalize text-lg -ml-3 -mr-3 -mb-3"
+                                        onClick={() => nav(-2)}
+                                    >
+                                        Quit
+                                    </a>
+                                    and not record data for this game...
+                                </p>
+                            </div>
+                        }
                     </div>
                 </div>
             </div>
