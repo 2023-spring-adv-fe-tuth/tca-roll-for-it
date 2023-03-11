@@ -121,7 +121,7 @@ export const Play: React.FC<PlayProps> = ({
                 }
             ]
         );
-
+            
         setCurrentTurn(
             nextPlayer 
             ? {
@@ -157,9 +157,55 @@ export const Play: React.FC<PlayProps> = ({
             }
             : undefined
         );
+    
+        setScoreCard(undefined);    
 
-        setScoreCard(undefined);
+        const winner = calcCurrentScore(activePlayer?.name ?? "") + (scoreCard ?? 0) >= 30;
+
+        if (winner) {
+            // Winner, game over...
+
+            // Put the final current turn into turns...
+            setTurns(
+                [
+                    ...turns
+                    , {
+                        name: currentTurn?.name ?? ""
+                        , start: currentTurn?.start ?? ""
+                        , cardsScored: currentTurn?.cardsScored ?? []
+                        , end: new Date().toISOString()
+                    }
+                ]
+            )
+                
+            // Clean some things up...
+            setCurrentTurn(undefined);
+            setActivePlayer(undefined);
+            setGameOver(true);
+        }
     };
+
+    const calcCurrentScore = (who: string) => 
+        turns
+            .filter(y => y.name == who)
+            .flatMap(y => y.cardsScored)
+            .reduce(
+                (acc, y) => acc + y.points
+                , 0
+            )
+        +
+        (currentTurn 
+            ? currentTurn.name == who
+                ? currentTurn.cardsScored
+                    .reduce(
+                        (acc, x) => acc + x.points
+                        , 0
+                    )
+                    ?? 0 
+                : 0
+            : 0
+        )
+    ;    
 
     return (
         <div className="drawer drawer-end">
@@ -186,27 +232,7 @@ export const Play: React.FC<PlayProps> = ({
                                     className={`text-xl font-bold badge badge-lg w-16 mr-5 ${activePlayer == x ? 'bg-primary' : ''}`}
                                 >
                                         {
-                                            turns
-                                                .filter(y => y.name == x.name)
-                                                .flatMap(y => y.cardsScored)
-                                                .reduce(
-                                                    (acc, y) => acc + y.points
-                                                    , 0
-                                                )
-                                            
-                                            +
-
-                                            (currentTurn 
-                                                ? currentTurn.name == x.name
-                                                    ? currentTurn.cardsScored
-                                                        .reduce(
-                                                            (acc, x) => acc + x.points
-                                                            , 0
-                                                        )
-                                                        ?? 0 
-                                                    : 0
-                                                : 0
-                                            )
+                                            calcCurrentScore(x.name)
                                         }
                                 </span>
                                 {x.name}
@@ -423,6 +449,18 @@ export const Play: React.FC<PlayProps> = ({
                             >
                                 Cancel
                             </button>                                  
+                        </div>
+                    }
+                    { 
+                        showDrawerReason == ShowDrawerReason.GameOver &&
+                        <div
+                            className="flex flex-col"
+                        >
+                            <p
+                                className="text-xl text-left font-bold"
+                            >
+                                Game Over
+                            </p>
                         </div>
                     }
                 </ul>
