@@ -293,7 +293,7 @@ export const Play: React.FC<PlayProps> = ({
                         {
                             showLess &&
                             <div
-                                className="-mt-3"
+                                className="-mt-3 -ml-3"
                             >
                                 <a
                                     className="btn btn-link capitalize text-lg"
