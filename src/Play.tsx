@@ -220,7 +220,16 @@ export const Play: React.FC<PlayProps> = ({
                                     <div
                                         className="font-semibold1 text-primary text-sm text-left mb-3 ml-16 -mt-5"
                                     >
-                                        5 + 5
+                                        {
+                                            [
+                                                ...turns
+                                                , currentTurn!
+                                            ]
+                                                .filter(y => y.name == x.name)
+                                                .flatMap(y => y.cardsScored)
+                                                .flatMap(y => y.points)
+                                                .join(' + ')
+                                        }
                                     </div>
                                     <div
                                         className="flex flex-row"
@@ -407,7 +416,13 @@ export const Play: React.FC<PlayProps> = ({
                                 onClick={cardScored}
                             >
                                 Score                                    
-                            </button>                                   
+                            </button> 
+                            <button
+                                className="btn btn-link capitalize"
+                                onClick={() => setScoreCard(undefined)}
+                            >
+                                Cancel
+                            </button>                                  
                         </div>
                     }
                 </ul>
