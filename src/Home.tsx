@@ -7,6 +7,7 @@ interface HomeProps {
     shortestGame: number;
     longestGame: number;
     avgGameLengths: { playerCount: number, avgTime: number}[];
+    setTitle: (title: string) => void;
 }
 
 const format = durationFormatter();
@@ -16,7 +17,11 @@ export const Home: React.FC<HomeProps> = ({
     , shortestGame
     , longestGame
     , avgGameLengths
+    , setTitle
 }) => {
+
+    setTitle("Roll for It");
+
     const nav = useNavigate();
 
     return (

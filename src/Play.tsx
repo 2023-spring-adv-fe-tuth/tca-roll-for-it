@@ -5,6 +5,7 @@ import { GamePlayer, GameResult, SetupInfo, Points, GamePlayerTurn } from "./fro
 interface PlayProps {
     setupInfo: SetupInfo;
     addGameResult: (r: GameResult) => void;
+    setTitle: (title: string) => void;
 }
 
 enum ShowDrawerReason {
@@ -16,8 +17,9 @@ enum ShowDrawerReason {
 
 export const Play: React.FC<PlayProps> = ({
     setupInfo
-    , addGameResult }
-) => {
+    , addGameResult
+    , setTitle 
+}) => {
 
     console.log(setupInfo.start);
     
@@ -31,6 +33,8 @@ export const Play: React.FC<PlayProps> = ({
     const [turns, setTurns] = useState<GamePlayerTurn[]>([]);
 
     const [showLess, setShowLess] = useState(false);
+
+    setTitle(`Turn ${Math.floor(turns.length / setupInfo.players.length) + 1}`);
 
     const showDrawerReason =
     

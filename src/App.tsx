@@ -82,6 +82,8 @@ function App() {
     , players: []
   });
 
+  const [title, setTitle] = useState("Roll for It");
+
   const addGameResult = (result: GameResult) => setGameResults(
     [
       ...gameResults
@@ -95,15 +97,15 @@ function App() {
       data-theme={darkMode ? "dark" : "light"}
     >
       <div className="navbar bg-base-200">
-        <div className="flex-none">
-          <button className="btn btn-square btn-ghost">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-5 h-5 stroke-current"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-          </button>
+        {/* <div className="flex-none">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="inline-block w-5 h-5 stroke-current mr-3"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </div> */}
+        <div className="flex-1 ml-5">
+          <span className="text-lg font-bold">
+            {title}
+          </span>
         </div>
-        <div className="flex-1">
-          <span className="text-lg font-bold">Roll for It</span>
-        </div>
-        <div className="flex-none">
+        <div className="flex-none mr-3">
           <label className="swap swap-rotate">
             <input 
               type="checkbox"
@@ -124,6 +126,7 @@ function App() {
                   shortestGame={getShortestGame(gameResults)}
                   longestGame={getLongestGame(gameResults)}
                   avgGameLengths={getAvgGameLengths(gameResults)}
+                  setTitle={setTitle}
                 />
               }
             />
@@ -133,6 +136,7 @@ function App() {
                 <Setup
                   availablePlayers={getPreviousPlayers(gameResults)} 
                   setSetupInfo={setSetupInfo}
+                  setTitle={setTitle}
                   foo={`${1 + 1}`} 
                   cat={cat} 
                 />
@@ -144,6 +148,7 @@ function App() {
                 <Play 
                   setupInfo={setupInfo}
                   addGameResult={addGameResult}
+                  setTitle={setTitle}
                 />
               }
             />

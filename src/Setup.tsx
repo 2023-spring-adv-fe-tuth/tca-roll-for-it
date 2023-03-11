@@ -7,11 +7,13 @@ interface SetupProps {
     setSetupInfo: (info: SetupInfo) => void;
     foo?: any;
     cat?: any;
+    setTitle: (title: string) => void;
 }
 
 export const Setup: FC<SetupProps> = ({
     availablePlayers
     , setSetupInfo
+    , setTitle
     , foo
     , cat
 }) => {
@@ -19,6 +21,8 @@ export const Setup: FC<SetupProps> = ({
     cat();
     cat();
     cat();
+
+    setTitle("Game Setup");
 
     const nav = useNavigate();
 
