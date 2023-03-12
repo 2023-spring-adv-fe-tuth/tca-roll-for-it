@@ -464,7 +464,7 @@ export const Play: React.FC<PlayProps> = ({
                             </p>
                             <button
                                 className="btn btn-lg btn-primary capitalize mt-3"
-                                onClick={cardScored}
+                                onClick={() => done(activePlayer?.name ?? "")}
                             >
                                 Yes, { activePlayer?.name} Won                                    
                             </button> 
