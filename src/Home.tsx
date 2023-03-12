@@ -39,7 +39,7 @@ export const Home: React.FC<HomeProps> = ({
                 </ul>
                 <br />
                 <button 
-                    className="btn btn-lg btn-primary capitalize"
+                    className="btn btn-lg btn-primary capitalize mx-3"
                     onClick={() => nav("/setup")}
                 >
                     Play Roll for It

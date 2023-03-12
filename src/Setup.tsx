@@ -74,7 +74,7 @@ export const Setup: FC<SetupProps> = ({
             className="flex flex-col p-1"
         >
             <button
-                className={`btn btn-lg btn-primary capitalize mt-3 ${playerChecked ? '' : 'btn-disabled'}`}
+                className={`btn btn-lg btn-primary capitalize mt-3 mx-3 ${playerChecked ? '' : 'btn-disabled'}`}
                 onClick={startGame}
             >
                 {playerChecked ? 'Start Playing' : 'Choose players below...'}
