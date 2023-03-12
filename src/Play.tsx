@@ -179,8 +179,9 @@ export const Play: React.FC<PlayProps> = ({
             )
                 
             // Clean some things up...
-            setCurrentTurn(undefined);
-            setActivePlayer(undefined);
+            // setCurrentTurn(undefined);
+            // setActivePlayer(undefined);
+
             setGameOver(true);
         }
     };
@@ -461,6 +462,36 @@ export const Play: React.FC<PlayProps> = ({
                             >
                                 Game Over
                             </p>
+                            <button
+                                className="btn btn-lg btn-primary capitalize mt-3"
+                                onClick={cardScored}
+                            >
+                                Yes, { activePlayer?.name} Won                                    
+                            </button> 
+                            <button
+                                className="btn btn-link capitalize"
+                                onClick={() => {
+
+                                    // Remove last scored card...
+                                    setCurrentTurn(
+                                        currentTurn
+                                        ? {
+                                            ...currentTurn
+                                            , cardsScored: [
+                                                ...currentTurn.cardsScored.filter(
+                                                    (x, i, a) => a.indexOf(x) != i 
+                                                )
+                                            ]
+                                        }
+                                        : undefined
+                                    );
+
+                                    // Close the game over drawer...
+                                    setGameOver(false);
+                                }}
+                            >
+                                Cancel
+                            </button>                                  
                         </div>
                     }
                 </ul>
