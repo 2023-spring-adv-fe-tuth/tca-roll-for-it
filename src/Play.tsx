@@ -69,24 +69,40 @@ export const Play: React.FC<PlayProps> = ({
         nav(-2);
     };
 
-    const playerOrderChosen = (x: string) => {
+    const playerOrderChosen = (chosenPlayerName: string) => {
 
-        const newPlayer = {
-            name: x
-            , order: currentPlayers.length + 1
+        const chosenPlayerNumber = currentPlayers.length + 1;
+
+        const nextPlayer = {
+            name: chosenPlayerName
+            , order: chosenPlayerNumber
         };
+
+        const playersRemainingAfterAddingChosenPlayer = setupInfo.players.filter(
+            x => x !== chosenPlayerName 
+                && !currentPlayers.some(y => y.name === x)
+        );
+        
+        const lastPlayer = playersRemainingAfterAddingChosenPlayer.length == 1
+            ? {
+                name: playersRemainingAfterAddingChosenPlayer[0]
+                , order: chosenPlayerNumber + 1
+            }
+            : undefined
+        ;
 
         setCurrentPlayers([
             ...currentPlayers
-            , newPlayer
+            , nextPlayer
+            , ...(lastPlayer ? [lastPlayer] : [])
         ]);
         
-        setActivePlayer(newPlayer);
+        setActivePlayer(nextPlayer);
 
         setCurrentTurn(
-            newPlayer 
+            nextPlayer 
             ? {
-                name: newPlayer.name
+                name: nextPlayer.name
                 , start: new Date().toISOString()
                 , end: ""
                 , cardsScored: []
