@@ -12,7 +12,6 @@ enum ShowDrawerReason {
     None
     , ChoosePlayerOrder
     , ScoreCard 
-    , GameOver
 };
 
 export const Play: React.FC<PlayProps> = ({
@@ -27,7 +26,6 @@ export const Play: React.FC<PlayProps> = ({
     
     const [activePlayer, setActivePlayer] = useState<GamePlayer | undefined>(undefined);
     const [scoreCard, setScoreCard] = useState<Points | undefined>(undefined);
-    const [gameOver, setGameOver] = useState<boolean>(false);
 
     const [currentTurn, setCurrentTurn] = useState<GamePlayerTurn>();
     const [turns, setTurns] = useState<GamePlayerTurn[]>([]);
@@ -46,12 +44,8 @@ export const Play: React.FC<PlayProps> = ({
             : activePlayer && scoreCard
                 ? ShowDrawerReason.ScoreCard 
 
-                // Else if game over
-                : gameOver
-                    ? ShowDrawerReason.GameOver
-
-                    // Otherwise, don't show drawer
-                    : ShowDrawerReason.None
+                // Otherwise, don't show drawer
+                : ShowDrawerReason.None
     ;
 
     const nav = useNavigate();
@@ -193,12 +187,6 @@ export const Play: React.FC<PlayProps> = ({
                     }
                 ]
             )
-                
-            // Clean some things up...
-            // setCurrentTurn(undefined);
-            // setActivePlayer(undefined);
-
-            setGameOver(true);
         }
     };
 
@@ -452,59 +440,34 @@ export const Play: React.FC<PlayProps> = ({
                                             </label>
                                         </div>
                                     ))
+                            }
+                            {
+                                calcCurrentScore(activePlayer?.name ?? "") + (scoreCard ?? 0) < 30 ?
+                                <button
+                                    className="btn btn-lg btn-primary capitalize mt-10"
+                                    onClick={cardScored}
+                                >
+                                    Score {scoreCard}                                    
+                                </button>
+                                : (
+                                    <>
+                                        <p
+                                            className="text-xl text-left font-bold mt-10"
+                                        >
+                                            Game Over...
+                                        </p>
+                                        <button
+                                            className="btn btn-lg btn-primary capitalize mt-3"
+                                            onClick={() => done(activePlayer?.name ?? "")}
+                                        >
+                                            Yes, {activePlayer?.name} Won                                    
+                                        </button>                             
+                                    </>
+                                ) 
                             }      
-                            <button
-                                className="btn btn-lg btn-primary capitalize mt-10"
-                                // key={x}
-                                onClick={cardScored}
-                            >
-                                Score                                    
-                            </button> 
                             <button
                                 className="btn btn-link capitalize"
                                 onClick={() => setScoreCard(undefined)}
-                            >
-                                Cancel
-                            </button>                                  
-                        </div>
-                    }
-                    { 
-                        showDrawerReason == ShowDrawerReason.GameOver &&
-                        <div
-                            className="flex flex-col"
-                        >
-                            <p
-                                className="text-xl text-left font-bold"
-                            >
-                                Game Over
-                            </p>
-                            <button
-                                className="btn btn-lg btn-primary capitalize mt-3"
-                                onClick={() => done(activePlayer?.name ?? "")}
-                            >
-                                Yes, { activePlayer?.name} Won                                    
-                            </button> 
-                            <button
-                                className="btn btn-link capitalize"
-                                onClick={() => {
-
-                                    // Remove last scored card...
-                                    setCurrentTurn(
-                                        currentTurn
-                                        ? {
-                                            ...currentTurn
-                                            , cardsScored: [
-                                                ...currentTurn.cardsScored.filter(
-                                                    (x, i, a) => a.indexOf(x) != i 
-                                                )
-                                            ]
-                                        }
-                                        : undefined
-                                    );
-
-                                    // Close the game over drawer...
-                                    setGameOver(false);
-                                }}
                             >
                                 Cancel
                             </button>                                  
