@@ -50,7 +50,7 @@ export const Home: React.FC<HomeProps> = ({
                 >
                     <div className="card w-0 bg-base-100 shadow-xl grow">
                         <div className="card-body p-3 overflow-x-hidden">
-                            <h2 className="card-title uppercase text-3xl text-gray-400">Leaderboard</h2>
+                            <h2 className="card-title uppercase text-2xl text-gray-400">Leaderboard</h2>
                             <table className="table w-full mt-3">
                                 <thead>
                                     <tr>
@@ -89,7 +89,7 @@ export const Home: React.FC<HomeProps> = ({
                 >
                     <div className="card w-96 bg-base-100 shadow-xl grow">
                         <div className="card-body p-3 overflow-x-hidden">
-                            <h2 className="card-title uppercase text-3xl text-gray-400">Game Time Facts</h2>
+                            <h2 className="card-title uppercase text-2xl text-gray-400">Game Time Facts</h2>
                             <p
                                 className="text-md font-light text-left mt-1 ml-3"
                             >
@@ -137,7 +137,7 @@ export const Home: React.FC<HomeProps> = ({
                 >
                     <div className="card w-96 bg-base-100 shadow-xl grow">
                         <div className="card-body p-3 overflow-x-hidden">
-                            <h2 className="card-title uppercase text-3xl text-gray-400">Winning Sequences</h2>
+                            <h2 className="card-title uppercase text-2xl text-gray-400">Winning Sequences</h2>
                         </div>
                     </div>
                 </div>  
