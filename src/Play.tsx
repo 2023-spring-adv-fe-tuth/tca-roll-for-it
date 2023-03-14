@@ -212,6 +212,8 @@ export const Play: React.FC<PlayProps> = ({
         )
     ;    
 
+    const potentialNewScore = calcCurrentScore(activePlayer?.name ?? "") + (scoreCard ?? 0);
+
     return (
         <div className="drawer drawer-end">
             <input 
@@ -442,7 +444,7 @@ export const Play: React.FC<PlayProps> = ({
                                     ))
                             }
                             {
-                                calcCurrentScore(activePlayer?.name ?? "") + (scoreCard ?? 0) < 30 ?
+                                potentialNewScore < 30 ?
                                 <button
                                     className="btn btn-lg btn-primary capitalize mt-10"
                                     onClick={cardScored}
@@ -460,7 +462,7 @@ export const Play: React.FC<PlayProps> = ({
                                             className="btn btn-lg btn-primary capitalize mt-3"
                                             onClick={() => done(activePlayer?.name ?? "")}
                                         >
-                                            Yes, {activePlayer?.name} Won                                    
+                                            Yes, {activePlayer?.name} Won with {potentialNewScore}                                 
                                         </button>                             
                                     </>
                                 ) 
