@@ -1,6 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { GamePlayer, GameResult, SetupInfo, Points, GamePlayerTurn } from "./front-end-model";
+import { 
+    GamePlayer
+    , GameResult
+    , SetupInfo
+    , Points
+    , GamePlayerTurn 
+} from "./front-end-model";
 
 interface PlayProps {
     setupInfo: SetupInfo;
@@ -22,15 +28,23 @@ export const Play: React.FC<PlayProps> = ({
 
     console.log(setupInfo.start);
     
-    const [currentPlayers, setCurrentPlayers] = useState<GamePlayer[]>([]);
+    const [currentPlayers, setCurrentPlayers] 
+        = useState<GamePlayer[]>([]);
     
-    const [activePlayer, setActivePlayer] = useState<GamePlayer | undefined>(undefined);
-    const [scoreCard, setScoreCard] = useState<Points | undefined>(undefined);
+    const [activePlayer, setActivePlayer] 
+        = useState<GamePlayer | undefined>(undefined);
 
-    const [currentTurn, setCurrentTurn] = useState<GamePlayerTurn>();
-    const [turns, setTurns] = useState<GamePlayerTurn[]>([]);
+    const [scoreCard, setScoreCard] 
+        = useState<Points | undefined>(undefined);
 
-    const [showLess, setShowLess] = useState(false);
+    const [currentTurn, setCurrentTurn] 
+        = useState<GamePlayerTurn>();
+    
+    const [turns, setTurns] 
+        = useState<GamePlayerTurn[]>([]);
+
+    const [showLess, setShowLess] 
+        = useState(false);
 
     setTitle(`Turn ${Math.floor(turns.length / setupInfo.players.length) + 1}`);
 
@@ -72,10 +86,11 @@ export const Play: React.FC<PlayProps> = ({
             , order: chosenPlayerNumber
         };
 
-        const playersRemainingAfterAddingChosenPlayer = setupInfo.players.filter(
-            x => x !== chosenPlayerName 
-                && !currentPlayers.some(y => y.name === x)
-        );
+        const playersRemainingAfterAddingChosenPlayer = setupInfo.players
+            .filter(
+                x => x !== chosenPlayerName 
+                    && !currentPlayers.some(y => y.name === x)
+            );
         
         const lastPlayer = playersRemainingAfterAddingChosenPlayer.length == 1
             ? {
@@ -170,7 +185,9 @@ export const Play: React.FC<PlayProps> = ({
     
         setScoreCard(undefined);    
 
-        const winner = calcCurrentScore(activePlayer?.name ?? "") + (scoreCard ?? 0) >= 30;
+        const winner = calcCurrentScore(activePlayer?.name ?? "") 
+            + (scoreCard ?? 0) >= 30
+        ;
 
         if (winner) {
             // Winner, game over...
@@ -212,7 +229,9 @@ export const Play: React.FC<PlayProps> = ({
         )
     ;    
 
-    const potentialNewScore = calcCurrentScore(activePlayer?.name ?? "") + (scoreCard ?? 0);
+    const potentialNewScore = calcCurrentScore(activePlayer?.name ?? "") 
+        + (scoreCard ?? 0)
+    ;
 
     return (
         <div className="drawer drawer-end">
