@@ -133,7 +133,7 @@ export const getAvgGameLengths: GetAverageGameLengthsByPlayerCount = (results) =
 };
 
 export const getFrenemiesData = (results: GameResult[]) => {
-    const allPlayerScoredCards = results 
+    const playersMappedToPlayersDiceTheyReturned = results 
         .flatMap(
             x => x.turns.flatMap(
                 y => y.cardsScored
@@ -156,5 +156,5 @@ export const getFrenemiesData = (results: GameResult[]) => {
         )
     ;
 
-    return [...allPlayerScoredCards];
+    return [...playersMappedToPlayersDiceTheyReturned];
 };
