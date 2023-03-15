@@ -68,10 +68,7 @@ export const Play: React.FC<PlayProps> = ({
 		
 		addGameResult({
 			winner: winner
-			, players: setupInfo.players.map(x => ({
-				name: x
-				, order: 0
-			}))
+			, players: currentPlayers
 			, start: setupInfo.start
 			, end: new Date().toISOString()
 			, turns: [
@@ -108,7 +105,8 @@ export const Play: React.FC<PlayProps> = ({
 			.filter(
 				x => x !== chosenPlayerName
 					&& !currentPlayers.some(y => y.name === x)
-			);
+			)
+		;
 
 		const lastPlayer = playersRemainingAfterAddingChosenPlayer.length == 1
 			? {
@@ -116,7 +114,7 @@ export const Play: React.FC<PlayProps> = ({
 				, order: chosenPlayerNumber + 1
 			}
 			: undefined
-			;
+		;
 
 		setCurrentPlayers([
 			...currentPlayers
