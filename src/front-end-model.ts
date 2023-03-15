@@ -2,46 +2,46 @@
 // Interfaces...
 //
 export interface GameResult {
-    
-    start: string;
-    end: string;
+	
+	start: string;
+	end: string;
 
-    winner: string;
-    players: GamePlayer[];
+	winner: string;
+	players: GamePlayer[];
 
-    turns: GamePlayerTurn[];
+	turns: GamePlayerTurn[];
 };
 
 export interface GamePlayer {
-    name: string;
-    order: number;
+	name: string;
+	order: number;
 }
 
 export interface GamePlayerTurn {
-    name: string;
-    start: string;
-    end: string;
-    cardsScored: CardScored[];
+	name: string;
+	start: string;
+	end: string;
+	cardsScored: CardScored[];
 }
 
 export type Points = 0 | 2 | 5 | 10 | 15;
 
 export interface CardScored {
-    timestamp: string;
-    points: Points; // : number
-    returnedDiceTo: string[];
+	timestamp: string;
+	points: Points; // : number
+	returnedDiceTo: string[];
 }
 
 export interface LeaderboardPlayer {
-    name: string;
-    wins: number;
-    losses: number;
-    avg: string;
+	name: string;
+	wins: number;
+	losses: number;
+	avg: string;
 }
 
 export interface SetupInfo {
-    start: string;
-    players: string[];
+	start: string;
+	players: string[];
 }
 
 //
@@ -58,51 +58,51 @@ export type GetAverageGameLengthsByPlayerCount = (results: GameResult[]) => { pl
 //
 export const getPreviousPlayers: GetPreviousPlayersFunc = (grs: GameResult[]) => {
   
-    const allPreviousPlayers = grs.flatMap(x => x.players.map(y => y.name));
-    
-    return [
-        ...new Set(allPreviousPlayers)
-    ].sort();
+	const allPreviousPlayers = grs.flatMap(x => x.players.map(y => y.name));
+	
+	return [
+		...new Set(allPreviousPlayers)
+	].sort();
 };
   
 export const calculateLeaderboard = (results: GameResult[]) => {
 
-    const gameResultsGroupedByPlayer = getPreviousPlayers(results).reduce(
-        (acc, x) => acc.set(
-            x
-            , results.filter(y => y.players.map(z => z.name).some(a => a == x))
-        )
-        , new Map<string, GameResult[]>() 
-    );
+	const gameResultsGroupedByPlayer = getPreviousPlayers(results).reduce(
+		(acc, x) => acc.set(
+			x
+			, results.filter(y => y.players.map(z => z.name).some(a => a == x))
+		)
+		, new Map<string, GameResult[]>() 
+	);
 
-    return [...gameResultsGroupedByPlayer]
+	return [...gameResultsGroupedByPlayer]
 
-        // First object with names game counts and wins...
-        .map(x => ({
-            name: x[0]
-            , totalGames: x[1].length
-            , wins: x[1].filter(y => y.winner === x[0]).length
-        }))
-        
-        // Now use wins and total games to get avg and losses
-        .map(x => ({
-            name: x.name
-            , wins: x.wins 
-            , losses: x.totalGames - x.wins
-            , avg: x.wins / x.totalGames
-        }))
-        
-        // Break average ties with total games...
-        .sort(
-            (a, b) => (a.avg * 1000 + a.wins + a.losses) > (b.avg * 1000 + b.wins + b.losses) ? -1 : 1
-        )
+		// First object with names game counts and wins...
+		.map(x => ({
+			name: x[0]
+			, totalGames: x[1].length
+			, wins: x[1].filter(y => y.winner === x[0]).length
+		}))
+		
+		// Now use wins and total games to get avg and losses
+		.map(x => ({
+			name: x.name
+			, wins: x.wins 
+			, losses: x.totalGames - x.wins
+			, avg: x.wins / x.totalGames
+		}))
+		
+		// Break average ties with total games...
+		.sort(
+			(a, b) => (a.avg * 1000 + a.wins + a.losses) > (b.avg * 1000 + b.wins + b.losses) ? -1 : 1
+		)
 
-        // Finally, convert average to a 3 digit string...
-        .map(x => ({
-            ...x
-            , avg: x.avg.toFixed(3)
-        }))
-    ;
+		// Finally, convert average to a 3 digit string...
+		.map(x => ({
+			...x
+			, avg: x.avg.toFixed(3)
+		}))
+	;
 };
 
 export const getLongestGame: GetLongestGame = (results) => Math.max(...results.map(x => new Date(x.end).getTime() - new Date(x.start).getTime()));
@@ -110,51 +110,51 @@ export const getShortestGame: GetShortestGame = (results) => Math.min(...results
 
 export const getAvgGameLengths: GetAverageGameLengthsByPlayerCount = (results) => {
 
-    const gameDurationsGroupedByNumberOfPlayers = results.reduce(
-        (acc, x) => acc.set(
-            x.players.length
-            , [
-                ...acc.get(x.players.length) ?? []
-                , new Date(x.end).getTime() - new Date(x.start).getTime()
-            ]
-        )
-        , new Map<number, number[]>()
-    );
+	const gameDurationsGroupedByNumberOfPlayers = results.reduce(
+		(acc, x) => acc.set(
+			x.players.length
+			, [
+				...acc.get(x.players.length) ?? []
+				, new Date(x.end).getTime() - new Date(x.start).getTime()
+			]
+		)
+		, new Map<number, number[]>()
+	);
 
-    return [...gameDurationsGroupedByNumberOfPlayers]
-        .map(x => ({
-            playerCount: x[0]
-            , avgTime: x[1].reduce((acc, x) => acc + x, 0) / x[1].length
-        }))
-        .sort(
-            (a, b) => a.playerCount >= b.playerCount ? 1 : -1
-        )
-    ;
+	return [...gameDurationsGroupedByNumberOfPlayers]
+		.map(x => ({
+			playerCount: x[0]
+			, avgTime: x[1].reduce((acc, x) => acc + x, 0) / x[1].length
+		}))
+		.sort(
+			(a, b) => a.playerCount >= b.playerCount ? 1 : -1
+		)
+	;
 };
 
 export const getFrenemiesData = (results: GameResult[]) => {
-    const playersMappedToPlayersDiceTheyReturned = results 
-        .flatMap(
-            x => x.turns.flatMap(
-                y => y.cardsScored
-                    .filter(z => z.returnedDiceTo.length > 0)
-                    .map(z => ({
-                        player: y.name
-                        , returnedDiceTo: z.returnedDiceTo
-                    }))
-            )
-        )
-        .reduce(
-            (acc, x) => acc.set(
-                x.player
-                , [
-                    ...acc.get(x.player) ?? []
-                    , ...x.returnedDiceTo
-                ]
-            )
-            , new Map<string, string[]>
-        )
-    ;
+	const playersMappedToPlayersDiceTheyReturned = results 
+		.flatMap(
+			x => x.turns.flatMap(
+				y => y.cardsScored
+					.filter(z => z.returnedDiceTo.length > 0)
+					.map(z => ({
+						player: y.name
+						, returnedDiceTo: z.returnedDiceTo
+					}))
+			)
+		)
+		.reduce(
+			(acc, x) => acc.set(
+				x.player
+				, [
+					...acc.get(x.player) ?? []
+					, ...x.returnedDiceTo
+				]
+			)
+			, new Map<string, string[]>
+		)
+	;
 
-    return [...playersMappedToPlayersDiceTheyReturned];
+	return [...playersMappedToPlayersDiceTheyReturned];
 };
