@@ -321,13 +321,6 @@ export const Play: React.FC<PlayProps> = ({
 										>
 											End Turn
 										</button>
-										<button
-											key={x.name}
-											className="ml-3 btn btn-md text-light btn-ghost capitalize"
-											onClick={() => done(x.name)}
-										>
-											Won
-										</button>
 									</div>
 								</div>
 							}
