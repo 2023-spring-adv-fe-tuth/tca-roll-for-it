@@ -72,10 +72,11 @@ const hardCodedGameResults: GameResult[] = [
 ];
 
 function App() {
-
+	
 	const [darkMode, setDarkMode] = useState(false);
 
 	const [gameResults, setGameResults] = useState(hardCodedGameResults);
+	console.log(gameResults);
 
 	const [setupInfo, setSetupInfo] = useState<SetupInfo>({
 		start: ""

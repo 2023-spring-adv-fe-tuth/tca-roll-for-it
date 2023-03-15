@@ -65,6 +65,7 @@ export const Play: React.FC<PlayProps> = ({
 	const nav = useNavigate();
 
 	const done = (winner: string) => {
+		
 		addGameResult({
 			winner: winner
 			, players: setupInfo.players.map(x => ({
@@ -73,7 +74,24 @@ export const Play: React.FC<PlayProps> = ({
 			}))
 			, start: setupInfo.start
 			, end: new Date().toISOString()
+			, turns: [
+				...turns
+				, {
+					name: currentTurn?.name ?? ""
+					, start: currentTurn?.start ?? ""
+					, cardsScored: [
+						...(currentTurn?.cardsScored ?? [])
+						, {
+							timestamp: new Date().toISOString()
+							, points: scoreCard ?? 0
+							, returnedDiceTo: []
+						}
+					]
+					, end: new Date().toISOString()
+				}
+			]
 		});
+
 		nav(-2);
 	};
 
@@ -184,27 +202,6 @@ export const Play: React.FC<PlayProps> = ({
 		);
 
 		setScoreCard(undefined);
-
-		const winner = calcCurrentScore(activePlayer?.name ?? "")
-			+ (scoreCard ?? 0) >= 30
-			;
-
-		if (winner) {
-			// Winner, game over...
-
-			// Put the final current turn into turns...
-			setTurns(
-				[
-					...turns
-					, {
-						name: currentTurn?.name ?? ""
-						, start: currentTurn?.start ?? ""
-						, cardsScored: currentTurn?.cardsScored ?? []
-						, end: new Date().toISOString()
-					}
-				]
-			)
-		}
 	};
 
 	const calcCurrentScore = (who: string) =>
