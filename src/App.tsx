@@ -100,7 +100,7 @@ function App() {
 		>
 			<div className="navbar bg-base-200">
 				<button 
-					className='btn btn-link text-black'
+					className={`btn btn-link ${darkMode ? 'text-gray-400' : 'text-black'}`}
 					onClick={() => setDiceValue(Math.floor(Math.random() * (6 - 1 + 1) + 1))}
 				>
 					<div className="flex-none">
