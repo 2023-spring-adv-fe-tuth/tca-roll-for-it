@@ -148,7 +148,7 @@ export const getFrenemiesData = (results: GameResult[]) => {
 			(acc, x) => acc.set(
 				x.player
 				, [
-					...acc.get(x.player) ?? []
+					...(acc.get(x.player) ?? [])
 					, ...x.returnedDiceTo
 				]
 			)
