@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { LeaderboardPlayer } from "./front-end-model";
+import { getFrenemiesData, LeaderboardPlayer } from "./front-end-model";
 import { durationFormatter } from 'human-readable'
 
 interface HomeProps {
@@ -8,6 +8,7 @@ interface HomeProps {
 	longestGame: number;
 	avgGameLengths: { playerCount: number, avgTime: number}[];
 	setTitle: (title: string) => void;
+	frenemiesData: any;
 }
 
 const format = durationFormatter();
@@ -18,8 +19,13 @@ export const Home: React.FC<HomeProps> = ({
 	, longestGame
 	, avgGameLengths
 	, setTitle
+	, frenemiesData
 }) => {
 
+	console.log(
+		"frenemiesData"
+		, frenemiesData
+	);
 	setTitle("Roll for It");
 
 	const nav = useNavigate();
@@ -137,7 +143,20 @@ export const Home: React.FC<HomeProps> = ({
 				>
 					<div className="card w-96 bg-base-100 shadow-xl grow">
 						<div className="card-body p-3 overflow-x-hidden">
-							<h2 className="card-title uppercase text-2xl text-gray-400">Winning Sequences</h2>
+							<h2 className="card-title uppercase text-2xl text-gray-400">
+								Frenemies
+							</h2>
+						</div>
+					</div>
+				</div>  
+				<div
+					className="flex"
+				>
+					<div className="card w-96 bg-base-100 shadow-xl grow">
+						<div className="card-body p-3 overflow-x-hidden">
+							<h2 className="card-title uppercase text-2xl text-gray-400">
+								Winning Sequences
+							</h2>
 						</div>
 					</div>
 				</div>  

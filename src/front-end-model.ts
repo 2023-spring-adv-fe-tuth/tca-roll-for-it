@@ -9,7 +9,7 @@ export interface GameResult {
     winner: string;
     players: GamePlayer[];
 
-    turns?: GamePlayerTurn[];
+    turns: GamePlayerTurn[];
 };
 
 export interface GamePlayer {
@@ -130,4 +130,31 @@ export const getAvgGameLengths: GetAverageGameLengthsByPlayerCount = (results) =
             (a, b) => a.playerCount >= b.playerCount ? 1 : -1
         )
     ;
+};
+
+export const getFrenemiesData = (results: GameResult[]) => {
+    const allPlayerScoredCards = results 
+        .flatMap(
+            x => x.turns.flatMap(
+                y => y.cardsScored
+                    .filter(z => z.returnedDiceTo.length > 0)
+                    .map(z => ({
+                        player: y.name
+                        , returnedDiceTo: z.returnedDiceTo
+                    }))
+            )
+        )
+        .reduce(
+            (acc, x) => acc.set(
+                x.player
+                , [
+                    ...acc.get(x.player) ?? []
+                    , ...x.returnedDiceTo
+                ]
+            )
+            , new Map<string, string[]>
+        )
+    ;
+
+    return [...allPlayerScoredCards];
 };
