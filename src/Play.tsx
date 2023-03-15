@@ -46,6 +46,9 @@ export const Play: React.FC<PlayProps> = ({
 	const [showLess, setShowLess]
 		= useState(false);
 
+	const [returnedTo, setReturnedTo] =
+		useState<string[]>([]);
+
 	setTitle(`Turn ${Math.floor(turns.length / setupInfo.players.length) + 1}`);
 
 	const showDrawerReason =
@@ -81,7 +84,7 @@ export const Play: React.FC<PlayProps> = ({
 						, {
 							timestamp: new Date().toISOString()
 							, points: scoreCard ?? 0
-							, returnedDiceTo: []
+							, returnedDiceTo: returnedTo
 						}
 					]
 					, end: new Date().toISOString()
@@ -174,6 +177,7 @@ export const Play: React.FC<PlayProps> = ({
 				: undefined
 		);
 
+		setReturnedTo([]);
 		setActivePlayer(nextPlayer);
 	};
 
@@ -192,14 +196,22 @@ export const Play: React.FC<PlayProps> = ({
 						, {
 							timestamp: new Date().toISOString()
 							, points: scoreCard ?? 0
-							, returnedDiceTo: []
+							, returnedDiceTo: returnedTo
 						}
 					]
 				}
 				: undefined
 		);
 
+		setReturnedTo([]);
 		setScoreCard(undefined);
+	};
+
+	const toggleReturnToCheck = (who: string) => {
+		returnedTo.some(x => x == who)
+			? setReturnedTo(returnedTo.filter(x => x != who))
+			: setReturnedTo([...returnedTo, who])
+		;
 	};
 
 	const calcCurrentScore = (who: string) =>
@@ -432,14 +444,9 @@ export const Play: React.FC<PlayProps> = ({
 											<label className="label1 flex">
 												<input
 													type="checkbox"
-													// checked={x.checked}
+													checked={returnedTo.some(y => y == x)}
 													className="checkbox checkbox-primary"
-												// onChange={() => setChosenPlayers([
-												//     ...chosenPlayers.map(y => ({
-												//         ...y
-												//         , checked: x.name == y.name ? !y.checked : y.checked
-												//     }))
-												// ])}
+													onChange={() => toggleReturnToCheck(x)}
 												/>
 												<span
 													className="label-text text-xl ml-3 capitalize"
