@@ -8,6 +8,7 @@ import {
 	, GamePlayerTurn,
 	getFrenemiesData
 } from "./front-end-model";
+import copy from 'clipboard-copy';
 
 interface PlayProps {
 	setupInfo: SetupInfo;
@@ -70,7 +71,7 @@ export const Play: React.FC<PlayProps> = ({
 
 	const done = (winner: string) => {
 		
-		addGameResult({
+		const newResult = {
 			winner: winner
 			, players: currentPlayers
 			, start: setupInfo.start
@@ -91,7 +92,11 @@ export const Play: React.FC<PlayProps> = ({
 					, end: new Date().toISOString()
 				}
 			]
-		});
+		};
+
+		copy(JSON.stringify(newResult));
+		
+		addGameResult(newResult);
 
 		nav(-2);
 	};
