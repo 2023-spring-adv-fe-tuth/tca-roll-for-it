@@ -5,7 +5,8 @@ import {
 	, GameResult
 	, SetupInfo
 	, Points
-	, GamePlayerTurn
+	, GamePlayerTurn,
+	getFrenemiesData
 } from "./front-end-model";
 
 interface PlayProps {
@@ -238,7 +239,34 @@ export const Play: React.FC<PlayProps> = ({
 
 	const potentialNewScore = calcCurrentScore(activePlayer?.name ?? "")
 		+ (scoreCard ?? 0)
-		;
+	;
+
+	const inGameFrenemies = getFrenemiesData(
+		[
+			{
+				winner: activePlayer?.name ?? ""
+				, players: currentPlayers
+				, start: setupInfo.start
+				, end: new Date().toISOString()
+				, turns: [
+					...turns
+					, {
+						name: currentTurn?.name ?? ""
+						, start: currentTurn?.start ?? ""
+						, cardsScored: [
+							...(currentTurn?.cardsScored ?? [])
+							, {
+								timestamp: new Date().toISOString()
+								, points: scoreCard ?? 0
+								, returnedDiceTo: returnedTo
+							}
+						]
+						, end: new Date().toISOString()
+					}
+				]
+			}			
+		]
+	);
 
 	const playersWhoseDiceCouldPossiblyBeReturned = setupInfo.players
 		.filter(
@@ -507,6 +535,36 @@ export const Play: React.FC<PlayProps> = ({
 							>
 								Cancel
 							</button>
+							{
+								potentialNewScore >= 30 && inGameFrenemies.length > 0 && (
+									<>
+										<p
+											className="text-xl text-left font-bold mt-10 mb-3"
+										>
+											Who targeted whom this game...
+										</p>
+										<table className="table w-full mt-3">
+											<thead>
+												<tr>
+													<th>Who Returned Dice To Whom</th>
+													<th># TIMES</th>
+												</tr>
+											</thead>
+											<tbody>
+												{inGameFrenemies.map((x: any) => (
+													<tr
+														key={x[0]}
+													>
+														<td>{x[0]}</td>
+														<td>{x[1]}</td>
+													</tr>
+												))}
+											</tbody>
+										</table>							
+		
+									</>
+								)
+							}
 						</div>
 					}
 				</ul>
