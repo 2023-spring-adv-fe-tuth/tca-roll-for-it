@@ -93,7 +93,7 @@ export const Home: React.FC<HomeProps> = ({
 				<div
 					className="flex"
 				>
-					<div className="card w-96 bg-base-100 shadow-xl grow">
+					<div className="card w-0 bg-base-100 shadow-xl grow">
 						<div className="card-body p-3 overflow-x-hidden">
 							<h2 className="card-title uppercase text-2xl text-gray-400">Game Time Facts</h2>
 							<p
@@ -141,7 +141,7 @@ export const Home: React.FC<HomeProps> = ({
 				<div
 					className="flex"
 				>
-					<div className="card w-96 bg-base-100 shadow-xl grow">
+					<div className="card w-0 bg-base-100 shadow-xl grow">
 						<div className="card-body p-3 overflow-x-hidden">
 							<h2 className="card-title uppercase text-2xl text-gray-400">
 								Frenemies
@@ -182,7 +182,7 @@ export const Home: React.FC<HomeProps> = ({
 				<div
 					className="flex"
 				>
-					<div className="card w-96 bg-base-100 shadow-xl grow">
+					<div className="card w-0 bg-base-100 shadow-xl grow">
 						<div className="card-body p-3 overflow-x-hidden">
 							<h2 className="card-title uppercase text-2xl text-gray-400">
 								Winning Sequences
