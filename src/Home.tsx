@@ -151,7 +151,7 @@ export const Home: React.FC<HomeProps> = ({
 									<table className="table w-full mt-3">
 										<thead>
 											<tr>
-												<th>Who Returned Dice To Whom</th>
+												<th>Who &gt; Whom</th>
 												<th># TIMES</th>
 											</tr>
 										</thead>
