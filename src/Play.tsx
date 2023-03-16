@@ -240,6 +240,14 @@ export const Play: React.FC<PlayProps> = ({
 		+ (scoreCard ?? 0)
 		;
 
+	const playersWhoseDiceCouldPossiblyBeReturned = setupInfo.players
+		.filter(
+			x => 
+				x != activePlayer?.name
+				&& turns.some(y => y.name == x)
+		)
+	;
+
 	return (
 		<div className="drawer drawer-end">
 			<input
@@ -431,31 +439,43 @@ export const Play: React.FC<PlayProps> = ({
 						<div
 							className="flex flex-col"
 						>
-							<p
-								className="text-xl text-left font-bold"
-							>
-								Returned dice to...
-							</p>
 							{
-								setupInfo.players
-									.filter(x => x != activePlayer?.name)
-									.map(x => (
-										<div className="form-control1 mt-5">
-											<label className="label1 flex">
-												<input
-													type="checkbox"
-													checked={returnedTo.some(y => y == x)}
-													className="checkbox checkbox-primary"
-													onChange={() => toggleReturnToCheck(x)}
-												/>
-												<span
-													className="label-text text-xl ml-3 capitalize"
-												>
-													{x}
-												</span>
-											</label>
-										</div>
-									))
+								playersWhoseDiceCouldPossiblyBeReturned.length > 0 ? (
+									<>
+										<p
+											className="text-xl text-left font-bold"
+										>
+											Returned dice to...
+										</p>
+										{
+											playersWhoseDiceCouldPossiblyBeReturned
+												.map(x => (
+													<div className="form-control1 mt-5">
+														<label className="label1 flex">
+															<input
+																type="checkbox"
+																checked={returnedTo.some(y => y == x)}
+																className="checkbox checkbox-primary"
+																onChange={() => toggleReturnToCheck(x)}
+															/>
+															<span
+																className="label-text text-xl ml-3 capitalize"
+															>
+																{x}
+															</span>
+														</label>
+													</div>
+												)
+											)
+										}
+									</>
+								) : (
+									<p
+										className="text-xl text-left font-bold"
+									>
+										Confirm scored card...
+									</p>									
+								)
 							}
 							{
 								potentialNewScore < 30 ?
