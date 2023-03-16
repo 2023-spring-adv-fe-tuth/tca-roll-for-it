@@ -164,8 +164,8 @@ export const getFrenemiesData = (results: GameResult[]) => {
 			, [
 				...x[1].reduce(
 					(acc, y) => acc.set(
-						x[0] + " > " + y
-						, (acc.get(x[0] + " > " + y) ?? 0) + 1
+						x[0] + " returned " + y + "'s dice"
+						, (acc.get(x[0] + " returned " + y + "'s dice") ?? 0) + 1
 					)
 					, new Map<string, number>()
 				)
@@ -174,5 +174,7 @@ export const getFrenemiesData = (results: GameResult[]) => {
 	;
 
 	return playersMappedToFenemiesWithTotalReturnDiceCount
+		.flatMap((x: any) => x[1])
+		.sort((a, b) => a[1] > b[1] ? -1 : 1)
 	;
 };

@@ -146,9 +146,28 @@ export const Home: React.FC<HomeProps> = ({
 							<h2 className="card-title uppercase text-2xl text-gray-400">
 								Frenemies
 							</h2>
+							<table className="table w-full mt-3">
+								<thead>
+									<tr>
+										<th></th>
+										<th># TIMES</th>
+									</tr>
+								</thead>
+								<tbody>
+									{frenemiesData.map((x: any) => (
+										<tr
+											key={x[0]}
+										>
+											<td>{x[0]}</td>
+											<td>{x[1]}</td>
+										</tr>
+									))}
+								</tbody>
+							</table>							
 						</div>
 					</div>
 				</div>  
+				<br />
 				<div
 					className="flex"
 				>
@@ -161,6 +180,7 @@ export const Home: React.FC<HomeProps> = ({
 					</div>
 				</div>  
 			</div>
+			<br />
 	  </div>
 	);
 };
