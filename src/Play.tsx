@@ -539,14 +539,16 @@ export const Play: React.FC<PlayProps> = ({
 								potentialNewScore >= 30 && inGameFrenemies.length > 0 && (
 									<>
 										<p
-											className="text-xl text-left font-bold mt-10 mb-3"
+											className="text-xl text-left font-bold mt-5 mb-3"
 										>
-											Who targeted whom this game...
+											Frenemies steal your cards 
+											<br />
+											: - O
 										</p>
 										<table className="table w-full mt-3">
 											<thead>
 												<tr>
-													<th>Who Returned Dice To Whom</th>
+													<th>Who &gt; Whom</th>
 													<th># TIMES</th>
 												</tr>
 											</thead>
