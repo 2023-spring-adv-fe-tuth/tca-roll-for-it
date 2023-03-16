@@ -156,5 +156,23 @@ export const getFrenemiesData = (results: GameResult[]) => {
 		)
 	;
 
-	return [...playersMappedToPlayersDiceTheyReturned];
+	// console.log("foo", playersMappedToPlayersDiceTheyReturned);
+
+	const playersMappedToFenemiesWithTotalReturnDiceCount = [...playersMappedToPlayersDiceTheyReturned]
+		.map(x => [
+			x[0]
+			, [
+				...x[1].reduce(
+					(acc, y) => acc.set(
+						x[0] + " > " + y
+						, (acc.get(x[0] + " > " + y) ?? 0) + 1
+					)
+					, new Map<string, number>()
+				)
+			]
+		])
+	;
+
+	return playersMappedToFenemiesWithTotalReturnDiceCount
+	;
 };
