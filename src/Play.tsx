@@ -291,6 +291,35 @@ export const Play: React.FC<PlayProps> = ({
 				readOnly
 			/>
 			<div className="drawer-content">
+				<div className="overflow-x-auto">
+					<table className="table w-full">
+						{/* head */}
+						<thead>
+							<tr>
+								{
+									currentPlayers.map(x => (
+										<th>
+											{x.name}
+										</th>
+									))
+								}
+							</tr>
+						</thead>
+						<tbody>
+							{
+								turns.map(y => (
+									<tr>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+									</tr>
+								))
+							}
+						</tbody>
+					</table>
+				</div>
 				<div
 					className="flex flex-col p-1"
 				>
