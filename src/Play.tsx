@@ -294,11 +294,21 @@ export const Play: React.FC<PlayProps> = ({
 				<div
 					className="flex flex-col p-1"
 				>
+					<div className="tabs -mx-1 -my-1">
+						{
+							currentPlayers.map(x =>(
+								<a 
+									className={`tab tab-bordered tab-lg ${x.name === activePlayer?.name ? 'tab-active': ''}`}
+								>
+									{x.name} - 0
+								</a> 
+							))
+						}
+					</div>
 					{currentPlayers.map(x => (
 						<div
 							className="mt-5 ml-3"
 						>
-
 							<h2
 								className="text-2xl text-left"
 							>
