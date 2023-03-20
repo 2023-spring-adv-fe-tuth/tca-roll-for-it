@@ -410,7 +410,7 @@ export const Play: React.FC<PlayProps> = ({
 							!showLess &&
 							<div>
 								<p>
-									Keep playing until somebody wins with <span className="font-semibold">30 points</span>...
+									Keep playing until somebody wins with <span className="font-semibold">40 points</span>...
 								</p>
 
 								<p>
@@ -511,7 +511,7 @@ export const Play: React.FC<PlayProps> = ({
 								)
 							}
 							{
-								potentialNewScore < 30 ?
+								potentialNewScore < 40 ?
 									<button
 										className="btn btn-lg btn-primary capitalize mt-10"
 										onClick={cardScored}
@@ -541,7 +541,7 @@ export const Play: React.FC<PlayProps> = ({
 								Cancel
 							</button>
 							{
-								potentialNewScore >= 30 && inGameFrenemies.length > 0 && (
+								potentialNewScore >= 40 && inGameFrenemies.length > 0 && (
 									<>
 										<p
 											className="text-xl text-left font-bold mt-5 mb-3"

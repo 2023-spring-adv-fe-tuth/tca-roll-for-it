@@ -76,7 +76,328 @@ const hardCodedGameResults: GameResult[] = [
 		, start: "2023-03-07T11:00:00.000"
 		, end: "2023-03-07T11:25:00.000"
 		, turns: []
-	}
+	},
+	{
+		"winner": "Tom",
+		"players": [
+			{
+				"name": "Stephanie ",
+				"order": 1
+			},
+			{
+				"name": "Tom",
+				"order": 2
+			}
+		],
+		"start": "2023-03-20T01:59:50.024Z",
+		"end": "2023-03-20T02:11:45.207Z",
+		"turns": [
+			{
+				"name": "Stephanie ",
+				"start": "2023-03-20T01:59:52.307Z",
+				"cardsScored": [],
+				"end": "2023-03-20T02:01:54.845Z"
+			},
+			{
+				"name": "Tom",
+				"start": "2023-03-20T02:01:54.845Z",
+				"cardsScored": [
+					{
+						"timestamp": "2023-03-20T02:02:19.405Z",
+						"points": 5,
+						"returnedDiceTo": [
+							"Stephanie "
+						]
+					}
+				],
+				"end": "2023-03-20T02:02:33.429Z"
+			},
+			{
+				"name": "Stephanie ",
+				"start": "2023-03-20T02:02:33.430Z",
+				"cardsScored": [],
+				"end": "2023-03-20T02:03:15.088Z"
+			},
+			{
+				"name": "Tom",
+				"start": "2023-03-20T02:03:15.088Z",
+				"cardsScored": [],
+				"end": "2023-03-20T02:03:33.728Z"
+			},
+			{
+				"name": "Stephanie ",
+				"start": "2023-03-20T02:03:33.728Z",
+				"cardsScored": [
+					{
+						"timestamp": "2023-03-20T02:04:05.981Z",
+						"points": 5,
+						"returnedDiceTo": [
+							"Tom"
+						]
+					}
+				],
+				"end": "2023-03-20T02:05:20.896Z"
+			},
+			{
+				"name": "Tom",
+				"start": "2023-03-20T02:05:20.896Z",
+				"cardsScored": [
+					{
+						"timestamp": "2023-03-20T02:05:34.871Z",
+						"points": 5,
+						"returnedDiceTo": []
+					}
+				],
+				"end": "2023-03-20T02:05:36.089Z"
+			},
+			{
+				"name": "Stephanie ",
+				"start": "2023-03-20T02:05:36.089Z",
+				"cardsScored": [],
+				"end": "2023-03-20T02:05:58.438Z"
+			},
+			{
+				"name": "Tom",
+				"start": "2023-03-20T02:05:58.438Z",
+				"cardsScored": [],
+				"end": "2023-03-20T02:06:06.228Z"
+			},
+			{
+				"name": "Stephanie ",
+				"start": "2023-03-20T02:06:06.228Z",
+				"cardsScored": [],
+				"end": "2023-03-20T02:06:18.324Z"
+			},
+			{
+				"name": "Tom",
+				"start": "2023-03-20T02:06:18.324Z",
+				"cardsScored": [],
+				"end": "2023-03-20T02:06:24.231Z"
+			},
+			{
+				"name": "Stephanie ",
+				"start": "2023-03-20T02:06:24.231Z",
+				"cardsScored": [],
+				"end": "2023-03-20T02:07:06.054Z"
+			},
+			{
+				"name": "Tom",
+				"start": "2023-03-20T02:07:06.054Z",
+				"cardsScored": [],
+				"end": "2023-03-20T02:07:12.819Z"
+			},
+			{
+				"name": "Stephanie ",
+				"start": "2023-03-20T02:07:12.819Z",
+				"cardsScored": [],
+				"end": "2023-03-20T02:07:27.911Z"
+			},
+			{
+				"name": "Tom",
+				"start": "2023-03-20T02:07:27.911Z",
+				"cardsScored": [],
+				"end": "2023-03-20T02:07:34.450Z"
+			},
+			{
+				"name": "Stephanie ",
+				"start": "2023-03-20T02:07:34.450Z",
+				"cardsScored": [],
+				"end": "2023-03-20T02:07:49.672Z"
+			},
+			{
+				"name": "Tom",
+				"start": "2023-03-20T02:07:49.672Z",
+				"cardsScored": [],
+				"end": "2023-03-20T02:07:53.650Z"
+			},
+			{
+				"name": "Stephanie ",
+				"start": "2023-03-20T02:07:53.650Z",
+				"cardsScored": [],
+				"end": "2023-03-20T02:08:01.050Z"
+			},
+			{
+				"name": "Tom",
+				"start": "2023-03-20T02:08:01.050Z",
+				"cardsScored": [],
+				"end": "2023-03-20T02:08:04.653Z"
+			},
+			{
+				"name": "Stephanie ",
+				"start": "2023-03-20T02:08:04.653Z",
+				"cardsScored": [],
+				"end": "2023-03-20T02:08:12.153Z"
+			},
+			{
+				"name": "Tom",
+				"start": "2023-03-20T02:08:12.154Z",
+				"cardsScored": [],
+				"end": "2023-03-20T02:08:15.329Z"
+			},
+			{
+				"name": "Stephanie ",
+				"start": "2023-03-20T02:08:15.329Z",
+				"cardsScored": [],
+				"end": "2023-03-20T02:08:19.332Z"
+			},
+			{
+				"name": "Tom",
+				"start": "2023-03-20T02:08:19.332Z",
+				"cardsScored": [],
+				"end": "2023-03-20T02:08:22.076Z"
+			},
+			{
+				"name": "Stephanie ",
+				"start": "2023-03-20T02:08:22.077Z",
+				"cardsScored": [],
+				"end": "2023-03-20T02:08:31.371Z"
+			},
+			{
+				"name": "Tom",
+				"start": "2023-03-20T02:08:31.371Z",
+				"cardsScored": [],
+				"end": "2023-03-20T02:08:34.713Z"
+			},
+			{
+				"name": "Stephanie ",
+				"start": "2023-03-20T02:08:34.714Z",
+				"cardsScored": [],
+				"end": "2023-03-20T02:08:41.393Z"
+			},
+			{
+				"name": "Tom",
+				"start": "2023-03-20T02:08:41.393Z",
+				"cardsScored": [],
+				"end": "2023-03-20T02:08:43.447Z"
+			},
+			{
+				"name": "Stephanie ",
+				"start": "2023-03-20T02:08:43.447Z",
+				"cardsScored": [],
+				"end": "2023-03-20T02:08:51.007Z"
+			},
+			{
+				"name": "Tom",
+				"start": "2023-03-20T02:08:51.007Z",
+				"cardsScored": [],
+				"end": "2023-03-20T02:08:51.666Z"
+			},
+			{
+				"name": "Stephanie ",
+				"start": "2023-03-20T02:08:51.666Z",
+				"cardsScored": [],
+				"end": "2023-03-20T02:08:56.052Z"
+			},
+			{
+				"name": "Tom",
+				"start": "2023-03-20T02:08:56.052Z",
+				"cardsScored": [],
+				"end": "2023-03-20T02:08:58.961Z"
+			},
+			{
+				"name": "Stephanie ",
+				"start": "2023-03-20T02:08:58.961Z",
+				"cardsScored": [],
+				"end": "2023-03-20T02:09:02.346Z"
+			},
+			{
+				"name": "Tom",
+				"start": "2023-03-20T02:09:02.346Z",
+				"cardsScored": [],
+				"end": "2023-03-20T02:09:05.471Z"
+			},
+			{
+				"name": "Stephanie ",
+				"start": "2023-03-20T02:09:05.471Z",
+				"cardsScored": [
+					{
+						"timestamp": "2023-03-20T02:09:24.458Z",
+						"points": 5,
+						"returnedDiceTo": []
+					}
+				],
+				"end": "2023-03-20T02:09:37.295Z"
+			},
+			{
+				"name": "Tom",
+				"start": "2023-03-20T02:09:37.295Z",
+				"cardsScored": [
+					{
+						"timestamp": "2023-03-20T02:09:47.139Z",
+						"points": 15,
+						"returnedDiceTo": []
+					}
+				],
+				"end": "2023-03-20T02:09:50.246Z"
+			},
+			{
+				"name": "Stephanie ",
+				"start": "2023-03-20T02:09:50.247Z",
+				"cardsScored": [],
+				"end": "2023-03-20T02:10:17.400Z"
+			},
+			{
+				"name": "Tom",
+				"start": "2023-03-20T02:10:17.400Z",
+				"cardsScored": [],
+				"end": "2023-03-20T02:10:32.848Z"
+			},
+			{
+				"name": "Stephanie ",
+				"start": "2023-03-20T02:10:32.849Z",
+				"cardsScored": [],
+				"end": "2023-03-20T02:10:49.390Z"
+			},
+			{
+				"name": "Tom",
+				"start": "2023-03-20T02:10:49.390Z",
+				"cardsScored": [],
+				"end": "2023-03-20T02:10:59.075Z"
+			},
+			{
+				"name": "Stephanie ",
+				"start": "2023-03-20T02:10:59.075Z",
+				"cardsScored": [],
+				"end": "2023-03-20T02:11:09.683Z"
+			},
+			{
+				"name": "Tom",
+				"start": "2023-03-20T02:11:09.683Z",
+				"cardsScored": [],
+				"end": "2023-03-20T02:11:18.110Z"
+			},
+			{
+				"name": "Stephanie ",
+				"start": "2023-03-20T02:11:18.110Z",
+				"cardsScored": [],
+				"end": "2023-03-20T02:11:25.434Z"
+			},
+			{
+				"name": "Tom",
+				"start": "2023-03-20T02:11:25.434Z",
+				"cardsScored": [],
+				"end": "2023-03-20T02:11:30.674Z"
+			},
+			{
+				"name": "Stephanie ",
+				"start": "2023-03-20T02:11:30.675Z",
+				"cardsScored": [],
+				"end": "2023-03-20T02:11:37.345Z"
+			},
+			{
+				"name": "Tom",
+				"start": "2023-03-20T02:11:37.345Z",
+				"cardsScored": [
+					{
+						"timestamp": "2023-03-20T02:11:45.207Z",
+						"points": 5,
+						"returnedDiceTo": []
+					}
+				],
+				"end": "2023-03-20T02:11:45.207Z"
+			}
+		]
+	}	
 ];
 
 function App() {
