@@ -303,13 +303,17 @@ export const Play: React.FC<PlayProps> = ({
 								className="text-2xl text-left"
 							>
 								<span
-									className={`text-xl font-bold badge badge-lg w-16 mr-5 ${activePlayer == x ? 'bg-primary' : ''}`}
+									className={`text-xl badge badge-lg w-16 mr-5 ${activePlayer == x ? 'bg-primary font-bold' : ''}`}
 								>
 									{
 										calcCurrentScore(x.name)
 									}
 								</span>
-								{x.name}
+								<span
+									className={`${activePlayer == x ? 'text-primary font-bold': ''}`}
+								>
+									{x.name}
+								</span>
 							</h2>
 
 							{
@@ -332,7 +336,7 @@ export const Play: React.FC<PlayProps> = ({
 										}
 									</div>
 									<div
-										className="flex flex-row"
+										className="flex flex-row mt-3"
 									>
 										<button
 											className="btn btn-primary btn-outline btn-md"
@@ -360,14 +364,24 @@ export const Play: React.FC<PlayProps> = ({
 										</button>
 									</div>
 									<div
-										className="flex flex-row mt-3"
+										className="flex flex-row -ml-5 -mb-3"
 									>
 										<button
 											key={x.name}
-											className="btn btn-md btn-primary capitalize"
+											className="btn btn-lg btn-link capitalize font-bold"
 											onClick={endTurn}
 										>
-											End Turn
+											Next Player
+											<svg 
+												xmlns="http://www.w3.org/2000/svg" 
+												width="20" 
+												height="20" 
+												fill="currentColor" 
+												viewBox="0 0 16 16"
+												className="ml-1"
+											>
+												<path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+											</svg> 
 										</button>
 									</div>
 								</div>
