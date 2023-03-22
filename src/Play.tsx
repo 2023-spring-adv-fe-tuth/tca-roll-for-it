@@ -364,24 +364,33 @@ export const Play: React.FC<PlayProps> = ({
 										</button>
 									</div>
 									<div
-										className="flex flex-row -ml-5 -mb-3"
+										className="flex flex-row -ml-10 -mb-3"
 									>
 										<button
 											key={x.name}
 											className="btn btn-lg btn-link capitalize font-bold"
 											onClick={endTurn}
 										>
-											Next Player
 											<svg 
 												xmlns="http://www.w3.org/2000/svg" 
 												width="20" 
 												height="20" 
 												fill="currentColor" 
 												viewBox="0 0 16 16"
-												className="ml-1"
+												className="mr-2"
 											>
-												<path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+												{
+													setupInfo.players.length === currentPlayers.length && currentPlayers[currentPlayers.length - 1].name == activePlayer.name ? (
+														<path fill-rule="evenodd" d="M4.854 1.146a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L4 2.707V12.5A2.5 2.5 0 0 0 6.5 15h8a.5.5 0 0 0 0-1h-8A1.5 1.5 0 0 1 5 12.5V2.707l3.146 3.147a.5.5 0 1 0 .708-.708l-4-4z"/>
+
+													) : (
+														<path fill-rule="evenodd" d="M8 1a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L7.5 13.293V1.5A.5.5 0 0 1 8 1z"/>
+													) 
+												
+
+												}
 											</svg> 
+											Next Player
 										</button>
 									</div>
 								</div>
