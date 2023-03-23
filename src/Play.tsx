@@ -281,6 +281,23 @@ export const Play: React.FC<PlayProps> = ({
 		)
 	;
 
+	const undo = () => {
+		// If scored cards in current turn, undo them first.
+		const currentTurnScoredCards = currentTurn?.cardsScored ?? [];
+		console.log("here", currentTurnScoredCards);
+
+		if (currentTurn && currentTurnScoredCards.length > 0) {
+			setCurrentTurn({
+				...currentTurn
+				, cardsScored: currentTurnScoredCards.filter(
+					(_, i, a) => i !== (a.length - 1)
+				)
+			});
+		}
+
+		// Otherwise previous turns.
+	};
+
 	return (
 		<div className="drawer drawer-end">
 			<input
@@ -413,6 +430,7 @@ export const Play: React.FC<PlayProps> = ({
 							>
 								<a
 									className="btn btn-link capitalize text-lg"
+									onClick={undo}
 								>
 									Undo
 								</a>
@@ -440,6 +458,7 @@ export const Play: React.FC<PlayProps> = ({
 									You can
 									<a
 										className="btn btn-link capitalize text-lg -ml-3 -mr-3 -mb-3"
+										onClick={undo}
 									>
 										Undo
 									</a>
