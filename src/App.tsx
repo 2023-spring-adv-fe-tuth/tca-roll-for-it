@@ -479,7 +479,7 @@ function App() {
 					</div>
 				</button>
 				<div className="flex-1 ml-0">
-					<span className="text-lg font-bold">
+					<span className="text-lg font-bold whitespace-nowrap">
 						{title}
 					</span>
 				</div>
