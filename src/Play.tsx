@@ -282,6 +282,7 @@ export const Play: React.FC<PlayProps> = ({
 	;
 
 	const undo = () => {
+		
 		// If scored cards in current turn, undo them first.
 		const currentTurnScoredCards = currentTurn?.cardsScored ?? [];
 		console.log("here", currentTurnScoredCards);
@@ -293,9 +294,35 @@ export const Play: React.FC<PlayProps> = ({
 					(_, i, a) => i !== (a.length - 1)
 				)
 			});
-		}
+		} else {
 
-		// Otherwise previous turns.
+			// Otherwise previous turns.
+			const previousTurn = turns
+				.filter(
+					(_, i, a) => i === (a.length - 1)
+				)[0]
+			;
+
+			if (previousTurn) {
+				setTurns([
+					...turns.filter(x => x !== previousTurn)
+					, {
+						name: previousTurn.name
+						, start: previousTurn.start
+						, end: ""
+						, cardsScored: previousTurn.cardsScored.filter(
+							(_, i, a) => i !== (a.length - 1)
+						)
+					}
+				]);
+			}
+
+			// Set active player if necessary.
+
+			// Set current turn if necessary.
+
+			// ? ? ?
+		}
 	};
 
 	return (
