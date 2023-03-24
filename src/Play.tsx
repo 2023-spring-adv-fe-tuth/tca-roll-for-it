@@ -303,25 +303,45 @@ export const Play: React.FC<PlayProps> = ({
 				)[0]
 			;
 
-			if (previousTurn) {
+			if (previousTurn && previousTurn.cardsScored.length > 0) {
+
+				const updatedPreviousTurn = {
+					name: previousTurn.name
+					, start: previousTurn.start
+					, end: ""
+					, cardsScored: previousTurn.cardsScored.filter(
+						(_, i, a) => i !== (a.length - 1)
+					)
+				};
+
 				setTurns([
 					...turns.filter(x => x !== previousTurn)
-					, {
-						name: previousTurn.name
-						, start: previousTurn.start
-						, end: ""
-						, cardsScored: previousTurn.cardsScored.filter(
-							(_, i, a) => i !== (a.length - 1)
-						)
-					}
+					, updatedPreviousTurn
 				]);
+
+				// Set current turn if necessary.
+				setCurrentTurn(updatedPreviousTurn);
+
+				// Set active player if necessary.
+				setActivePlayer(
+					currentPlayers.filter(x => x.name === updatedPreviousTurn.name)[0] ?? undefined
+				);
+
+				// ? ? ?
+
+			} else {
+				// Previous turn doesn't have cards scored, so dump it...
+				setTurns([
+					...turns.filter((_, i, a) => i !== (a.length - 1))
+				]);
+
+				const newLastTurn = turns.filter((_, i, a) => i === (a.length - 1))[0];
+
+				setCurrentTurn(newLastTurn);
+				setActivePlayer(
+					currentPlayers.filter(x => x.name === newLastTurn.name)[0] ?? undefined
+				);
 			}
-
-			// Set active player if necessary.
-
-			// Set current turn if necessary.
-
-			// ? ? ?
 		}
 	};
 
