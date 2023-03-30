@@ -432,7 +432,7 @@ export const Play: React.FC<PlayProps> = ({
 									>
 										<button
 											key={x.name}
-											className="btn btn-lg btn-link capitalize"
+											className="btn btn-lg btn-link normal-case"
 											onClick={endTurn}
 										>
 											<svg 
@@ -454,7 +454,12 @@ export const Play: React.FC<PlayProps> = ({
 
 												}
 											</svg> 
-											Next Player
+											{
+												setupInfo.players.length === 1 ?
+													"End Turn" :
+													`Next ${setupInfo.players.length === currentPlayers.length && currentPlayers[currentPlayers.length - 1].name == activePlayer.name ? " (first)" : ""} Player`
+											}
+											
 										</button>
 									</div>
 								</div>
