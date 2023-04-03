@@ -514,7 +514,7 @@ export const Play: React.FC<PlayProps> = ({
 									>
 										Undo
 									</a>
-									scored cards through previous turns...
+									scored cards and turns...
 
 								</p>
 
@@ -526,7 +526,7 @@ export const Play: React.FC<PlayProps> = ({
 									>
 										Quit
 									</a>
-									and not record data for this game...
+									to not record data for this game...
 								</p>
 							</div>
 						}
