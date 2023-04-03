@@ -330,17 +330,23 @@ export const Play: React.FC<PlayProps> = ({
 				// ? ? ?
 
 			} else {
+
+				// console.log("Is this where it dies?");
+				
 				// Previous turn doesn't have cards scored, so dump it...
 				setTurns([
 					...turns.filter((_, i, a) => i !== (a.length - 1))
 				]);
 
+
 				const newLastTurn = turns.filter((_, i, a) => i === (a.length - 1))[0];
 
-				setCurrentTurn(newLastTurn);
-				setActivePlayer(
-					currentPlayers.filter(x => x.name === newLastTurn.name)[0] ?? undefined
-				);
+				if (newLastTurn) {
+					setCurrentTurn(newLastTurn);
+					setActivePlayer(
+						currentPlayers.filter(x => x.name === newLastTurn.name)[0] ?? undefined
+					);
+				}
 			}
 		}
 	};
