@@ -178,3 +178,24 @@ export const getFrenemiesData = (results: GameResult[]) => {
 		.sort((a, b) => a[1] > b[1] ? -1 : 1)
 	;
 };
+
+export const getWinningSequenceData = (results: GameResult[]) => {
+
+	const winningSequences = results.flatMap(
+		x => x.turns
+			.filter(y => y.name == x.winner)
+			.flatMap(y => y.cardsScored)
+			.map(y => y.points)
+			.join(" + ")
+	);
+
+	const groupedByWinningSequenceString = winningSequences.reduce(
+		(acc, x) => acc.set(
+			x
+			, 0
+		)
+		, new Map<string, number>
+	);
+
+	console.log("getWinninSequenceData", groupedByWinningSequenceString);
+};

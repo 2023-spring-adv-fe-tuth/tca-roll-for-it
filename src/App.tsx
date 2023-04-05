@@ -9,7 +9,8 @@ import {
 	getShortestGame,
 	getLongestGame,
 	getAvgGameLengths,
-	getFrenemiesData
+	getFrenemiesData,
+	getWinningSequenceData
 } from './front-end-model';
 
 import {
@@ -506,6 +507,7 @@ function App() {
 								avgGameLengths={getAvgGameLengths(gameResults)}
 								setTitle={setTitle}
 								frenemiesData={getFrenemiesData(gameResults)}
+								winningSequenceData={getWinningSequenceData(gameResults)}
 							/>
 						}
 					/>

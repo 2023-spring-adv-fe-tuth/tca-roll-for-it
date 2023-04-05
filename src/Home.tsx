@@ -9,6 +9,7 @@ interface HomeProps {
 	avgGameLengths: { playerCount: number, avgTime: number}[];
 	setTitle: (title: string) => void;
 	frenemiesData: any;
+	winningSequenceData: any;
 }
 
 const format = durationFormatter();
@@ -20,6 +21,7 @@ export const Home: React.FC<HomeProps> = ({
 	, avgGameLengths
 	, setTitle
 	, frenemiesData
+	, winningSequenceData
 }) => {
 
 	console.log(
