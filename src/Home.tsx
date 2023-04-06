@@ -11,6 +11,7 @@ interface HomeProps {
 	frenemiesData: any;
 	winningSequenceData: any;
 	pastGamesData: {date: string; msAgo: number; who: string}[];
+	hmmData: {totalGamesPlayed: number; lastPlayedMsAgo: number;};
 }
 
 const format = durationFormatter();
@@ -27,6 +28,7 @@ export const Home: React.FC<HomeProps> = ({
 	, frenemiesData
 	, winningSequenceData
 	, pastGamesData
+	, hmmData
 }) => {
 
 	console.log(
@@ -93,6 +95,28 @@ export const Home: React.FC<HomeProps> = ({
 									))}
 								</tbody>
 							</table>
+						</div>
+					</div>
+				</div>
+				<br />
+				<div
+					className="flex"
+				>
+					<div className="card w-0 bg-base-100 shadow-xl grow">
+						<div className="card-body p-3 overflow-x-hidden">
+							<h2 className="card-title uppercase text-2xl text-gray-400">
+								Hmm...
+							</h2>
+							<div className="stats stats-vertical shadow text-left">
+								<div className="stat">
+									<div className="stat-title text-xl">Last Played</div>
+									<div className="stat-value font-semibold">{`${justDaysFormat(hmmData.lastPlayedMsAgo)} ago`}</div>
+								</div>
+								<div className="stat">
+									<div className="stat-title text-xl">Total Games Played</div>
+									<div className="stat-value font-semibold">{hmmData.totalGamesPlayed}</div>
+								</div>
+							</div>							
 						</div>
 					</div>
 				</div>

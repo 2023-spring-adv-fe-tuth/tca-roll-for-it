@@ -228,3 +228,11 @@ export const getReverseChronGamesData = (results: GameResult[]) => {
 		)
 	;
 };
+
+export const getHmmData = (results: GameResult[]) => {
+
+	return {
+		totalGamesPlayed: results.length
+		, lastPlayedMsAgo: Math.min(...results.map(x => Date.now() - new Date(x.end).getTime()))
+	};
+};
