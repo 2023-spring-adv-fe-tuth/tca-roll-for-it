@@ -11,6 +11,7 @@ import {
 	getAvgGameLengths,
 	getFrenemiesData,
 	getWinningSequenceData
+	, getReverseChronGamesData
 } from './front-end-model';
 
 import {
@@ -508,6 +509,7 @@ function App() {
 								setTitle={setTitle}
 								frenemiesData={getFrenemiesData(gameResults)}
 								winningSequenceData={getWinningSequenceData(gameResults)}
+								pastGamesData={getReverseChronGamesData(gameResults)}
 							/>
 						}
 					/>

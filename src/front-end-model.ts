@@ -213,3 +213,18 @@ export const getWinningSequenceData = (results: GameResult[]) => {
 		)
 	;
 };
+
+export const getReverseChronGamesData = (results: GameResult[]) => {
+	return results
+		.map(
+			x => ({
+				date: new Date(x.end).toLocaleDateString()
+				, msAgo: new Date().getTime() - new Date(x.end).getTime()
+				, who: x.players.map(y => y.name).join(", ") 
+			})
+		)
+		.sort(
+			(a, b) => a.msAgo < b.msAgo ? -1 : 1
+		)
+	;
+};

@@ -10,9 +10,13 @@ interface HomeProps {
 	setTitle: (title: string) => void;
 	frenemiesData: any;
 	winningSequenceData: any;
+	pastGamesData: {date: string; msAgo: number; who: string}[];
 }
 
 const format = durationFormatter();
+const justDaysFormat = durationFormatter({
+	allowMultiples: ["y", "mo", "d"]
+});
 
 export const Home: React.FC<HomeProps> = ({
 	leaderBoardData
@@ -22,6 +26,7 @@ export const Home: React.FC<HomeProps> = ({
 	, setTitle
 	, frenemiesData
 	, winningSequenceData
+	, pastGamesData
 }) => {
 
 	console.log(
@@ -205,6 +210,47 @@ export const Home: React.FC<HomeProps> = ({
 												>
 													<td>{x[0]}</td>
 													<td>{x[1]}</td>
+												</tr>
+											))}
+										</tbody>
+									</table>							
+
+								) : (
+									<p
+										className="text-left"
+									>
+										No dice returned, yet ! ! !
+									</p>
+								)							
+							}
+						</div>
+					</div>
+				</div>  
+				<br />
+				<div
+					className="flex"
+				>
+					<div className="card w-0 bg-base-100 shadow-xl grow">
+						<div className="card-body p-3 overflow-x-hidden">
+							<h2 className="card-title uppercase text-2xl text-gray-400">
+								Past Games
+							</h2>
+							{
+								pastGamesData.length ? (
+									<table className="table w-full mt-3">
+										<thead>
+											<tr>
+												<th>WHEN</th>
+												<th>WHO</th>
+											</tr>
+										</thead>
+										<tbody>
+											{pastGamesData.map((x: any) => (
+												<tr
+													key={x.msAgo}
+												>
+													<td>{`${x.date} (${justDaysFormat(x.msAgo)} ago)`}</td>
+													<td>{x.who}</td>
 												</tr>
 											))}
 										</tbody>
