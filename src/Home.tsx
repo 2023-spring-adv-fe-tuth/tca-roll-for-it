@@ -233,15 +233,15 @@ export const Home: React.FC<HomeProps> = ({
 					<div className="card w-0 bg-base-100 shadow-xl grow">
 						<div className="card-body p-3 overflow-x-hidden">
 							<h2 className="card-title uppercase text-2xl text-gray-400">
-								Past Games
+								All Games
 							</h2>
 							{
 								pastGamesData.length ? (
-									<table className="table w-full mt-3">
+									<table className="table-fixed w-full mt-3">
 										<thead>
 											<tr>
-												<th>WHEN</th>
-												<th>WHO</th>
+												<th className="text-left">WHEN</th>
+												<th className="text-left">WHO</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -249,8 +249,8 @@ export const Home: React.FC<HomeProps> = ({
 												<tr
 													key={x.msAgo}
 												>
-													<td>{`${x.date} (${justDaysFormat(x.msAgo)} ago)`}</td>
-													<td>{x.who}</td>
+													<td className="text-left whitespace-nowrap align-top overflow-x-hidden">{`${x.date} (${justDaysFormat(x.msAgo)} ago)`}</td>
+													<td className="text-left">{x.who}</td>
 												</tr>
 											))}
 										</tbody>
