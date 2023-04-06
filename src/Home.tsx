@@ -237,7 +237,7 @@ export const Home: React.FC<HomeProps> = ({
 							</h2>
 							{
 								pastGamesData.length ? (
-									<table className="table-fixed w-full mt-3">
+									<table className="table w-full mt-3">
 										<thead>
 											<tr>
 												<th className="text-left">WHEN</th>
@@ -249,8 +249,8 @@ export const Home: React.FC<HomeProps> = ({
 												<tr
 													key={x.msAgo}
 												>
-													<td className="text-left whitespace-nowrap align-top overflow-x-hidden">{`${x.date} (${justDaysFormat(x.msAgo)} ago)`}</td>
-													<td className="text-left">{x.who}</td>
+													<td className="text-left whitespace-nowrap align-top text-ellipsis overflow-x-hidden">{`${x.date} (${justDaysFormat(x.msAgo)} ago)`}</td>
+													<td className="text-left whitespace-pre-wrap">{x.who}</td>
 												</tr>
 											))}
 										</tbody>
