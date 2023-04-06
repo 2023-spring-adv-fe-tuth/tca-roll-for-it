@@ -192,10 +192,24 @@ export const getWinningSequenceData = (results: GameResult[]) => {
 	const groupedByWinningSequenceString = winningSequences.reduce(
 		(acc, x) => acc.set(
 			x
-			, 0
+			, (acc.get(x) ?? 0) + 1
 		)
 		, new Map<string, number>
 	);
 
-	console.log("getWinninSequenceData", groupedByWinningSequenceString);
+	// console.log("getWinninSequenceData", groupedByWinningSequenceString);
+	return [...groupedByWinningSequenceString]
+		
+		.map(x => ({
+			winningSequence: x[0]
+			, wins: x[1]
+		}))
+
+		// Dummy data didn't have turns, so don't show it.
+		.filter(x => x.winningSequence.length > 0)
+		
+		.sort(
+			(a, b) => a.wins < b.wins ? 1 : -1
+		)
+	;
 };

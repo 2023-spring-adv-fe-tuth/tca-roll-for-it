@@ -146,6 +146,47 @@ export const Home: React.FC<HomeProps> = ({
 					<div className="card w-0 bg-base-100 shadow-xl grow">
 						<div className="card-body p-3 overflow-x-hidden">
 							<h2 className="card-title uppercase text-2xl text-gray-400">
+								Winning Sequences
+							</h2>
+							{
+								winningSequenceData.length ? (
+									<table className="table w-full mt-3">
+										<thead>
+											<tr>
+												<th>SEQUENCE</th>
+												<th># TIMES</th>
+											</tr>
+										</thead>
+										<tbody>
+											{winningSequenceData.map((x: any) => (
+												<tr
+													key={x.winningSequence}
+												>
+													<td>{x.winningSequence}</td>
+													<td>{x.wins}</td>
+												</tr>
+											))}
+										</tbody>
+									</table>							
+
+								) : (
+									<p
+										className="text-left"
+									>
+										No dice returned, yet ! ! !
+									</p>
+								)							
+							}
+						</div>
+					</div>
+				</div>  
+				<br />
+				<div
+					className="flex"
+				>
+					<div className="card w-0 bg-base-100 shadow-xl grow">
+						<div className="card-body p-3 overflow-x-hidden">
+							<h2 className="card-title uppercase text-2xl text-gray-400">
 								Frenemies
 							</h2>
 							{
@@ -177,18 +218,6 @@ export const Home: React.FC<HomeProps> = ({
 									</p>
 								)							
 							}
-						</div>
-					</div>
-				</div>  
-				<br />
-				<div
-					className="flex"
-				>
-					<div className="card w-0 bg-base-100 shadow-xl grow">
-						<div className="card-body p-3 overflow-x-hidden">
-							<h2 className="card-title uppercase text-2xl text-gray-400">
-								Winning Sequences
-							</h2>
 						</div>
 					</div>
 				</div>  
