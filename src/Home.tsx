@@ -167,7 +167,7 @@ export const Home: React.FC<HomeProps> = ({
 												<tr
 													key={x.winningSequence}
 												>
-													<td>{x.winningSequence}</td>
+													<td className="whitespace-pre-wrap">{x.winningSequence}</td>
 													<td>{x.wins}</td>
 												</tr>
 											))}
