@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/tca-roll-for-it/static/css/main.d88391a5.css",
-    "main.js": "/tca-roll-for-it/static/js/main.03ca4dd6.js",
+    "main.css": "/tca-roll-for-it/static/css/main.e8b0c8c1.css",
+    "main.js": "/tca-roll-for-it/static/js/main.8baaaed3.js",
     "static/js/787.b02ed5da.chunk.js": "/tca-roll-for-it/static/js/787.b02ed5da.chunk.js",
     "index.html": "/tca-roll-for-it/index.html",
-    "main.d88391a5.css.map": "/tca-roll-for-it/static/css/main.d88391a5.css.map",
-    "main.03ca4dd6.js.map": "/tca-roll-for-it/static/js/main.03ca4dd6.js.map",
+    "main.e8b0c8c1.css.map": "/tca-roll-for-it/static/css/main.e8b0c8c1.css.map",
+    "main.8baaaed3.js.map": "/tca-roll-for-it/static/js/main.8baaaed3.js.map",
     "787.b02ed5da.chunk.js.map": "/tca-roll-for-it/static/js/787.b02ed5da.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d88391a5.css",
-    "static/js/main.03ca4dd6.js"
+    "static/css/main.e8b0c8c1.css",
+    "static/js/main.8baaaed3.js"
   ]
 }
