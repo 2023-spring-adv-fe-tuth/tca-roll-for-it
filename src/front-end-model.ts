@@ -164,7 +164,7 @@ export const getFrenemiesData = (results: GameResult[]) => {
 			, [
 				...x[1].reduce(
 					(acc, y) => acc.set(
-						x[0] + " > " + y
+						x[0] + " -> " + y
 						, (acc.get(x[0] + " > " + y) ?? 0) + 1
 					)
 					, new Map<string, number>()

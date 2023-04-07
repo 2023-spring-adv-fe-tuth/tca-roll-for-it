@@ -65,6 +65,59 @@ export const Home: React.FC<HomeProps> = ({
 				>
 					<div className="card w-0 bg-base-100 shadow-xl grow">
 						<div className="card-body p-3 overflow-x-hidden">
+							<h2 className="card-title uppercase text-2xl text-gray-400">
+								General
+							</h2>
+							<p
+								className="text-xl font-light text-left mt-1 ml-3"
+							>
+								Last played&nbsp;
+								<span
+									className="font-semibold mr-1"
+								>
+									{`${justDaysFormat(hmmData.lastPlayedMsAgo)}`}
+								</span> 
+								ago
+							</p>
+							<p
+								className="text-xl font-light text-left mt-1 ml-3"
+							>
+								<span
+									className="font-semibold mr-1"
+								>
+									{hmmData.totalGamesPlayed}
+								</span> 
+								total games
+							</p>
+							<p
+								className="text-xl font-light text-left mt-1 ml-3"
+							>
+								Shortest game ever was&nbsp;
+								<span
+									className="font-semibold mr-1"
+								>
+									{`${format(shortestGame)}`}
+								</span> 
+							</p>
+							<p
+								className="text-xl font-light text-left ml-3 mb-3"
+							>
+								Longest game ever was&nbsp;
+								<span
+									className="font-semibold mr-1"
+								>
+									{`${format(longestGame)}`}
+								</span> 
+							</p>
+						</div>						
+					</div>
+				</div>
+				<br />
+				<div
+					className="flex"
+				>
+					<div className="card w-0 bg-base-100 shadow-xl grow">
+						<div className="card-body p-3 overflow-x-hidden">
 							<h2 className="card-title uppercase text-2xl text-gray-400">Leaderboard</h2>
 							<table className="table w-full mt-3">
 								<thead>
@@ -104,49 +157,7 @@ export const Home: React.FC<HomeProps> = ({
 				>
 					<div className="card w-0 bg-base-100 shadow-xl grow">
 						<div className="card-body p-3 overflow-x-hidden">
-							<h2 className="card-title uppercase text-2xl text-gray-400">
-								Hmm...
-							</h2>
-							<div className="stats stats-vertical shadow text-left">
-								<div className="stat">
-									<div className="stat-title text-xl">Last Played</div>
-									<div className="stat-value font-semibold">{`${justDaysFormat(hmmData.lastPlayedMsAgo)} ago`}</div>
-								</div>
-								<div className="stat">
-									<div className="stat-title text-xl">Total Games Played</div>
-									<div className="stat-value font-semibold">{hmmData.totalGamesPlayed}</div>
-								</div>
-							</div>							
-						</div>
-					</div>
-				</div>
-				<br />
-				<div
-					className="flex"
-				>
-					<div className="card w-0 bg-base-100 shadow-xl grow">
-						<div className="card-body p-3 overflow-x-hidden">
-							<h2 className="card-title uppercase text-2xl text-gray-400">Game Time Facts</h2>
-							<p
-								className="text-md font-light text-left mt-1 ml-3"
-							>
-								<span
-									className="font-semibold mr-1"
-								>
-									{`${format(shortestGame)}`}
-								</span> 
-								shortest game ever
-							</p>
-							<p
-								className="text-md font-light text-left ml-3"
-							>
-								<span
-									className="font-semibold mr-1"
-								>
-									{`${format(longestGame)}`}
-								</span> 
-								longest game ever
-							</p>
+							<h2 className="card-title uppercase text-2xl text-gray-400">Average Game Times</h2>
 							<table className="table w-full mt-3">
 								<thead>
 									<tr>
@@ -216,14 +227,14 @@ export const Home: React.FC<HomeProps> = ({
 					<div className="card w-0 bg-base-100 shadow-xl grow">
 						<div className="card-body p-3 overflow-x-hidden">
 							<h2 className="card-title uppercase text-2xl text-gray-400">
-								Frenemies
+								Returned Dice
 							</h2>
 							{
 								frenemiesData.length ? (
 									<table className="table w-full mt-3">
 										<thead>
 											<tr>
-												<th>Who &gt; Whom</th>
+												<th>Who -&gt; Whom</th>
 												<th># TIMES</th>
 											</tr>
 										</thead>
