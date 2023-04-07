@@ -68,7 +68,7 @@ export const Home: React.FC<HomeProps> = ({
 							<h2 className="card-title uppercase text-2xl text-gray-400">
 								General
 							</h2>
-							<table className="table w-full mt-3">
+							<table className="table w-full mt-1">
 								<tbody>
 									<tr>
 										<td>
