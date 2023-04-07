@@ -68,47 +68,42 @@ export const Home: React.FC<HomeProps> = ({
 							<h2 className="card-title uppercase text-2xl text-gray-400">
 								General
 							</h2>
-							<p
-								className="text-xl font-light text-left mt-1 ml-3"
-							>
-								Last played&nbsp;
-								<span
-									className="font-semibold mr-1"
-								>
-									{`${justDaysFormat(hmmData.lastPlayedMsAgo)}`}
-								</span> 
-								ago
-							</p>
-							<p
-								className="text-xl font-light text-left mt-1 ml-3"
-							>
-								<span
-									className="font-semibold mr-1"
-								>
-									{hmmData.totalGamesPlayed}
-								</span> 
-								total games
-							</p>
-							<p
-								className="text-xl font-light text-left mt-1 ml-3"
-							>
-								Shortest game ever was&nbsp;
-								<span
-									className="font-semibold mr-1"
-								>
-									{`${format(shortestGame)}`}
-								</span> 
-							</p>
-							<p
-								className="text-xl font-light text-left ml-3 mb-3"
-							>
-								Longest game ever was&nbsp;
-								<span
-									className="font-semibold mr-1"
-								>
-									{`${format(longestGame)}`}
-								</span> 
-							</p>
+							<table className="table w-full mt-3">
+								<tbody>
+									<tr>
+										<td>
+											Last Played
+										</td>
+										<th>
+											{`${justDaysFormat(hmmData.lastPlayedMsAgo)} ago`}
+										</th>
+									</tr>
+									<tr>
+										<td>
+											Total Games
+										</td>
+										<th>
+											{hmmData.totalGamesPlayed}
+										</th>
+									</tr>
+									<tr>
+										<td>
+											Shortest Game
+										</td>
+										<th>
+											{`${format(shortestGame)}`}
+										</th>
+									</tr>
+									<tr>
+										<td>
+											Longest Game
+										</td>
+										<th>
+											{`${format(longestGame)}`}
+										</th>
+									</tr>
+								</tbody>
+							</table>							
 						</div>						
 					</div>
 				</div>
