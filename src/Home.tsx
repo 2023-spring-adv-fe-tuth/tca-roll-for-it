@@ -284,8 +284,17 @@ export const Home: React.FC<HomeProps> = ({
 												<tr
 													key={x.msAgo}
 												>
-													<td className="text-left whitespace-nowrap align-top text-ellipsis overflow-x-hidden">{`${x.date} (${justDaysFormat(x.msAgo)} ago)`}</td>
-													<td className="text-left whitespace-pre-wrap">{x.who}</td>
+													<td className="text-left whitespace-nowrap align-top text-ellipsis overflow-x-hidden">
+														<p>
+															{`${x.date}`}
+														</p>
+														<p
+															className="text-xs"
+														>
+															{`${justDaysFormat(x.msAgo)} ago`}
+														</p>
+													</td>
+													<td className="text-left whitespace-pre-wrap align-top">{x.who}</td>
 												</tr>
 											))}
 										</tbody>
