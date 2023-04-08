@@ -55,6 +55,10 @@ export const Home: React.FC<HomeProps> = ({
 		return total < 40;
 	}; 
 
+	// console.log(
+	// 	hmmData
+	// );
+
 	return (
 		<div
 			className=""
@@ -91,7 +95,11 @@ export const Home: React.FC<HomeProps> = ({
 											Last Played
 										</td>
 										<th>
-											{`${justDaysFormat(hmmData.lastPlayedMsAgo)} ago`}
+											{
+												Number.isInteger(hmmData.lastPlayedMsAgo)
+												? `${justDaysFormat(hmmData.lastPlayedMsAgo)} ago`
+												: 'Never'
+											}
 										</th>
 									</tr>
 									<tr>
@@ -107,7 +115,11 @@ export const Home: React.FC<HomeProps> = ({
 											Shortest Game
 										</td>
 										<th>
-											{`${format(shortestGame)}`}
+											{
+												Number.isInteger(shortestGame)
+												? `${format(shortestGame)}`
+												: 'n/a'
+											}
 										</th>
 									</tr>
 									<tr>
@@ -115,7 +127,11 @@ export const Home: React.FC<HomeProps> = ({
 											Longest Game
 										</td>
 										<th>
-											{`${format(longestGame)}`}
+										{
+												Number.isInteger(longestGame)
+												? `${format(longestGame)}`
+												: 'n/a'
+											}
 										</th>
 									</tr>
 								</tbody>
@@ -129,36 +145,50 @@ export const Home: React.FC<HomeProps> = ({
 				>
 					<div className="card w-0 bg-base-100 shadow-xl grow">
 						<div className="card-body p-3 overflow-x-hidden">
-							<h2 className="card-title whitespace-nowrap uppercase text-2xl text-gray-400">Leaderboard</h2>
-							<table className="table w-full mt-3">
-								<thead>
-									<tr>
-										<th>
-											W
-										</th>
-										<th>
-											L
-										</th>
-										<th>
-											AVG
-										</th>
-										<th>
-										</th>
-									</tr>
-								</thead>
-								<tbody>
-									{leaderBoardData.map(x => (
-										<tr
-											key={x.name}
-										>
-											<td>{x.wins}</td>
-											<td>{x.losses}</td>
-											<td>{x.avg}</td>
-											<td>{x.name}</td>
-										</tr>
-									))}
-								</tbody>
-							</table>
+							<h2 className="card-title whitespace-nowrap uppercase text-2xl text-gray-400">
+								Leaderboard
+							</h2>
+							{
+								leaderBoardData.length > 0
+								? (
+									<table className="table w-full mt-3">
+										<thead>
+											<tr>
+												<th>
+													W
+												</th>
+												<th>
+													L
+												</th>
+												<th>
+													AVG
+												</th>
+												<th>
+												</th>
+											</tr>
+										</thead>
+										<tbody>
+											{leaderBoardData.map(x => (
+												<tr
+													key={x.name}
+												>
+													<td>{x.wins}</td>
+													<td>{x.losses}</td>
+													<td>{x.avg}</td>
+													<td>{x.name}</td>
+												</tr>
+											))}
+										</tbody>
+									</table>
+								)
+								: (
+									<p
+										className="text-left"
+									>
+										No leaderboard until you play a game...
+									</p>
+								)		
+							}
 						</div>
 					</div>
 				</div>
@@ -168,25 +198,39 @@ export const Home: React.FC<HomeProps> = ({
 				>
 					<div className="card w-0 bg-base-100 shadow-xl grow">
 						<div className="card-body p-3 overflow-x-hidden">
-							<h2 className="card-title whitespace-nowrap uppercase text-2xl text-gray-400">Average Game Times</h2>
-							<table className="table w-full mt-3">
-								<thead>
-									<tr>
-										<th># PLAYERS</th>
-										<th>AVG GAME LENGTH</th>
-									</tr>
-								</thead>
-								<tbody>
-									{avgGameLengths.map(x => (
-										<tr
-											key={x.playerCount}
-										>
-											<td>{x.playerCount}</td>
-											<td>{`${format(x.avgTime)}`}</td>
-										</tr>
-									))}
-								</tbody>
-							</table>
+							<h2 className="card-title whitespace-nowrap uppercase text-2xl text-gray-400">
+								Average Game Times
+							</h2>
+							{
+								avgGameLengths.length > 0
+								? (
+									<table className="table w-full mt-3">
+										<thead>
+											<tr>
+												<th># PLAYERS</th>
+												<th>AVG GAME LENGTH</th>
+											</tr>
+										</thead>
+										<tbody>
+											{avgGameLengths.map(x => (
+												<tr
+													key={x.playerCount}
+												>
+													<td>{x.playerCount}</td>
+													<td>{`${format(x.avgTime)}`}</td>
+												</tr>
+											))}
+										</tbody>
+									</table>
+								)
+								: (
+									<p
+										className="text-left"
+									>
+										Play some games...
+									</p>
+								)		
+							}
 						</div>
 					</div>
 				</div>
@@ -229,7 +273,7 @@ export const Home: React.FC<HomeProps> = ({
 									<p
 										className="text-left"
 									>
-										No dice returned, yet ! ! !
+										Play some games and see if a pattern emerges...
 									</p>
 								)							
 							}
@@ -270,7 +314,7 @@ export const Home: React.FC<HomeProps> = ({
 									<p
 										className="text-left"
 									>
-										No dice returned, yet ! ! !
+										No games, no dice returned, yet...
 									</p>
 								)							
 							}
@@ -320,7 +364,7 @@ export const Home: React.FC<HomeProps> = ({
 									<p
 										className="text-left"
 									>
-										No dice returned, yet ! ! !
+										Play a game of Roll for It!
 									</p>
 								)							
 							}

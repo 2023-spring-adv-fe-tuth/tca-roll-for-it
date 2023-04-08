@@ -408,6 +408,7 @@ function App() {
 	const [darkMode, setDarkMode] = useState(false);
 
 	const [gameResults, setGameResults] = useState(hardCodedGameResults);
+	// const [gameResults, setGameResults] = useState<GameResult[]>([]);
 	console.log(gameResults);
 
 	const [setupInfo, setSetupInfo] = useState<SetupInfo>({
