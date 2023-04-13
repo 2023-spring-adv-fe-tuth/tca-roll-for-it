@@ -593,7 +593,8 @@ function App() {
 					/>
 				</Routes>
 			</HashRouter>
-			<Modal 
+			<Modal
+				responsive={true}
 				open={showEmailModal} 
 				onClickBackdrop={() => setShowEmailModal(false)}
 			>
