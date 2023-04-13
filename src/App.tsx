@@ -411,7 +411,9 @@ const hardCodedGameResults: GameResult[] = [
 
 function App() {
 	
-	const [darkMode, setDarkMode] = useState(false);
+	const [settings, setSettings] = useState<Settings>({
+		darkMode: false
+	});
 
 	const [gameResults, setGameResults] = useState(hardCodedGameResults);
 	// const [gameResults, setGameResults] = useState<GameResult[]>([]);
@@ -431,12 +433,15 @@ function App() {
 		() => {
 			const loadSettings = async () => {
 				const s = await localForage.getItem<Settings>("settings");
-				setDarkMode(s?.darkMode ?? false);
+				setSettings({
+					...settings
+					, darkMode: s?.darkMode ?? false
+			});
 			};
 
 			loadSettings();
 		}
-		, [darkMode]
+		, [settings]
 	);
 
 	const addGameResult = (result: GameResult) => setGameResults(
@@ -454,17 +459,20 @@ function App() {
 			}
 		);
 
-		setDarkMode(s.darkMode);
+		setSettings({
+			...settings
+			, darkMode: dark
+		});
 	};
 
 	return (
 		<div
 			className="App"
-			data-theme={darkMode ? "dark" : "light"}
+			data-theme={settings.darkMode ? "dark" : "light"}
 		>
 			<div className="navbar bg-base-200">
 				<button 
-					className={`btn btn-link ${darkMode ? 'text-gray-400' : 'text-black'}`}
+					className={`btn btn-link ${settings.darkMode ? 'text-gray-400' : 'text-black'}`}
 					onClick={() => setDiceValue(Math.floor(Math.random() * (6 - 1 + 1) + 1))}
 				>
 					<div className="flex-none">
