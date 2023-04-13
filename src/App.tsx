@@ -420,6 +420,7 @@ function App() {
 	});
 
 	const [showEmailModal, setShowEmailModal] = useState(false);
+	const [emailOnModal, setEmailOnModal] = useState("");
 
 	const [gameResults, setGameResults] = useState(hardCodedGameResults);
 	// const [gameResults, setGameResults] = useState<GameResult[]>([]);
@@ -440,10 +441,12 @@ function App() {
 			const loadSettings = async () => {
 				const s = await localForage.getItem<Settings>("settings");
 				setSettings({
-					...settings
-					, darkMode: s?.darkMode ?? false
-			});
-			};
+					darkMode: s?.darkMode ?? false
+					, email: s?.email ?? ""
+				});
+
+				// setEmailOnModal(s?.email ?? "");
+		};
 
 			loadSettings();
 		}
@@ -470,6 +473,23 @@ function App() {
 			...settings
 			, darkMode: dark
 		});
+	};
+
+	const updateEmail = async () => {
+		const s = await localForage.setItem(
+			"settings"
+			, {
+				...settings
+				, email: emailOnModal
+			}
+		);
+
+		setSettings({
+			...settings
+			, email: emailOnModal
+		});
+
+		setShowEmailModal(false);
 	};
 
 	return (
@@ -603,11 +623,23 @@ function App() {
 				open={showEmailModal} 
 				onClickBackdrop={() => setShowEmailModal(false)}
 			>
-				<p>
-				Enim dolorem dolorum omnis atque necessitatibus. Consequatur aut
-				adipisci qui iusto illo eaque. Consequatur repudiandae et. Nulla ea
-				quasi eligendi. Saepe velit autem minima.
-				</p>
+				<div className="form-control">
+					<div className="input-group mt-3">
+						<input
+							type="text"
+							placeholder="Email for saving games"
+							className="input input-bordered grow w-0"
+							value={emailOnModal}
+							onChange={(e) => setEmailOnModal(e.target.value)}
+						/>
+						<button
+							className="btn btn-primary"
+							onClick={updateEmail}
+						>
+							Update
+						</button>
+					</div>
+				</div>
 			</Modal>
 		</div>
 	);
