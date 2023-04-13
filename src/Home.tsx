@@ -55,10 +55,6 @@ export const Home: React.FC<HomeProps> = ({
 		return total < 40;
 	}; 
 
-	// console.log(
-	// 	hmmData
-	// );
-
 	return (
 		<div
 			className=""
