@@ -36,8 +36,6 @@ interface Settings {
 	email: string;
 }
 
-const cat = () => console.log("Meow");
-
 const hardCodedGameResults: GameResult[] = [
 	{
 		winner: "Tom"
@@ -439,18 +437,22 @@ function App() {
 	useEffect(
 		() => {
 			const loadSettings = async () => {
+				console.log("loadSettings()...");
 				const s = await localForage.getItem<Settings>("settings");
 				setSettings({
 					darkMode: s?.darkMode ?? false
 					, email: s?.email ?? ""
 				});
 
-				// setEmailOnModal(s?.email ?? "");
-		};
+				setEmailOnModal(s?.email ?? "");
+			};
 
 			loadSettings();
+			console.log(settings.email.length)
+			console.log(settingsLoading)
+			setShowEmailModal(settings.email.length == 0);
 		}
-		, [settings]
+		, [settings.email]
 	);
 
 	const addGameResult = (result: GameResult) => setGameResults(
@@ -476,6 +478,11 @@ function App() {
 	};
 
 	const updateEmail = async () => {
+
+		if (emailOnModal.length == 0) {
+			return;
+		}
+
 		const s = await localForage.setItem(
 			"settings"
 			, {
@@ -601,8 +608,6 @@ function App() {
 								availablePlayers={getPreviousPlayers(gameResults)}
 								setSetupInfo={setSetupInfo}
 								setTitle={setTitle}
-								foo={`${1 + 1}`}
-								cat={cat}
 							/>
 						}
 					/>
@@ -621,7 +626,7 @@ function App() {
 			<Modal
 				responsive={true}
 				open={showEmailModal} 
-				onClickBackdrop={() => setShowEmailModal(false)}
+				// onClickBackdrop={() => setShowEmailModal(false)}
 			>
 				<div className="form-control">
 					<div className="input-group mt-3">
