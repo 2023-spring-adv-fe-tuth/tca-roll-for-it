@@ -35,6 +35,7 @@ interface Settings {
 	darkMode: boolean;
 	email: string;
 	showLess: boolean;
+	number: number;
 }
 
 const hardCodedGameResults: GameResult[] = [
@@ -411,13 +412,16 @@ const hardCodedGameResults: GameResult[] = [
 	}	
 ];
 
+const defaultSettings = {
+	darkMode: false
+	, email: ""
+	, showLess: false
+	, number: 50
+};
+
 function App() {
 	
-	const [settings, setSettings] = useState<Settings>({
-		darkMode: false
-		, email: ""
-		, showLess: false
-	});
+	const [settings, setSettings] = useState<Settings>(defaultSettings);
 
 	const [showEmailModal, setShowEmailModal] = useState(false);
 	const [emailOnModal, setEmailOnModal] = useState("");
@@ -444,8 +448,9 @@ function App() {
 				
 				const s = await localForage.getItem<Settings>("settings");
 				
-				setSettings(s ?? {darkMode: false, email: "", showLess: false});
+				setSettings(s ?? defaultSettings);
 				setEmailOnModal(s?.email ?? "");
+				setNumberOnModal(s?.number ?? 50);
 				setShowEmailModal((s?.email ?? "").length == 0);
 			};
 
@@ -484,6 +489,7 @@ function App() {
 			, {
 				...settings
 				, email: emailOnModal
+				, number: numberOnModal
 			}
 		);
 
