@@ -421,6 +421,7 @@ function App() {
 
 	const [showEmailModal, setShowEmailModal] = useState(false);
 	const [emailOnModal, setEmailOnModal] = useState("");
+	const [numberOnModal, setNumberOnModal] = useState(50);
 
 	const [gameResults, setGameResults] = useState(hardCodedGameResults);
 	// const [gameResults, setGameResults] = useState<GameResult[]>([]);
@@ -664,6 +665,29 @@ function App() {
 							</svg>
 						</button>
 					</div>
+					<p
+						className='mt-5 text-left text-xs ml-2 font-light whitespace-nowrap overflow-hidden text-ellipsis'
+					>
+						And pick a number to help ensure uniqueness:
+					</p>					
+					<p
+						className='text-left text-xs ml-2 font-bold whitespace-nowrap overflow-hidden text-ellipsis mt-2'
+					>
+						{numberOnModal}
+					</p>
+					<input 
+						type="range" 
+						min="0" 
+						max="100" 
+						value={numberOnModal}
+						onChange={(e) => setNumberOnModal(Number(e.target.value))} 
+						className="mt-2 range range-xs range-primary mb-2" 
+					/>
+					<p
+						className='text-left text-md font-bold overflow-hidden mt-2'
+					>
+						Use Email &amp; Number to access data from other devices/browsers
+					</p>
 				</div>
 			</Modal>
 		</div>
