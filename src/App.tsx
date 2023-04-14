@@ -448,8 +448,6 @@ function App() {
 			};
 
 			loadSettings();
-			console.log(settings.email.length)
-			console.log(settingsLoading)
 			setShowEmailModal(settings.email.length == 0);
 		}
 		, [settings.email]
