@@ -33,7 +33,7 @@ import { Modal } from 'react-daisyui';
 
 interface Settings {
 	darkMode: boolean;
-	email: string;
+	username: string;
 	showLess: boolean;
 	number: number;
 }
@@ -414,7 +414,7 @@ const hardCodedGameResults: GameResult[] = [
 
 const defaultSettings = {
 	darkMode: false
-	, email: ""
+	, username: ""
 	, showLess: false
 	, number: 50
 };
@@ -423,8 +423,8 @@ function App() {
 	
 	const [settings, setSettings] = useState<Settings>(defaultSettings);
 
-	const [showEmailModal, setShowEmailModal] = useState(false);
-	const [emailOnModal, setEmailOnModal] = useState("");
+	const [showUsernameModal, setShowUsernameModal] = useState(false);
+	const [usernameOnModal, setUsernameOnModal] = useState("");
 	const [numberOnModal, setNumberOnModal] = useState(50);
 
 	const [gameResults, setGameResults] = useState(hardCodedGameResults);
@@ -449,14 +449,14 @@ function App() {
 				const s = await localForage.getItem<Settings>("settings");
 				
 				setSettings(s ?? defaultSettings);
-				setEmailOnModal(s?.email ?? "");
+				setUsernameOnModal(s?.username ?? "");
 				setNumberOnModal(s?.number ?? 50);
-				setShowEmailModal((s?.email ?? "").length == 0);
+				setShowUsernameModal((s?.username ?? "").length == 0);
 			};
 
 			loadSettings();
 		}
-		, [settings.email]
+		, [settings.username]
 	);
 
 	const addGameResult = (result: GameResult) => setGameResults(
@@ -480,7 +480,7 @@ function App() {
 
 	const updateEmail = async () => {
 
-		if (emailOnModal.length == 0) {
+		if (usernameOnModal.length == 0) {
 			return;
 		}
 
@@ -488,13 +488,13 @@ function App() {
 			"settings"
 			, {
 				...settings
-				, email: emailOnModal
+				, username: usernameOnModal
 				, number: numberOnModal
 			}
 		);
 
 		setSettings(s);
-		setShowEmailModal(false);
+		setShowUsernameModal(false);
 	};
 
 	const updateShowLess = async (less: boolean) => {
@@ -574,7 +574,7 @@ function App() {
 					title == "Roll for It" && (
 						<div 
 							className='flex-none mr-5'
-							onClick={() => setShowEmailModal(true)}
+							onClick={() => setShowUsernameModal(true)}
 						>
 							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
 								<path d="M11 5a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm.256 7a4.474 4.474 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10c.26 0 .507.009.74.025.226-.341.496-.65.804-.918C9.077 9.038 8.564 9 8 9c-5 0-6 3-6 4s1 1 1 1h5.256Zm3.63-4.54c.18-.613 1.048-.613 1.229 0l.043.148a.64.64 0 0 0 .921.382l.136-.074c.561-.306 1.175.308.87.869l-.075.136a.64.64 0 0 0 .382.92l.149.045c.612.18.612 1.048 0 1.229l-.15.043a.64.64 0 0 0-.38.921l.074.136c.305.561-.309 1.175-.87.87l-.136-.075a.64.64 0 0 0-.92.382l-.045.149c-.18.612-1.048.612-1.229 0l-.043-.15a.64.64 0 0 0-.921-.38l-.136.074c-.561.305-1.175-.309-.87-.87l.075-.136a.64.64 0 0 0-.382-.92l-.148-.045c-.613-.18-.613-1.048 0-1.229l.148-.043a.64.64 0 0 0 .382-.921l-.074-.136c-.306-.561.308-1.175.869-.87l.136.075a.64.64 0 0 0 .92-.382l.045-.148ZM14 12.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0Z"/>
@@ -639,7 +639,7 @@ function App() {
 			</HashRouter>
 			<Modal
 				responsive={true}
-				open={showEmailModal} 
+				open={showUsernameModal} 
 				// onClickBackdrop={() => setShowEmailModal(false)}
 				className='overflow-hidden'
 			>
@@ -647,29 +647,16 @@ function App() {
 					<p
 						className='text-left text-xs ml-2 font-light whitespace-nowrap overflow-hidden text-ellipsis'
 					>
-						Email for loading &amp; saving game results:
+						Username:
 					</p>
-					<p
-						className='text-left text-xs ml-2 font-bold whitespace-nowrap overflow-hidden text-ellipsis mt-2'
-					>
-						{emailOnModal.length > 0 ? emailOnModal : <span><sup>*</sup>Required, no spam, not shared</span>}
-					</p>
-					<div className="input-group mt-3">
+					<div className="mt-3">
 						<input
 							type="text"
-							placeholder="Email address"
-							className="input input-bordered grow w-0"
-							value={emailOnModal}
-							onChange={(e) => setEmailOnModal(e.target.value)}
+							placeholder="Enter username"
+							className="input input-bordered w-full"
+							value={usernameOnModal}
+							onChange={(e) => setUsernameOnModal(e.target.value)}
 						/>
-						<button
-							className="btn btn-primary"
-							onClick={updateEmail}
-						>
-							<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16">
-								<path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
-							</svg>
-						</button>
 					</div>
 					<p
 						className='mt-5 text-left text-xs ml-2 font-light whitespace-nowrap overflow-hidden text-ellipsis'
@@ -692,8 +679,16 @@ function App() {
 					<p
 						className='text-left text-md font-bold overflow-hidden mt-2'
 					>
-						Use Email &amp; Number to access data from other devices/browsers
+						Use <span className='text-primary'>Username + Number</span> to access data from other browsers and devices
 					</p>
+					<button
+						className="btn btn-primary my-5 mb-0"
+						onClick={updateEmail}
+					>
+						<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 16 16">
+							<path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425a.247.247 0 0 1 .02-.022Z"/>
+						</svg>
+					</button>					
 				</div>
 			</Modal>
 		</div>
