@@ -641,7 +641,6 @@ function App() {
 				responsive={true}
 				open={showUsernameModal} 
 				// onClickBackdrop={() => setShowEmailModal(false)}
-				className='overflow-hidden'
 			>
 				<div className="form-control">
 					<p
@@ -661,7 +660,7 @@ function App() {
 					<p
 						className='mt-5 text-left text-xs ml-2 font-light whitespace-nowrap overflow-hidden text-ellipsis'
 					>
-						And pick a number to help ensure uniqueness:
+						Pick a number to help ensure uniqueness:
 					</p>					
 					<p
 						className='text-left text-xs ml-2 font-bold whitespace-nowrap overflow-hidden text-ellipsis mt-2'
