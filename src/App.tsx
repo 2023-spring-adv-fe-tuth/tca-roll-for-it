@@ -34,6 +34,7 @@ import { Modal } from 'react-daisyui';
 interface Settings {
 	darkMode: boolean;
 	email: string;
+	showLess: boolean;
 }
 
 const hardCodedGameResults: GameResult[] = [
@@ -415,6 +416,7 @@ function App() {
 	const [settings, setSettings] = useState<Settings>({
 		darkMode: false
 		, email: ""
+		, showLess: false
 	});
 
 	const [showEmailModal, setShowEmailModal] = useState(false);
@@ -441,7 +443,7 @@ function App() {
 				
 				const s = await localForage.getItem<Settings>("settings");
 				
-				setSettings(s ?? {darkMode: false, email: ""});
+				setSettings(s ?? {darkMode: false, email: "", showLess: false});
 				setEmailOnModal(s?.email ?? "");
 				setShowEmailModal((s?.email ?? "").length == 0);
 			};
@@ -486,6 +488,19 @@ function App() {
 
 		setSettings(s);
 		setShowEmailModal(false);
+	};
+
+	const updateShowLess = async (less: boolean) => {
+
+		const s = await localForage.setItem(
+			"settings"
+			, {
+				...settings
+				, showLess: less
+			}
+		);
+
+		setSettings(s);
 	};
 
 	return (
@@ -608,6 +623,8 @@ function App() {
 								setupInfo={setupInfo}
 								addGameResult={addGameResult}
 								setTitle={setTitle}
+								showLess={settings.showLess}
+								setShowLess={updateShowLess}
 							/>
 						}
 					/>

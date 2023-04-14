@@ -14,6 +14,8 @@ interface PlayProps {
 	setupInfo: SetupInfo;
 	addGameResult: (r: GameResult) => void;
 	setTitle: (title: string) => void;
+	showLess: boolean;
+	setShowLess: any;
 }
 
 enum ShowDrawerReason {
@@ -26,6 +28,8 @@ export const Play: React.FC<PlayProps> = ({
 	setupInfo
 	, addGameResult
 	, setTitle
+	, showLess
+	, setShowLess
 }) => {
 
 	console.log(setupInfo.start);
@@ -44,9 +48,6 @@ export const Play: React.FC<PlayProps> = ({
 
 	const [turns, setTurns]
 		= useState<GamePlayerTurn[]>([]);
-
-	const [showLess, setShowLess]
-		= useState(false);
 
 	const [returnedTo, setReturnedTo] =
 		useState<string[]>([]);
