@@ -643,9 +643,9 @@ function App() {
 						Email for loading &amp; saving game results:
 					</p>
 					<p
-						className='text-left text-xs ml-2 font-bold whitespace-nowrap overflow-hidden text-ellipsis'
+						className='text-left text-xs ml-2 font-bold whitespace-nowrap overflow-hidden text-ellipsis mt-2'
 					>
-						{emailOnModal.length > 0 ? emailOnModal : "none"}
+						{emailOnModal.length > 0 ? emailOnModal : <span><sup>*</sup>Required, no spam, not shared</span>}
 					</p>
 					<div className="input-group mt-3">
 						<input
