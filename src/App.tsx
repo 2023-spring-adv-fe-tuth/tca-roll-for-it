@@ -679,7 +679,7 @@ function App() {
 					<p
 						className='text-left text-md font-bold overflow-hidden mt-2'
 					>
-						Use <span className='text-primary'>Username + Number</span> to access data from other browsers and devices
+						Remember <span className='text-primary'>Username + Number</span> to access data from other browsers and devices
 					</p>
 					<button
 						className="btn btn-primary my-5 mb-0"
