@@ -617,15 +617,16 @@ function App() {
 				responsive={true}
 				open={showEmailModal} 
 				// onClickBackdrop={() => setShowEmailModal(false)}
+				className='overflow-hidden'
 			>
 				<div className="form-control">
 					<p
-						className='text-left text-xs ml-2 font-light'
+						className='text-left text-xs ml-2 font-light whitespace-nowrap overflow-hidden text-ellipsis'
 					>
 						Email for loading &amp; saving game results:
 					</p>
 					<p
-						className='text-left text-xs ml-2 font-bold'
+						className='text-left text-xs ml-2 font-bold whitespace-nowrap overflow-hidden text-ellipsis'
 					>
 						{emailOnModal.length > 0 ? emailOnModal : "none"}
 					</p>
