@@ -619,10 +619,20 @@ function App() {
 				// onClickBackdrop={() => setShowEmailModal(false)}
 			>
 				<div className="form-control">
+					<p
+						className='text-left text-xs ml-2 font-light'
+					>
+						Email for loading &amp; saving game results:
+					</p>
+					<p
+						className='text-left text-xs ml-2 font-bold'
+					>
+						{emailOnModal.length > 0 ? emailOnModal : "none"}
+					</p>
 					<div className="input-group mt-3">
 						<input
 							type="text"
-							placeholder="Email for saving games"
+							placeholder="Email address"
 							className="input input-bordered grow w-0"
 							value={emailOnModal}
 							onChange={(e) => setEmailOnModal(e.target.value)}
