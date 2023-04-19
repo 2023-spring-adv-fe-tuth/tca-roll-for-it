@@ -31,6 +31,7 @@ import localForage from 'localforage';
 
 import { Modal } from 'react-daisyui';
 
+import { saveGameToCloud, loadGamesFromCloud } from './tca-cloud-api';
 interface Settings {
 	darkMode: boolean;
 	username: string;
@@ -39,56 +40,6 @@ interface Settings {
 }
 
 const hardCodedGameResults: GameResult[] = [
-	{
-		winner: "Tom"
-		, players: [{ name: "Tom", order: 0 }, { name: "Taylor", order: 0 }]
-		, start: "2023-03-07T09:18:00.000"
-		, end: "2023-03-07T09:19:58.000"
-		, turns: []
-
-	}
-	, {
-		winner: "Taylor"
-		, players: [{ name: "Jack", order: 0 }, { name: "Taylor", order: 0 }]
-		, start: "2023-03-07T09:20:00.000"
-		, end: "2023-03-07T09:40:00.000"
-		, turns: []
-	}
-	, {
-		winner: "Taylor"
-		, players: [{ name: "Tom", order: 0 }, { name: "Taylor", order: 0 }, { name: "Jack", order: 0 }]
-		, start: "2023-03-07T09:45:00.000"
-		, end: "2023-03-07T09:51:00.000"
-		, turns: []
-	}
-	, {
-		winner: "X"
-		, players: [{ name: "X", order: 0 }, { name: "Joe", order: 0 }]
-		, start: "2023-03-07T10:00:00.000"
-		, end: "2023-03-07T10:05:00.000"
-		, turns: []
-	}
-	, {
-		winner: "X"
-		, players: [{ name: "X", order: 0 }, { name: "Joe", order: 0 }]
-		, start: "2023-03-07T10:20:00.000"
-		, end: "2023-03-07T10:50:00.000"
-		, turns: []
-	}
-	, {
-		winner: "Joe"
-		, players: [{ name: "X", order: 0 }, { name: "Joe", order: 0 }]
-		, start: "2023-03-07T10:55:00.000"
-		, end: "2023-03-07T10:57:00.000"
-		, turns: []
-	}
-	, {
-		winner: "Jack"
-		, players: [{ name: "X", order: 0 }, { name: "Joe", order: 0 }, { name: "Jack", order: 0 }]
-		, start: "2023-03-07T11:00:00.000"
-		, end: "2023-03-07T11:25:00.000"
-		, turns: []
-	},
 	{
 		"winner": "Tom",
 		"players": [
@@ -427,8 +378,8 @@ function App() {
 	const [usernameOnModal, setUsernameOnModal] = useState("");
 	const [numberOnModal, setNumberOnModal] = useState(50);
 
-	const [gameResults, setGameResults] = useState(hardCodedGameResults);
-	// const [gameResults, setGameResults] = useState<GameResult[]>([]);
+	// const [gameResults, setGameResults] = useState(hardCodedGameResults);
+	const [gameResults, setGameResults] = useState<GameResult[]>([]);
 	console.log(gameResults);
 
 	const [setupInfo, setSetupInfo] = useState<SetupInfo>({
@@ -443,28 +394,68 @@ function App() {
 
 	useEffect(
 		() => {
-			const loadSettings = async () => {
-				console.log("loadSettings()...");
+			const init = async () => {
 				
+				// The local storage stuff.
 				const s = await localForage.getItem<Settings>("settings");
-				
-				setSettings(s ?? defaultSettings);
-				setUsernameOnModal(s?.username ?? "");
-				setNumberOnModal(s?.number ?? 50);
-				setShowUsernameModal((s?.username ?? "").length == 0);
+
+				if (s && s.username.length > 0) {
+					// The cloud stuff.
+					const results = await loadGamesFromCloud(
+						`${s.username}~${s.number}`
+						, "tca-roll-for-it"
+					);
+
+					// Run once to get existing 4 games to cloud...
+					// hardCodedGameResults.forEach(async x => await saveGameToCloud(
+					// 	`${s.username}~${s.number}`
+					// 	, "tca-roll-for-it"
+					//   , x.end
+					//   , x
+					// ));
+
+					if (!ignore) {
+						setGameResults(results);
+					}
+				}
+
+				if (!ignore) {
+					setSettings(s ?? defaultSettings);
+					setUsernameOnModal(s?.username ?? "");
+					setNumberOnModal(s?.number ?? 50);
+					setShowUsernameModal((s?.username ?? "").length == 0);
+
+				}
 			};
 
-			loadSettings();
+			let ignore = false;
+			init();
+			return () => {
+				ignore = true;
+			}
 		}
-		, [settings.username]
+		, [settings.username, settings.number]
 	);
 
-	const addGameResult = (result: GameResult) => setGameResults(
-		[
-			...gameResults
+	const addGameResult = async (result: GameResult) => {
+
+		// Save the game to the cloud.
+		await saveGameToCloud(
+			`${settings.username}~${settings.number}`
+			, "tca-roll-for-it"
+			, result.end
 			, result
-		]
-	);
+		);
+
+		// Optimistically add it to app state. In other words,
+		// assume the save worked.
+		setGameResults(
+			[
+				...gameResults
+				, result
+			]
+		);
+	}
 
 	const updateDarkMode = async (dark: boolean) => {
 		const s = await localForage.setItem(
