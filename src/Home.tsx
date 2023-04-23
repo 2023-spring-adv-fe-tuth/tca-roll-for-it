@@ -2,6 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { getFrenemiesData, LeaderboardPlayer } from "./front-end-model";
 import { durationFormatter } from 'human-readable'
 
+import chart from './chart.jpg';
+
 interface HomeProps {
 	leaderBoardData: LeaderboardPlayer[];
 	shortestGame: number;
@@ -35,7 +37,7 @@ export const Home: React.FC<HomeProps> = ({
 		"frenemiesData"
 		, frenemiesData
 	);
-	setTitle("Roll for It");
+	setTitle("Lorcana Log");
 
 	const nav = useNavigate();
 
@@ -64,8 +66,8 @@ export const Home: React.FC<HomeProps> = ({
 			>
 				<br />
 				<ul className="steps">
-					<li className="step step-primary">Play</li>
-					<li className="step step-primary">Tap the App</li>
+					<li className="step step-primary">Lorcana!</li>
+					<li className="step step-primary">Log Your Time</li>
 					<li className="step step-primary">Enjoy Fun Facts</li>
 				</ul>
 				<br />
@@ -73,7 +75,7 @@ export const Home: React.FC<HomeProps> = ({
 					className="btn btn-lg btn-primary capitalize mx-3 whitespace-nowrap"
 					onClick={() => nav("/setup")}
 				>
-					Play Roll for It
+					Log Your Lorcana Activity
 				</button>
 				<br />
 				<div
@@ -82,52 +84,70 @@ export const Home: React.FC<HomeProps> = ({
 					<div className="card w-0 bg-base-100 shadow-xl grow">
 						<div className="card-body p-3 overflow-x-hidden">
 							<h2 className="card-title whitespace-nowrap uppercase text-2xl text-gray-400">
-								General
+								INTERESTING TOTALS
 							</h2>
 							<table className="table w-full mt-1">
 								<tbody>
 									<tr>
 										<td>
-											Last Played
+											Total Lorcana Time
 										</td>
 										<th>
-											{
-												Number.isInteger(hmmData.lastPlayedMsAgo)
-												? `${justDaysFormat(hmmData.lastPlayedMsAgo)} ago`
-												: 'Never'
-											}
+											173h 22m 38s
 										</th>
 									</tr>
 									<tr>
-										<td>
-											Total Games
+										<td className="ms-3">
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											Content Creating
 										</td>
 										<th>
-											{hmmData.totalGamesPlayed}
+											36h 17m 38s
 										</th>
 									</tr>
 									<tr>
-										<td>
-											Shortest Game
+										<td className="ms-3">
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											Consuming Social Media
 										</td>
 										<th>
-											{
-												Number.isInteger(shortestGame)
-												? `${format(shortestGame)}`
-												: 'n/a'
-											}
+											16h 45m
 										</th>
 									</tr>
 									<tr>
-										<td>
-											Longest Game
+										<td className="ms-3">
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											Deck Building
 										</td>
 										<th>
-										{
-												Number.isInteger(longestGame)
-												? `${format(longestGame)}`
-												: 'n/a'
-											}
+											8h 15m
+										</th>
+									</tr>
+									<tr>
+										<td className="ms-3">
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											Playing
+										</td>
+										<th>
+											6h 30m
+										</th>
+									</tr>
+									<tr>
+										<td className="ms-3">
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											Cracking Packs
+										</td>
+										<th>
+											4h
+										</th>
+									</tr>
+									<tr>
+										<td className="ms-3">
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											Other
+										</td>
+										<th>
+											2h 30m
 										</th>
 									</tr>
 								</tbody>
@@ -142,8 +162,13 @@ export const Home: React.FC<HomeProps> = ({
 					<div className="card w-0 bg-base-100 shadow-xl grow">
 						<div className="card-body p-3 overflow-x-hidden">
 							<h2 className="card-title whitespace-nowrap uppercase text-2xl text-gray-400">
-								Leaderboard
+								Community Comparisons
 							</h2>
+							<img 
+								src={chart} 
+								className="mt-5 w-100"
+							/>
+
 							{
 								leaderBoardData.length > 0
 								? (
