@@ -67,7 +67,7 @@ export const Home: React.FC<HomeProps> = ({
 				<br />
 				<ul className="steps">
 					<li className="step step-primary">Lorcana!</li>
-					<li className="step step-primary">Log Your Time</li>
+					<li className="step step-primary">Log Some Details</li>
 					<li className="step step-primary">Enjoy Fun Facts</li>
 				</ul>
 				<br />
@@ -75,7 +75,7 @@ export const Home: React.FC<HomeProps> = ({
 					className="btn btn-lg btn-primary capitalize mx-3 whitespace-nowrap"
 					onClick={() => nav("/setup")}
 				>
-					Log Your Lorcana Activity
+					Add Lorcana Activity Log
 				</button>
 				<br />
 				<div
