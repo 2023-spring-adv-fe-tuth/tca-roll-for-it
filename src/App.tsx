@@ -44,7 +44,7 @@ const defaultSettings = {
 	darkMode: false
 	, username: ""
 	, showLess: false
-	, number: 50
+	, number: Math.floor(Math.random() * (100 - 1 + 1) + 1)
 };
 
 function App() {
@@ -53,7 +53,7 @@ function App() {
 
 	const [showUsernameModal, setShowUsernameModal] = useState(false);
 	const [usernameOnModal, setUsernameOnModal] = useState("");
-	const [numberOnModal, setNumberOnModal] = useState(50);
+	const [numberOnModal, setNumberOnModal] = useState(defaultSettings.number);
 
 	// const [gameResults, setGameResults] = useState(hardCodedGameResults);
 	const [gameResults, setGameResults] = useState<GameResult[]>([]);
@@ -99,7 +99,7 @@ function App() {
 				if (!ignore) {
 					setSettings(s ?? defaultSettings);
 					setUsernameOnModal(s?.username ?? "");
-					setNumberOnModal(s?.number ?? 50);
+					setNumberOnModal(s?.number ?? defaultSettings.number);
 					setShowUsernameModal((s?.username ?? "").length == 0);
 
 				}
