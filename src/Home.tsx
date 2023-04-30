@@ -12,6 +12,7 @@ interface HomeProps {
 	winningSequenceData: any;
 	pastGamesData: {date: string; msAgo: number; who: string}[];
 	hmmData: {totalGamesPlayed: number; lastPlayedMsAgo: number;};
+	takeBackData: {name: string, takeBacks: number}[];
 }
 
 const format = durationFormatter();
@@ -29,6 +30,7 @@ export const Home: React.FC<HomeProps> = ({
 	, winningSequenceData
 	, pastGamesData
 	, hmmData
+	, takeBackData
 }) => {
 
 	console.log(
@@ -311,6 +313,47 @@ export const Home: React.FC<HomeProps> = ({
 										className="text-left"
 									>
 										No games, no dice returned, yet...
+									</p>
+								)							
+							}
+						</div>
+					</div>
+				</div>  
+				<br />
+				<div
+					className="flex"
+				>
+					<div className="card w-0 bg-base-100 shadow-xl grow">
+						<div className="card-body p-3 overflow-x-hidden">
+							<h2 className="card-title whitespace-nowrap uppercase text-2xl text-gray-400">
+								Take Backs
+							</h2>
+							{
+								takeBackData.length ? (
+									<table className="table w-full mt-3">
+										<thead>
+											<tr>
+												<th>Player</th>
+												<th>Take Backs</th>
+											</tr>
+										</thead>
+										<tbody>
+											{takeBackData.map((x) => (
+												<tr
+													key={x.name}
+												>
+													<td>{x.name}</td>
+													<td>{x.takeBacks}</td>
+												</tr>
+											))}
+										</tbody>
+									</table>							
+
+								) : (
+									<p
+										className="text-left"
+									>
+										No take backs, yet...
 									</p>
 								)							
 							}

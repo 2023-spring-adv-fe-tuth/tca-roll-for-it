@@ -22,6 +22,7 @@ export interface GamePlayerTurn {
 	start: string;
 	end: string;
 	cardsScored: CardScored[];
+	tookBackDice?: boolean;
 }
 
 export type Points = 0 | 2 | 5 | 10 | 15;
@@ -235,4 +236,29 @@ export const getHmmData = (results: GameResult[]) => {
 		totalGamesPlayed: results.length
 		, lastPlayedMsAgo: Math.min(...results.map(x => Date.now() - new Date(x.end).getTime()))
 	};
+};
+
+export const getTakeBackLeaderboard = (results: GameResult[]) => {
+
+	const playersMappedToTakeBacks = results
+		.flatMap(x => x.turns)
+		.filter(x => x.tookBackDice)
+		.reduce(
+			(acc, x) => acc.set(
+				x.name
+				, (acc.get(x.name) ?? 0) + 1
+			) 
+			, new Map<string, number>()
+		)
+	;
+
+	return [...playersMappedToTakeBacks]
+		.map(x => ({
+			name: x[0]
+			, takeBacks: x[1]
+		}))
+		.sort(
+			(a, b) => b.takeBacks - a.takeBacks
+		)
+	;
 };

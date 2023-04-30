@@ -32,6 +32,14 @@ export const Play: React.FC<PlayProps> = ({
 	, setShowLess
 }) => {
 
+	const defaultTurn = {
+		name: ""
+		, start: new Date().toISOString()
+		, end: ""
+		, cardsScored: []
+		, tookBackDice: false
+	};
+
 	console.log(setupInfo.start);
 
 	const [currentPlayers, setCurrentPlayers]
@@ -91,6 +99,7 @@ export const Play: React.FC<PlayProps> = ({
 						}
 					]
 					, end: new Date().toISOString()
+					, tookBackDice: currentTurn?.tookBackDice ?? false
 				}
 			]
 		};
@@ -137,10 +146,8 @@ export const Play: React.FC<PlayProps> = ({
 		setCurrentTurn(
 			nextPlayer
 				? {
-					name: nextPlayer.name
-					, start: new Date().toISOString()
-					, end: ""
-					, cardsScored: []
+					...defaultTurn
+					, name: nextPlayer.name
 				}
 				: undefined
 		);
@@ -169,6 +176,7 @@ export const Play: React.FC<PlayProps> = ({
 					, start: currentTurn?.start ?? ""
 					, cardsScored: currentTurn?.cardsScored ?? []
 					, end: new Date().toISOString()
+					, tookBackDice: currentTurn?.tookBackDice ?? false
 				}
 			]
 		);
@@ -176,10 +184,8 @@ export const Play: React.FC<PlayProps> = ({
 		setCurrentTurn(
 			nextPlayer
 				? {
-					name: nextPlayer.name
-					, start: new Date().toISOString()
-					, end: ""
-					, cardsScored: []
+					...defaultTurn
+					, name: nextPlayer.name
 				}
 				: undefined
 		);
@@ -268,6 +274,7 @@ export const Play: React.FC<PlayProps> = ({
 							}
 						]
 						, end: new Date().toISOString()
+						, tookBackDice: currentTurn?.tookBackDice ?? false
 					}
 				]
 			}			
@@ -313,6 +320,7 @@ export const Play: React.FC<PlayProps> = ({
 					, cardsScored: previousTurn.cardsScored.filter(
 						(_, i, a) => i !== (a.length - 1)
 					)
+					, tookBackDice: previousTurn.tookBackDice
 				};
 
 				setTurns([
@@ -405,6 +413,28 @@ export const Play: React.FC<PlayProps> = ({
 												.flatMap(y => y.points)
 												.join(' + ')
 										}
+									</div>
+									<div
+										className="flex flex-row mt-3"
+									>
+										<div className="form-control1 mt-5">
+											<label className="label1 flex">
+												<input
+													type="checkbox"
+													checked={currentTurn?.tookBackDice ?? false}
+													className="checkbox checkbox-primary"
+													onChange={() => setCurrentTurn({
+														...currentTurn ?? defaultTurn
+														, tookBackDice: !currentTurn?.tookBackDice
+													})}
+												/>
+												<span 
+													className="label-text text-lg ml-3 -mt-1 capitalize"
+												>
+													Took back all dice
+												</span>
+											</label>
+										</div>
 									</div>
 									<div
 										className="flex flex-row mt-3"
