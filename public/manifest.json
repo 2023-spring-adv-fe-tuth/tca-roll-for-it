@@ -22,5 +22,17 @@
   "display": "standalone",
   "theme_color": "#971ccb",
   "background_color": "#ffffff",
-  "description": "Play Roll for It\nTap the App\nEnjoy Fun Facts"
+  "description": "Play Roll for It\nTap the App\nEnjoy Fun Facts",
+  "screenshots": [
+    {
+      "src": "screenshots/1280x800-screenshot.png",
+      "sizes": "1280x800",
+      "type": "image/png"
+    },
+    {
+      "src": "screenshots/750x1334-screenshot.png",
+      "sizes": "750x1334",
+      "type": "image/png"
+    }
+  ]
 }
