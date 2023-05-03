@@ -429,7 +429,7 @@ export const Play: React.FC<PlayProps> = ({
 													})}
 												/>
 												<span 
-													className="label-text text-lg ml-3 -mt-1 capitalize"
+													className="label-text text-lg ml-3 -mt-1 text-primary"
 												>
 													Took back all dice
 												</span>
