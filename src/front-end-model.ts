@@ -157,7 +157,7 @@ export const getFrenemiesData = (results: GameResult[]) => {
 		)
 	;
 
-	// console.log("foo", playersMappedToPlayersDiceTheyReturned);
+	console.log("foo", playersMappedToPlayersDiceTheyReturned);
 
 	const playersMappedToFenemiesWithTotalReturnDiceCount = [...playersMappedToPlayersDiceTheyReturned]
 		.map(x => [
@@ -166,13 +166,15 @@ export const getFrenemiesData = (results: GameResult[]) => {
 				...x[1].reduce(
 					(acc, y) => acc.set(
 						x[0] + " -> " + y
-						, (acc.get(x[0] + " > " + y) ?? 0) + 1
+						, (acc.get(x[0] + " -> " + y) ?? 0) + 1
 					)
 					, new Map<string, number>()
 				)
 			]
 		])
 	;
+
+	console.log("bar", playersMappedToFenemiesWithTotalReturnDiceCount);
 
 	return playersMappedToFenemiesWithTotalReturnDiceCount
 		.flatMap((x: any) => x[1])
