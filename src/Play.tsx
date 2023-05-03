@@ -465,11 +465,11 @@ export const Play: React.FC<PlayProps> = ({
 										</button>
 									</div>
 									<div
-										className="flex flex-row -ml-12 -mb-3"
+										className="flex flex-row -ml-12 mt-5"
 									>
 										<button
 											key={x.name}
-											className="btn btn-lg btn-link normal-case"
+											className="btn btn-lg btn-link normal-case font-bold"
 											onClick={endTurn}
 										>
 											<svg 
