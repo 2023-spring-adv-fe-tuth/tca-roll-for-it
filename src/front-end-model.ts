@@ -264,3 +264,23 @@ export const getTakeBackLeaderboard = (results: GameResult[]) => {
 		)
 	;
 };
+
+export const getGamesByDay = (r: GameResult[]) => {
+
+    // Map to array of date only string.
+    const arrayOfDateStrings = r.map(x => x.end.substring(0, 10)); // Need work here only ! ! !
+
+    console.log(arrayOfDateStrings);
+    // ["2023-05-05", "2023-05-07", "2023-05-07"]
+
+    // Reduce to Map object of date and count of games.
+    const gameCountsByDay = arrayOfDateStrings.reduce(
+        (acc, x) => acc.set(
+            x
+            , (acc.get(x) ?? 0) + 1
+        )
+        , new Map<string, number>()
+    );
+
+    return [...gameCountsByDay];
+};

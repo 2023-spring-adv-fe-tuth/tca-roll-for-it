@@ -14,6 +14,7 @@ import {
 	, getReverseChronGamesData
 	, getHmmData,
 	getTakeBackLeaderboard
+	, getGamesByDay
 } from './front-end-model';
 
 import {
@@ -279,6 +280,7 @@ function App() {
 								pastGamesData={getReverseChronGamesData(gameResults)}
 								hmmData={getHmmData(gameResults)}
 								takeBackData={getTakeBackLeaderboard(gameResults)}
+								gamesByDay={getGamesByDay(gameResults)}
 							/>
 						}
 					/>

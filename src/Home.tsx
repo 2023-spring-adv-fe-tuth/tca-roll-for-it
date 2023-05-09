@@ -1,6 +1,25 @@
 import { useNavigate } from "react-router-dom";
 import { getFrenemiesData, LeaderboardPlayer } from "./front-end-model";
 import { durationFormatter } from 'human-readable'
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+import { Bar } from 'react-chartjs-2';
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 interface HomeProps {
 	leaderBoardData: LeaderboardPlayer[];
@@ -13,6 +32,7 @@ interface HomeProps {
 	pastGamesData: {date: string; msAgo: number; who: string}[];
 	hmmData: {totalGamesPlayed: number; lastPlayedMsAgo: number;};
 	takeBackData: {name: string, takeBacks: number}[];
+	gamesByDay: any;
 }
 
 const format = durationFormatter();
@@ -31,6 +51,7 @@ export const Home: React.FC<HomeProps> = ({
 	, pastGamesData
 	, hmmData
 	, takeBackData
+	, gamesByDay
 }) => {
 
 	console.log(
@@ -57,6 +78,40 @@ export const Home: React.FC<HomeProps> = ({
 		return total < 40;
 	}; 
 
+	const options = {
+		responsive: true,
+		plugins: {
+		  legend: {
+			position: 'top' as const,
+		  },
+		  title: {
+			display: false,
+		  },
+		},
+		// scales: {
+		// 	xAxis: {
+		// 		type: 'time'
+		// 	}
+		// }
+	  };
+	  
+	  const labels = gamesByDay.map((x: any) => x[0]);
+	  
+	  const data = {
+		labels,
+		datasets: [
+		  {
+			label: 'Dataset 1',
+			data: gamesByDay.map((x: any) => x[1]),
+			backgroundColor: 'rgba(255, 99, 132, 0.5)',
+		  },
+		],
+	  };
+	  
+	  const MyChart = () => {
+		return <Bar options={options} data={data} />;
+	  }
+	  
 	return (
 		<div
 			className=""
@@ -354,6 +409,29 @@ export const Home: React.FC<HomeProps> = ({
 										className="text-left"
 									>
 										No take backs, yet...
+									</p>
+								)							
+							}
+						</div>
+					</div>
+				</div>  
+				<br />
+				<div
+					className="flex"
+				>
+					<div className="card w-0 bg-base-100 shadow-xl grow">
+						<div className="card-body p-3 overflow-x-hidden">
+							<h2 className="card-title whitespace-nowrap uppercase text-2xl text-gray-400">
+								GAMES BY DAY
+							</h2>
+							{
+								gamesByDay.length ? (
+									<MyChart />
+								) : (
+									<p
+										className="text-left"
+									>
+										No games, yet...
 									</p>
 								)							
 							}
