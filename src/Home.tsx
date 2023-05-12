@@ -88,14 +88,22 @@ export const Home: React.FC<HomeProps> = ({
 			display: false,
 		  },
 		},
-		// scales: {
+		scales: {
 		// 	xAxis: {
 		// 		type: 'time'
 		// 	}
-		// }
+		
+            x: {
+                type: 'time',
+                // time: {
+                //     unit: 'day'
+                // },
+				// min: gamesByDay[0][0]
+            }
+		}	
 	  };
 	  
-	  const labels = gamesByDay.map((x: any) => x[0]);
+	  const labels = gamesByDay.map((x: any) => new Date(x[0]));
 	  
 	  const data = {
 		labels,
@@ -103,7 +111,7 @@ export const Home: React.FC<HomeProps> = ({
 		  {
 			label: 'Dataset 1',
 			data: gamesByDay.map((x: any) => x[1]),
-			backgroundColor: 'rgba(255, 99, 132, 0.5)',
+			backgroundColor: 'purple',
 		  },
 		],
 	  };
