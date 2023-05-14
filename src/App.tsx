@@ -186,7 +186,16 @@ function App() {
 			<div className="navbar bg-base-200">
 				<button 
 					className={`btn btn-link ${settings.darkMode ? 'text-gray-400' : 'text-black'}`}
-					onClick={() => setDiceValue(Math.floor(Math.random() * (6 - 1 + 1) + 1))}
+					onClick={() => {
+						const rollValue = Math.floor(Math.random() * (6 - 1 + 1) + 1);
+						setDiceValue(rollValue);
+
+						if (rollValue == 6) setSettings({
+							...settings
+							, darkMode: !settings.darkMode
+						})
+					}
+				}
 				>
 					<div className="flex-none">
 						{
