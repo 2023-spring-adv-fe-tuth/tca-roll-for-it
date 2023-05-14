@@ -31,7 +31,7 @@ date, who, what, remaining ('work days' or 'x' for removed work)
 20230207, Tom, misc/usability-tests-and-tweaks, 1
 20230207, Tom, misc/pwa-tweaks/icons-and-name, 1
 20230207, Tom, misc/fork-and-publish, 0.5
-20230208, Tom, getting-started/tracking-spreadsheet, 0.25
+20230208, Tom, getting-started/tracking-spreadsheet, 0
 20230209, Tom, getting-started/app-data-experiments, 2
 20230214, Tom, getting-started/choose-css-framework, 0
 20230214, Tom, getting-started/app-data-experiments, 1
@@ -49,7 +49,7 @@ date, who, what, remaining ('work days' or 'x' for removed work)
 20230224, Tom, screens/general/initial-navigation, 0
 20230224, Tom, misc/light-and-dark-mode, 0.25
 20230225, Tom, screens/setup/choose-from-existing-players, 0
-20230225, Tom, screens/setup/add-new-player, 0.25
+20230225, Tom, screens/setup/add-new-player, 0
 20230228, Tom, screens/home-and-stats/leaderboard, 0
 20230303, Tom, screens/setup/start-game, 0
 20230303, Tom, screens/play/player-order, 1
@@ -88,4 +88,4 @@ date, who, what, remaining ('work days' or 'x' for removed work)
 20230419, Tom, storage/cloud/write-data, 0
 20230502, Tom, screens/home-and-stats/take-backs, 0.5
 20230502, Tom, screens/home-and-stats/take-backs, 0
-20230504, Tom, misc/fork-and-publish/general, 0
+20230504, Tom, misc/fork-and-publish, 0
