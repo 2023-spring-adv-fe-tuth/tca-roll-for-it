@@ -184,13 +184,30 @@ export const getFrenemiesData = (results: GameResult[]) => {
 
 export const getWinningSequenceData = (results: GameResult[]) => {
 
-	const winningSequences = results.flatMap(
+	const groupedWinningSequences = results.flatMap(
 		x => x.turns
 			.filter(y => y.name == x.winner)
 			.flatMap(y => y.cardsScored)
 			.map(y => y.points)
-			.join(" + ")
+			.sort((a, b) => b - a)
+			.reduce(
+				(acc, x) => acc.set(
+					x.toString()
+					, (acc.get(x.toString()) ?? 0) + 1
+				)
+				, new Map<string, number>()
+			)
 	);
+
+	const winningSequences = groupedWinningSequences
+		.map(x => 
+			[...x]
+				.map(
+					y => `${y[0]} (${y[1]})`
+				)
+				.join(' + ')
+		)
+	;
 
 	const groupedByWinningSequenceString = winningSequences.reduce(
 		(acc, x) => acc.set(
