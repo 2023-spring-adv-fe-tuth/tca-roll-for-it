@@ -59,7 +59,7 @@ export type GetPreviousPlayersFunc = (r: GameResult[]) => string[];
 export type CalculateLeaderboardFunc = (r: GameResult[]) => LeaderboardPlayer[];
 export type GetLongestGame = (results: GameResult[]) => number;
 export type GetShortestGame = (results: GameResult[]) => number;
-export type GetAverageGameLengthsByPlayerCount = (results: GameResult[]) => { playerCount: number, avgTime: number }[];
+export type GetAverageGameLengthsByPlayerCount = (results: GameResult[]) => { playerCount: number, numGames: number, avgTime: number }[];
   
 //
 // Func impls...
@@ -154,6 +154,7 @@ export const getAvgGameLengths: GetAverageGameLengthsByPlayerCount = (results) =
 	return [...gameDurationsGroupedByNumberOfPlayers]
 		.map(x => ({
 			playerCount: x[0]
+			, numGames: x[1].length
 			, avgTime: x[1].reduce((acc, x) => acc + x, 0) / x[1].length
 		}))
 		.sort(

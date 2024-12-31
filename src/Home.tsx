@@ -6,7 +6,7 @@ interface HomeProps {
 	leaderBoardData: LeaderboardPlayer[];
 	shortestGame: number;
 	longestGame: number;
-	avgGameLengths: { playerCount: number, avgTime: number}[];
+	avgGameLengths: { playerCount: number, numGames: number, avgTime: number}[];
 	setTitle: (title: string) => void;
 	frenemiesData: any;
 	winningSequenceData: any;
@@ -190,7 +190,8 @@ export const Home: React.FC<HomeProps> = ({
 										<thead>
 											<tr>
 												<th># PLAYERS</th>
-												<th>AVG GAME LENGTH</th>
+												<th># GAMES</th>
+												<th>AVG LENGTH</th>
 											</tr>
 										</thead>
 										<tbody>
@@ -199,6 +200,7 @@ export const Home: React.FC<HomeProps> = ({
 													key={x.playerCount}
 												>
 													<td>{x.playerCount}</td>
+													<td>{x.numGames}</td>
 													<td>{`${format(x.avgTime)}`}</td>
 												</tr>
 											))}
