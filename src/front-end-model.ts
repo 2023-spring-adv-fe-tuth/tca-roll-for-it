@@ -45,6 +45,13 @@ export interface SetupInfo {
 	players: string[];
 }
 
+export type LeaderboardEntry = {
+    wins: number;
+    losses: number;
+    avg: string;
+    name: string;  
+};
+
 //
 // Func types...
 //
@@ -66,44 +73,66 @@ export const getPreviousPlayers: GetPreviousPlayersFunc = (grs: GameResult[]) =>
 	].sort();
 };
   
+
+const getLeaderboardEntry = (
+    results: GameResult[]
+    , player: string
+): LeaderboardEntry => {
+
+    const playerWins = results.filter(
+        x => x.winner === player
+    ).length;
+
+    const playerGames = results.filter(
+        x => x.players.some(
+            y => y.name === player
+        )
+    ).length;
+
+    return {
+        wins: playerWins
+        , losses: playerGames - playerWins 
+
+        , avg: playerGames > 0
+            ? (playerWins / playerGames).toFixed(3)
+            : "0.000"
+
+        , name: player
+    };
+};
+
 export const calculateLeaderboard = (results: GameResult[]) => {
 
-	const gameResultsGroupedByPlayer = getPreviousPlayers(results).reduce(
-		(acc, x) => acc.set(
-			x
-			, results.filter(y => y.players.map(z => z.name).some(a => a == x))
-		)
-		, new Map<string, GameResult[]>() 
-	);
-
-	return [...gameResultsGroupedByPlayer]
-
-		// First object with names game counts and wins...
-		.map(x => ({
-			name: x[0]
-			, totalGames: x[1].length
-			, wins: x[1].filter(y => y.winner === x[0]).length
-		}))
-		
-		// Now use wins and total games to get avg and losses
-		.map(x => ({
-			name: x.name
-			, wins: x.wins 
-			, losses: x.totalGames - x.wins
-			, avg: x.wins / x.totalGames
-		}))
-		
-		// Break average ties with total games...
+	const lbEntries = getPreviousPlayers(results).map((player) =>
+		getLeaderboardEntry(results, player)
+	  );
+	  //
+	  // Biz rule ! ! !
+	  //
+	  // Zero win players should be sorted differently...
+	  //
+	  // The more games you have without any wins make you a worse player ! ! !
+	  //
+	  // So filter and sort two lb entry arrays differently, i-o-g : - )
+	  //
+	  const playersWithWins = lbEntries
+		.filter((x) => x.wins > 0)
 		.sort(
-			(a, b) => (a.avg * 1000 + a.wins + a.losses) > (b.avg * 1000 + b.wins + b.losses) ? -1 : 1
-		)
-
-		// Finally, convert average to a 3 digit string...
-		.map(x => ({
-			...x
-			, avg: x.avg.toFixed(3)
-		}))
-	;
+		  (a, b) =>
+			(parseFloat(b.avg) * 1000 + b.wins + b.losses) 
+				- (parseFloat(a.avg) * 1000 + a.wins + a.losses)
+		);
+	
+	  const playersWithoutWins = lbEntries
+		.filter((x) => x.wins === 0)
+		.sort(
+		  (a, b) => a.losses - b.losses
+		);
+	
+		return [
+			...playersWithWins
+			, ...playersWithoutWins
+		];
 };
 
 export const getLongestGame: GetLongestGame = (results) => Math.max(...results.map(x => new Date(x.end).getTime() - new Date(x.start).getTime()));
