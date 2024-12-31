@@ -269,7 +269,12 @@ export const getReverseChronGamesData = (results: GameResult[]) => {
 			x => ({
 				date: new Date(x.end).toLocaleDateString()
 				, msAgo: new Date().getTime() - new Date(x.end).getTime()
-				, who: x.players.map(y => y.name).sort().join(", ") 
+				, who: x.players
+					.map(
+						y => y.name === x.winner ? `${y.name} (W)` : y.name
+					)
+					.sort()
+					.join(", ") 
 			})
 		)
 		.sort(
