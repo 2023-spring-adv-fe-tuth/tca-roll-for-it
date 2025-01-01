@@ -228,14 +228,27 @@ export const getWinningSequenceData = (results: GameResult[]) => {
 				, new Map<string, number>()
 			)
 	);
+	
+	// console.log(groupedWinningSequences);
+	const winningSequenceTotals = groupedWinningSequences.map(
+		x => [...x].reduce(
+			(acc, y) => acc + (Number(y[0]) * y[1])
+			, 0
+		)
+	);
+	// console.log(winningSequenceTotals);
 
 	const winningSequences = groupedWinningSequences
-		.map(x => 
-			[...x]
-				.map(
-					y => `${y[0]} (${y[1]})`
-				)
-				.join(' + ')
+		.map(
+			x => 
+				[...x]
+					.map(
+						y => `${y[0]} (${y[1]})`
+					)
+					.join(' + ')
+		)
+		.map(
+			(x, i) => `${x} = ${winningSequenceTotals[i]}${winningSequenceTotals[i] < 40 ? " **" : ""}`
 		)
 	;
 
@@ -250,16 +263,16 @@ export const getWinningSequenceData = (results: GameResult[]) => {
 	// console.log("getWinninSequenceData", groupedByWinningSequenceString);
 	return [...groupedByWinningSequenceString]
 		
-		.map(x => ({
-			winningSequence: x[0]
-			, wins: x[1]
-		}))
-
-		// Dummy data didn't have turns, so don't show it.
-		.filter(x => x.winningSequence.length > 0)
+		.map(
+			(x, i) => ({
+				winningSequence: x[0]
+				, wins: x[1]
+				, total: winningSequenceTotals[i]
+			})
+		)
 		
 		.sort(
-			(a, b) => a.wins < b.wins ? 1 : -1
+			(a, b) => a.wins * 1000 + a.total < b.wins * 1000 + b.total ? 1 : -1
 		)
 	;
 };
